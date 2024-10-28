@@ -26,10 +26,10 @@ const Hero = () => {
         </div>
         <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col items-center md:items-start text-center md:text-left bg-sky-300 md:flex-row-reverse">
           <div className="container mx-auto mt-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pr-6 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pr-6 ml-8 sm:ml-0 ">
               {loanOptions.map((loan, index) => (
-                <div key={index} className="w-full h-[170px] shadow-2xl rounded-xl flex flex-col items-center justify-center bg-white p-4 space-y-2  hover:cursor-pointer pr-">
-                  <img alt={loan.title} className="w-30 h-30 object-cover" src={loan.imgSrc} />
+                <div key={index} className="w-[90%] h-[60%]   sm:w-full sm:h-[92%] shadow-2xl rounded-xl sm:flex flex-col items-center justify-center bg-white p-4 space-y-2  hover:cursor-pointer ">
+                  <img alt={loan.title} className="w-30 h-30 object-cover sm:mb-0 mb-[-20px]  " src={loan.imgSrc} />
                   <h1 className="title-font font-medium text-gray-900 text-lg">{loan.title}</h1>
                   <button className="bg-blue-500 h-7 w-[80px] px-4  text-white rounded-sm text-center  hover:bg-blue-700">Apply</button>
                 </div>
