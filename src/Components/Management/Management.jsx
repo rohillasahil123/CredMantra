@@ -11,28 +11,28 @@ const Management = () => {
         
         <div className="flex flex-col rounded text-black justify-center items-center p-4">
           <CiFaceSmile size={50} />
-          <h1 className="text-xl font-bold">5,00,000+</h1>
+          <h1 className="text-xl font-bold">2,00,000+</h1>
           <h1 className="text-gray-700 font-bold text-center">Happy Customers</h1>
         </div>
-        
-        <div className="flex flex-col rounded text-black justify-center items-center p-4">
-          <FaRegAddressBook size={50} />
-          <h1 className="text-xl font-bold">2,500+</h1>
-          <h1 className="text-gray-700 font-bold text-center">Relationship Managers</h1>
-        </div>
-        
+              
         <div className="flex flex-col rounded text-black justify-center items-center p-4">
           <BsBank2 size={50} />
-          <h1 className="text-xl font-bold">30+</h1>
+          <h1 className="text-xl font-bold">21+</h1>
           <h1 className="text-gray-700 font-bold text-center">Banks & NBFCs</h1>
         </div>
-        
+
         <div className="flex flex-col rounded text-black justify-center items-center p-4">
           <RiPlantLine size={50} />
-          <h1 className="text-xl font-bold">₹70,00,00,000+</h1>
+          <h1 className="text-xl font-bold">₹30,00,00,000+</h1>
           <h1 className="text-gray-700 font-bold text-center">Business Conducted</h1>
         </div>
-        
+
+        <div className="flex flex-col rounded text-black justify-center items-center p-4">
+          <FaRegAddressBook size={50} />
+          <h1 className="text-xl font-bold">2,000+</h1>
+          <h1 className="text-gray-700 font-bold text-center">Relationship Managers</h1>
+        </div>
+            
       </div>
     </div>
   );

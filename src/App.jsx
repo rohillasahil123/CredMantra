@@ -8,6 +8,7 @@ import LoanBox from './Components/LoanBox/LoanBox'
 import EmiCalculator from './Components/Calculater/EmiCalculator'
 import Download from './Components/DownloadPhone/Download'
 import Footer from './Components/Footer/Footer'
+import Partner from './Components/Partners/Partner'
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
       <LoanBox/>
       <EmiCalculator/>
       <Download/>
+      <Partner/>
       <Footer/>
     </div>
   )
