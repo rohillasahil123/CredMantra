@@ -9,12 +9,14 @@ import EmiCalculator from './Components/Calculater/EmiCalculator'
 import Download from './Components/DownloadPhone/Download'
 import Footer from './Components/Footer/Footer'
 import Partner from './Components/Partners/Partner'
+import Login from './Components/LoginFile/Login'
 
 
 const App = () => {
   return (
     <div>
       <Header/>
+      <Login/>
       <Hero/>
       <Choose/>
       <Management/>
