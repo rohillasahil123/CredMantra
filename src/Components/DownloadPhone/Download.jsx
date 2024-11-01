@@ -16,7 +16,7 @@ const Download = () => {
                     </h2>
             </div>
           
-            <div className="sm:w-[70%] h-[80%]  flex-col: sm:flex-row sm:flex  rounded-2xl max-w-md bg-white shadow-lg p-2 relative transform transition-transform hover:scale-105">
+            <div className="sm:w-[70%] h-[80%] flex-col: sm:flex-row sm:flex  rounded-2xl max-w-md bg-white shadow-lg p-2 relative transform transition-transform hover:scale-105">
           <img
             src={phoneImg}
             alt="App preview"

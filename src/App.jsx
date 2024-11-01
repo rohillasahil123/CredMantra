@@ -1,33 +1,25 @@
-import React from 'react'
-import Header from './Components/Header/Header'
-import Hero from './Components/Hero/Hero'
-import Choose from './Components/choose/Choose'
-import Management from './Components/Management/Management'
-import SlidingBox from './Components/Slider/SlidingBox'
-import LoanBox from './Components/LoanBox/LoanBox'
-import EmiCalculator from './Components/Calculater/EmiCalculator'
-import Download from './Components/DownloadPhone/Download'
-import Footer from './Components/Footer/Footer'
-import Partner from './Components/Partners/Partner'
-import Login from './Components/LoginFile/Login'
-
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './Components/Header/Header';
+import Login from './Components/LoginFile/Login';
+import Ourteam from './Components/OurTeam/Ourteam';
+import HomeAll from './Components/HomeAll/HomeAll';
+import Footer from "./Components/Footer/Footer"
 
 const App = () => {
   return (
     <div>
-      <Header/>
-      <Login/>
-      <Hero/>
-      <Choose/>
-      <Management/>
-      <SlidingBox/>
-      <LoanBox/>
-      <EmiCalculator/>
-      <Download/>
-      <Partner/>
-      <Footer/>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+        <Route path="/" element={<Login />} />
+          <Route path="/home" element={<HomeAll />} />
+          <Route path="/ourteam" element={<Ourteam />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
