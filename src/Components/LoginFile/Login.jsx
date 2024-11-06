@@ -33,7 +33,7 @@ const handelClick =(e)=>{
 
   return (
     <>
-      <div className="md:flex justify-center text-align text-center w-[100%] mx-auto h-[100vh] space-x-4 bg-yellow-200 ">
+      <div className="md:flex justify-center text-align text-center w-[100%] mx-auto h-[100vh] space-x-4 bg-sky-300 ">
         <div className=" h-[350px] w-[80%] border ml-7 sm:ml-0 lg:w-[25%]  mt-[100px] bg-white shadow-xl rounded-xl ">
           <div className="border h-12 bg-violet-600  rounded-xl ">
             <h1 className="font-bold text-white mt-1  text-2xl">LOGIN</h1>{" "}

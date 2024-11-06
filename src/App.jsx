@@ -5,7 +5,8 @@ import Login from './Components/LoginFile/Login';
 import Ourteam from './Components/OurTeam/Ourteam';
 import HomeAll from './Components/HomeAll/HomeAll';
 import Footer from "./Components/Footer/Footer"
-import Personal from './Components/LoanForm/personal';
+import PersonalLoan from "./Components/LoanForm/PersonalLoan"
+import BusinessEligibilityForm from './Components/LoanForm/Business';
 
 const App = () => {
   return (
@@ -16,7 +17,8 @@ const App = () => {
         <Route path="/" element={<Login />} />
           <Route path="/home" element={<HomeAll />} />
           <Route path="/ourteam" element={<Ourteam />} />
-          <Route path="/personal" element={<Personal/>} />
+          <Route path="/personalloan" element={ <PersonalLoan/>  } />
+          <Route path="/businessloan" element={ <BusinessEligibilityForm/>   } />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LoanBox = () => {
   return (
@@ -8,7 +9,9 @@ const LoanBox = () => {
         <h2 className="text-xl font-semibold">Personal Loan</h2>
         <p className="mt-2 text-sm">Get loans at Lowest Rate</p>
         <button className="mt-4 px-4 py-2 bg-white text-blue-400 font-semibold rounded shadow hover:bg-gray-200">
+          <Link to='/personalloan' >
           Apply Personal Loan
+          </Link>
         </button>
       </div>
       <div className="w-full md:w-1/2 bg-blue-600 text-white rounded-lg p-6 flex flex-col items-center text-center shadow-lg">
@@ -25,7 +28,9 @@ const LoanBox = () => {
         <h2 className="text-xl font-semibold">Business Loan</h2>
         <p className="mt-2 text-sm">Get Business Loans in a few quick steps</p>
         <button className="mt-4 px-4 py-2 bg-white text-blue-600 font-semibold rounded shadow hover:bg-gray-200">
-          Apply Business Loan
+        <Link to='/businessloan' >
+        Apply Business Loan
+          </Link>
         </button>
       </div>
     </div>

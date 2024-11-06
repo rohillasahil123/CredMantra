@@ -30,7 +30,7 @@ const Hero = () => {
               {loanOptions.map((loan, index) => (
                 <div
                   key={index}
-                  className="w-[100%] h-auto mt-[10%] flex   sm:w-full sm:h-[92%] shadow-2xl rounded-xl sm:flex flex-row sm:flex-col items-center justify-center bg-white p-4 space-y-2  hover:shadow-[0_0_30px_15px_rgba(0,255,255,0.5)] hover:cursor-pointer transition-transform hover:scale-105 "  style={{
+                  className="w-[100%] h-auto mt-[10%] flex   sm:w-full sm:h-[92%] shadow-2xl rounded-xl sm:flex flex-row sm:flex-col items-center justify-center bg-white p-4 space-y-2 hover:cursor-pointer transition-transform hover:scale-105 "  style={{
                     backgroundImage:
                       "url('https://img.freepik.com/free-vector/stylish-flower-line-pattern-background_361591-1162.jpg?w=1480&t=st=1706072054~exp=1706072654~hmac=5dccb80...')",
                     backgroundRepeat: "no-repeat",
