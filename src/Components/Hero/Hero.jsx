@@ -1,19 +1,21 @@
 import React from "react";
 import FrountGirl from "../../assets/FrountGirl.png";
-import personalLoans from "../../assets/Personal-Loan.gif";
-import BusinessLoans from "../../assets/business loan.png";
-import HomeLoans from "../../assets/Home-Loan.gif";
-import BackgroundImage from "../../assets/back.avif";
+import personalLoans from "../../assets/personal.gif";
+import businessLoans from "../../assets/Business.gif";
+import homeLoans from "../../assets/homeloan.gif";
+import microLoans from "../../assets/microloan.gif";
+import goldLoans from "../../assets/Gold-Loan.gif";
+import securityLoans from "../../assets/security.gif";
 
 import { Link } from "react-router-dom";
 
 const loanOptions = [
-  { title: "Personal Loans", imgSrc: BusinessLoans , Route:"/personalloan" },
-  { title: "Business Loans", imgSrc: BusinessLoans , Route:"/businessloan" },
-  { title: "Home Loans", imgSrc: BusinessLoans },
-  { title: "Security Loans", imgSrc: BusinessLoans },
-  { title: "Micro Loans", imgSrc: BusinessLoans },
-  { title: "Gold Loans", imgSrc: BusinessLoans },
+  { title: "Personal Loans", imgSrc: personalLoans, Route: "/personalloan" },
+  { title: "Business Loans", imgSrc: businessLoans, Route: "/businessloan" },
+  { title: `Home Loans`, imgSrc: homeLoans  },
+  { title: "Security Loans", imgSrc: securityLoans},
+  { title: "Micro Loans", imgSrc: microLoans },
+  { title: "Gold Loans", imgSrc: goldLoans },
 ];
 
 const Hero = () => {
@@ -29,33 +31,25 @@ const Hero = () => {
         </div>
         <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col items-center md:items-start text-center md:text-left bg-sky-300 md:flex-row-reverse justify-center p-[3%]">
           <div className="container mt-5 sm:mt-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:ml-0 sm:text-center  ">
+            <div className="flex flex-wrap gap-3 sm:ml-0   sm:text-center justify-center">
               {loanOptions.map((loan, index) => (
                 <div
                   key={index}
-                  className="w-[100%] h-[50%] flex   sm:w-full sm:h-[92%] shadow-2xl rounded-xl sm:flex flex-row sm:flex-col items-center justify-center bg-white p-4  hover:cursor-pointer transition-transform hover:scale-105 " style={{
-                    backgroundImage:
-                      `url(${BackgroundImage})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    backgroundColor: "#e8f0ff",
-                    backgroundBlendMode: "color-burn",
-                  
-                  }}  
-                > 
-                    <img
-                      alt={loan.title}
-                      className="w-[90%] mr-[14%] sm:mr-0 h-[95%] sm:mb-0 mb-[-11px] mt-[-6%]  sm:ml-0 "
-                      src={loan.imgSrc}
-                    />
-                    <div className="mr-[20%] sm:ml-auto space-y-2 sm:w-full ">
-                      <h1 className="title-font font-medium text-black text-[17px] ">
-                        {loan.title}
-                      </h1>
-                      <button className="bg-blue-800 h-7 w-[80px] px-4  text-white rounded-sm text-center ml-[10%] hover:bg-blue-700">
-                       <Link to={loan.Route} > Apply</Link>
-                      </button>
-      
+                className="w-full sm:w-[48%]  h-[12vh] sm:h-[23vh] flex  items-center justify-center shadow-2xl rounded-xl bg-white  hover:cursor-pointer transition-transform hover:scale-105"
+                 
+                >
+                  <img
+                    alt={loan.title}
+                    className="w-[90%] sm:h-[90%]  h-[94%] mb-[-12px] mt-[-2%] ml-1"
+                    src={loan.imgSrc}
+                  />
+                  <div className="space-y-2 text-center w-full">
+                    <h1 className="title-font font-medium text-black text-[18px] uppercase">
+                      {loan.title}
+                    </h1>
+                    <button className="bg-gray-600 h-7 w-[80px] px-4  text-white rounded-lg hover:bg-gray-800">
+                      <Link to={loan.Route}> <span className="font-bold ">Apply</span></Link>
+                    </button>
                   </div>
                 </div>
               ))}
