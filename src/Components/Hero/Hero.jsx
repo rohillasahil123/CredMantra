@@ -13,7 +13,7 @@ const loanOptions = [
   { title: "Personal Loans", imgSrc: personalLoans, Route: "/personalloan" },
   { title: "Business Loans", imgSrc: businessLoans, Route: "/businessloan" },
   { title: `Home Loans`, imgSrc: homeLoans  },
-  { title: "Security Loans", imgSrc: securityLoans},
+  { title: "Loan Against Security", imgSrc: securityLoans},
   { title: "Micro Loans", imgSrc: microLoans },
   { title: "Gold Loans", imgSrc: goldLoans },
 ];
