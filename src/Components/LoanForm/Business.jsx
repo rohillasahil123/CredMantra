@@ -42,7 +42,7 @@ const BusinessEligibilityForm = () => {
 
     return (
         <div className="flex flex-col items-center h-auto p-4 bg-sky-300">
-            <div className='h-[40vh] text-white w-full rounded-xl text-center bg-red-300'>
+            <div className='h-[30vh] text-gray-800 w-full rounded-xl text-center bg-red-300'>
                 <h1 className='text-4xl'><span className='font-bold'>Business  Loans </span> starting at 10.25%* Interest Rates.</h1>
                 <p className='text-lg font-semibold'>Get instant loan approval and disbursal in 24 hours</p>
                 <p className='font-semibold'>Minimal Documentation</p>

@@ -7,6 +7,7 @@ import HomeAll from './Components/HomeAll/HomeAll';
 import Footer from "./Components/Footer/Footer"
 import PersonalLoan from "./Components/LoanForm/PersonalLoan"
 import BusinessEligibilityForm from './Components/LoanForm/Business';
+import SignUp from './Components/Signup/Signup';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/ourteam" element={<Ourteam />} />
           <Route path="/personalloan" element={ <PersonalLoan/>  } />
           <Route path="/businessloan" element={ <BusinessEligibilityForm/>   } />
+          <Route path="/signup" element={ <SignUp/> } />
         </Routes>
         <Footer />
       </BrowserRouter>
