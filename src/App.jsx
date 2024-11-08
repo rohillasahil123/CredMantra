@@ -8,6 +8,7 @@ import Footer from "./Components/Footer/Footer"
 import PersonalLoan from "./Components/LoanForm/PersonalLoan"
 import BusinessEligibilityForm from './Components/LoanForm/Business';
 import SignUp from './Components/Signup/Signup';
+import LanderList from './Components/LanderList/LanderList';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/personalloan" element={ <PersonalLoan/>  } />
           <Route path="/businessloan" element={ <BusinessEligibilityForm/>   } />
           <Route path="/signup" element={ <SignUp/> } />
+          <Route path="/landerlist" element={ <LanderList/> } />
         </Routes>
         <Footer />
       </BrowserRouter>
