@@ -9,6 +9,7 @@ import PersonalLoan from "./Components/LoanForm/PersonalLoan"
 import BusinessEligibilityForm from './Components/LoanForm/Business';
 import SignUp from './Components/Signup/Signup';
 import LanderList from './Components/LanderList/LanderList';
+import Otp from './Components/LoginFile/Otp';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Header />
         <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/otp" element={ <Otp/> } />
           <Route path="/home" element={<HomeAll />} />
           <Route path="/ourteam" element={<Ourteam />} />
           <Route path="/personalloan" element={ <PersonalLoan/>  } />

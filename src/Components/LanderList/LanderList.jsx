@@ -76,9 +76,7 @@ const LenderList = () => {
                 <h2>No Collateral</h2>
           </div>
           </div>
-        
             <button className="h-[35px] border w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 ">Apply Now</button>
-        
         </div>
     </div>
     </div>
