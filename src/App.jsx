@@ -9,7 +9,6 @@ import PersonalLoan from "./Components/LoanForm/PersonalLoan"
 import BusinessEligibilityForm from './Components/LoanForm/Business';
 import SignUp from './Components/Signup/Signup';
 import LanderList from './Components/LanderList/LanderList';
-import Otp from './Components/LoginFile/Otp';
 
 const App = () => {
   return (
