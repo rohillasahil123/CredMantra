@@ -37,8 +37,8 @@ const Fixbox = () => {
 
   return (
     isVisible && (
-      <div className="fixed sm:h-[16%] bottom-0  left-0  w-[80%] sm:w-[100%] bg-white rounded-md z-50 ease-in-out">
-        <div className="h-full border rounded-lg w-full  shadow-2xl space-y-4  text-center">
+      <div className="fixed sm:h-[16%] h-[12%] bottom-0  left-0  w-[100%] sm:w-[100%] bg-orange-300 rounded-md z-50 ease-in-out">
+        <div className="h-full border rounded-lg w-full  shadow-2xl space-y-0 sm:space-y-3   text-center">
           <h1 className="font-semibold text-xl">
             Get Instant Loan Approval in less than 2 minutes
           </h1>
@@ -46,7 +46,7 @@ const Fixbox = () => {
             <input
               type="text"
               placeholder="OTP"
-              className="border h-9 w-[60%] rounded-md mt-[5%] ml-3"
+              className="border h-9 w-[60%] rounded-md  ml-3"
               onChange={handleChange}
               value={otp}
               name="otp"
@@ -55,14 +55,14 @@ const Fixbox = () => {
             <input
               type="text"
               placeholder="91+ Phone Number"
-              className="border h-9 w-[30%] rounded-md ml-3"
+              className="border h-9 w-[50%] rounded-md ml-3 "
               onChange={handleChange}
               value={phoneNumber}
               name="phoneNumber"
             />
           )}
           <button
-            className="h-9 w-[15%] ml-[3%] border rounded-md bg-teal-800 text-white font-bold"
+            className="h-9 w-[20%] sm:w-[15%] ml-[3%] border rounded-md bg-teal-800 text-white font-bold"
             onClick={handelOtpSend}
           >
             Send OTP
