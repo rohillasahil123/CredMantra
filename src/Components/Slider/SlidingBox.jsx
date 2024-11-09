@@ -60,10 +60,10 @@ export default function SlidingBox() {
   }, [slider]);
 
   return (
-    <div className="w-full max-w-lg mx-auto">
-      <div className="relative overflow-hidden border border-gray-200 shadow-lg rounded-lg">
+    <div className="w-full max-w-lg mx-auto pb-[80px] "> 
+      <div className=" overflow-hidden border border-gray-200 shadow-lg rounded-lg">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex transition-transform duration-1000 ease-in-out"
           style={{ transform: `translateX(-${slider * 100}%)` }}
         >
           {slides.map((slide, index) => (
