@@ -36,10 +36,11 @@ const Login = () => {
 
   return (
     <>
-      <div className="md:flex justify-center text-align text-center w-[100%] mx-auto sm:h-[80vh] h-[100vh] space-x-4 bg-sky-300">
+      <div className="md:flex justify-center text-align text-center w-[100%] mx-auto sm:h-[80vh] h-[90vh] space-x-4 bg-sky-300">
         {isOnScreen ? (
           <>
-            <div className="h-[350px] w-[80%] border mt-[100px] bg-white shadow-2xl rounded-xl ml-9 md:ml-0 lg:w-[25%]">
+              <div className="h-[5%] sm:h-0 w-full sm:w-0 bg-sky-300"></div>
+            <div className="h-[350px] w-[80%] border mt-[100px] bg-white shadow-2xl rounded-xl ml-9 md:ml-0 lg:w-[25%]" style={{justifySelf:"center"}}>
               <div className="border h-12 bg-violet-600 rounded-xl ">
                 <h1 className="font-bold text-white text-2xl mt-1">OTP</h1>
 
