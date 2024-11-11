@@ -9,6 +9,8 @@ import PersonalLoan from "./Components/LoanForm/PersonalLoan"
 import BusinessEligibilityForm from './Components/LoanForm/Business';
 import SignUp from './Components/Signup/Signup';
 import LanderList from './Components/LanderList/LanderList';
+import { Toaster } from 'react-hot-toast';
+import Contect from './Components/Contect/Contect';
 
 const App = () => {
   return (
@@ -23,8 +25,10 @@ const App = () => {
           <Route path="/businessloan" element={ <BusinessEligibilityForm/>   } />
           <Route path="/signup" element={ <SignUp/> } />
           <Route path="/landerlist" element={ <LanderList/> } />
-        </Routes>
+          <Route path="/contect" element={ <Contect/> } />        
+          </Routes>
         <Footer />
+        <Toaster/>
       </BrowserRouter>
     </div>
   );

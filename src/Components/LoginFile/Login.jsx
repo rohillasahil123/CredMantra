@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import axios from "axios";
 import loginImage from "../../assets/Login.avif";
+import toast from "react-hot-toast";
+const baseUrl = "https://credmantra.com/api/v1/";
+const signUpUrl = `${baseUrl}auth/`; 
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  const [phone, setPhone] = useState(""); 
+  const [name, setName] = useState(""); 
+
 
   const handelChange = (e, index) => {
     const value = e.target.value;
     if (/^\d?$/.test(value)) {
       const newotp = [...otp];
-      newotp[index] = value;
+      newotp[index] = value; 
       setOtp(newotp);
     }
 
@@ -30,8 +37,17 @@ const Login = () => {
     console.log(otpValue);
   };
 
-  const handelSendOtpClick = () => {
-    setIsOnScreen(true);
+  const handleSendOtpClick = async () => {
+    try {
+      const response = await axios.post(signUpUrl, { phone });
+      toast.success("Otp Send Successfully" , response.data)
+      console.log("OTP sent successfully:", response.data);
+      setIsOnScreen(true); 
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      toast.error("Otp dont Send !")
+
+    }
   };
 
   return (
@@ -105,17 +121,21 @@ const Login = () => {
                       type="text"
                       className="h-9 border rounded w-[90%]"
                       placeholder=" Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                     <input
                       type="text"
                       className="h-9 border rounded w-[90%]"
                       placeholder=" Mobile Number "
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </div>
                 </div>
                 <button
                   className="w-[100px] mt-4 bg-sky-600 h-9 mb-2 text-white font-bold rounded-full hover:bg-sky-950"
-                  onClick={handelSendOtpClick}
+                  onClick={handleSendOtpClick}
                 >
                   Send Otp
                 </button>
