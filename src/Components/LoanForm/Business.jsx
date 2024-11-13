@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import bussines from "../../assets/busformImage.png"
 
 const BusinessEligibilityForm = () => {
     const [step, setStep] = useState(1); 
@@ -42,12 +43,17 @@ const BusinessEligibilityForm = () => {
 
     return (
         <div className="flex flex-col items-center h-auto p-4 bg-sky-300">
-            <div className='h-[32vh] sm:h-[30vh] text-gray-800 w-full rounded-xl text-center bg-red-300'>
+            <div className='flex justify-around h-[27vh] sm:h-[60vh] text-gray-800 w-full rounded-xl text-center bg-white '>
+            <div className='h-full'>
+                <img src={bussines} alt="" className='object-cover  h-[100%] ml-[20%] ' />
+            </div>
+            <div className='h-[32vh] sm:h-[80%] text-gray-800 w-full sm:w-[30%] rounded-xl text-center '>
                 <h1 className='text-4xl'><span className='font-bold'>Business  Loans </span> starting at 10.25%* Interest Rates.</h1>
                 <p className='text-lg font-semibold'>Get instant loan approval and disbursal in 24 hours</p>
                 <p className='font-semibold'>Minimal Documentation</p>
                 <p className='font-semibold'>Lowest interest rate guaranteed*</p>
                 <p className='font-semibold'>Now compare pre-qualified offers from 70+ Top Lenders!</p>
+            </div>
             </div>
             <h1 className="text-2xl font-bold text-center mb-2">Check Eligibility</h1>
             <p className="text-center mb-6">Offers from 70+ RBI Approved Lenders</p>
