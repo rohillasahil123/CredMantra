@@ -56,7 +56,7 @@ const Login = () => {
         {isOnScreen ? (
           <>
               <div className="h-[5%] sm:h-0 w-full sm:w-0 bg-sky-300"></div>
-            <div className="h-[350px] w-[80%] border mt-[100px] bg-white shadow-2xl rounded-xl ml-9 md:ml-0 lg:w-[25%]" style={{justifySelf:"center"}}>
+            <div className="h-[350px] w-[80%] border mt-[100px] bg-white shadow-2xl rounded-xl ml-9 md:ml-0 md:w-[30%] lg:w-[25%]" style={{justifySelf:"center"}}>
               <div className="border h-12 bg-violet-600 rounded-xl ">
                 <h1 className="font-bold text-white text-2xl mt-1">OTP</h1>
 
@@ -100,7 +100,7 @@ const Login = () => {
                 <img
                   src={loginImage}
                   alt=""
-                  className="object-cover h-[70%] sm:h-[80%] w-[70%] sm:w-[80%] p-2 rounded-lg"
+                  className="object-cover h-[70%] sm:h-[80%] md:h-[60%]  w-[70%] sm:w-[80%] md:w-[70%] p-2 rounded-lg"
                 />
               </div>
             </div>

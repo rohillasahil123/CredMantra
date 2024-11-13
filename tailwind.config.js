@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     extend: {
+        
       fontSize: {
         '10xl': '10rem',
         '11xl': '11rem',
@@ -14,7 +15,17 @@ export default {
         '200px': '200px',
       },
     },
-    extend: {},
+    extend: {
+      animation: {
+        blink: 'blink 1s infinite',
+      },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0 },
+        },
+      },
+    },
   },
   plugins: [],
 }
