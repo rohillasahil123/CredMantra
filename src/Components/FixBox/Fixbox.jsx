@@ -37,14 +37,13 @@ const Fixbox = () => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 w-full sm:h-[14%] h-[12 %] bg-orange-300 rounded-md z-50 ease-in-out transition-all duration-500 transform ${
+      className={`fixed bottom-0 left-0 w-full sm:h-[12%] h-[12 %] bg-orange-300 rounded-md z-50 ease-in-out transition-all duration-500 transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
       }`}
     >
-      <div className="h-full border rounded-lg w-full shadow-2xl space-y-0 sm:space-y-1 text-center p-1">
-        <h1 className="font-semibold text-xl">
-          Get Instant Loan Approval in less than 2 minutes
-        </h1>
+      <div className="h-full sm:flex space-x-5  border rounded-lg w-full shadow-2xl space-y-0 sm:space-y-1 text-center p-1 items-center " style={{justifyContent:"center"}}>
+        <h1 className="font-bold text-xl">
+          Get Instant Loan :        </h1>
         {isOnScreen ? (
           <input
             type="text"
@@ -57,7 +56,7 @@ const Fixbox = () => {
         ) : (
           <input
             type="text"
-            placeholder="+91 9991462406"
+            placeholder="+91 xxxxxxxxxxx"
             className="border h-9 w-[50%] rounded-md ml-3"
             onChange={handleChange}
             value={phoneNumber}

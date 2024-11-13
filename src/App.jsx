@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 import Contect from './Components/Contect/Contect';
 import EmiCalculator from './Components/Calculater/EmiCalculator';
 import Partner from './Components/Partners/Partner';
+import Blog from './Components/Blog/Blog';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/contect" element={ <Contect/> } />    
           <Route path="/emicalculator" element={ <EmiCalculator/>  } />        
           <Route path="/partner" element={ <Partner/> } />    
+          <Route path='blog' element={<Blog/>} ></Route>
           </Routes>
         <Footer />
         <Toaster/>
