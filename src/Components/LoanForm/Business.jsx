@@ -70,7 +70,7 @@ const BusinessEligibilityForm = () => {
   };
 
   return (
-    <div className="sm:min-h-[200vh] min-h-[140vh]">
+    <div className="sm:min-h-[200vh] min-h-[160vh]">
       {isFormVisible ? (
         <>
           <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md">
@@ -332,17 +332,17 @@ const BusinessEligibilityForm = () => {
                 src={businesLoan}
                 alt=""
                 srcset=""
-                className="w-[100%]  h-[100%] rounded-lg mt-2"
+                className="w-[100%]  h-[100%] rounded-lg mt-2 opacity-80 "
               />
             </div>
-            <div className="absolute top-[7%] sm:top-[28%] left-[2%] sm:left-[3%] mt-[1%]  ">
+            <div className="absolute top-[7%] sm:top-[20%] left-[2%] sm:left-[3%] mt-[1%]  ">
               <h1 className="font-bold uppercase text-lg sm:text-[70px] ">
                 Expert IN
               </h1>
               <h1 className="font-bold uppercase text-lg sm:text-[60px] sm:mt-[7%]  ">
                 Business Loan
               </h1>
-              <h1 className="mt-[4%] text-[8px]  sm:text-[12px] text-gray-700">
+              <h1 className="mt-[4%] text-[8px] sm:text-xl  text-black ">
                 A business loan can be vital for export companies seeking growth
                 in international markets. <br /> It provides the capital needed
                 for expanding production, covering <br /> shipping costs, and
@@ -355,30 +355,30 @@ const BusinessEligibilityForm = () => {
               </h1>
 
               <button
-                className="bg-yellow-500 text-sm sm:text-sm  sm:ml-[9%] sm:mt-[10%] mt-4 text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
+                className="bg-yellow-500 text-sm sm:text-sm  sm:ml-[9%] sm:mt-[4%] mt-4 text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
                 onClick={DisplayForm}
               >
                 Get Started
               </button>
             </div>
-            <div className="text-center h-[26vh] sm:h-[40vh] mt-[4%] sm:mt-[2%]">
-              <h1 className="font-semibold text-xl sm:text-lg">
+            <div className="text-center h-[26vh] sm:h-[40vh] mt-[4%] sm:mt-[2%] w-[80%]" style={{justifySelf:"center"}}>
+              <h1 className="font-semibold text-md sm:text-lg">
                 {" "}
                 Take Your Business To New Heights With Our{" "}
               </h1>
-              <h1 className="font-bold text-2xl sm:text-5xl">
+              <h1 className="font-bold text-xl sm:text-5xl">
                 Flexible and Affordable Loans !
               </h1>
-              <p className="sm:text-md text-sm font-serif mt-[1%] ">
+              <p className="sm:text-xl text-[10px] font-serif mt-[1%] ">
                 Running a successful business often involves strategic financial
-                management, and loans can be a key <br /> resource for growth and
+                management, and loans can be a key  resource for growth and
                 stability. Business loans offer  the capital needed to
-                expand operations, invest in new <br /> equipment, increase inventory,
-                or explore new markets. For entrepreneurs, securing a <br />{" "}
+                expand operations, invest in new equipment, increase inventory,
+                or explore new markets. For entrepreneurs, securing a {" "}
         
               </p>
             </div>
-            <div className="h-[67vh] w-[80%] flex-col sm:flex justify-center sm:mt-[2%] space-x-4" style={{justifySelf:"center"}}>
+            <div className="h-[67vh] w-[80%] flex-col sm:flex sm:flex-row justify-center sm:mt-[2%] space-x-4" style={{justifySelf:"center"}}>
               {businessHelp.map((loan, index) => (
                 <div key={index} className=" space-x-3 text-center items-center justify-center " >
                   <div className="" style={{justifyItems:"center"}}>
