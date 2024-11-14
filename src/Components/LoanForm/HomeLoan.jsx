@@ -91,7 +91,7 @@ const HomeLoan = () => {
                 <br />
                 <button
                 type="submit"
-                  className="bg-orange-500 text-sm sm:text-sm sm:ml-[9%] sm:mt-[15%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
+                  className="bg-orange-500 text-sm sm:text-sm sm:ml-[9%] ml-[9%] sm:mt-[15%] text-white h-8 w-[40%] sm:w-[30%] rounded-md uppercase"
                   onClick={handleSubmit}
                 >       
                   Submit
