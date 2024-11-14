@@ -31,19 +31,19 @@ const HomeLoan = () => {
   };
 
   return (
-    <div className=" h-[100%]">
+    <div className="sm:min-h-[105vh] h-[80vh]">
       {isFormVisible ? (
         <>
           <div className="h-[90vh] w-full  relative items-center p-[3%]">
-            <h1 className="font-bold text-2xl sm:text-4xl sm:absolute  ml-[35%]  text-center ">
+            <h1 className="font-bold text-2xl sm:text-4xl sm:absolute ml-[2%] sm:ml-[35%]   text-center ">
               {" "}
               Home Loan Form
             </h1>
             <div
-              className="items-center flex-col sm:flex-row  sm:flex text-center  w-[80%] border h-[80%] mt-[8%] shadow-2xl rounded-lg  "
+              className="items-center flex-col  sm:flex-row  sm:flex text-center  w-[80%] border h-[80%] mt-[5%] shadow-2xl rounded-lg  "
               style={{ justifySelf: "center" }}
             >
-              <div className="sm:h-[90%] sm:w-[50%] w-[100%] h-[40%] items-center ">
+              <div className="sm:h-[90%] sm:w-[50%] ml-[5%] w-[100%] h-[40%] items-center ">
                 <img src={HomeLoangif} alt="" className="h-full w-[90%]" />
               </div>
 
@@ -91,7 +91,7 @@ const HomeLoan = () => {
                 <br />
                 <button
                 type="submit"
-                  className="bg-orange-500 text-[1px] sm:text-sm sm:ml-[9%] sm:mt-[15%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
+                  className="bg-orange-500 text-sm sm:text-sm sm:ml-[9%] sm:mt-[15%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
                   onClick={handleSubmit}
                 >       
                   Submit
@@ -132,7 +132,7 @@ const HomeLoan = () => {
               </p>
 
               <button
-                className="bg-orange-500 text-[1px] sm:text-sm  sm:ml-[9%] sm:mt-[10%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
+                className="bg-orange-500 text-sm sm:text-sm  sm:ml-[9%] sm:mt-[10%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
 
                 onClick={DisplayForm}
               >
