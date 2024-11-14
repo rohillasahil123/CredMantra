@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import axios from "axios";
 import loginImage from "../../assets/Login.avif";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const baseUrl = "https://credmantra.com/api/v1/";
 const signUpUrl = `${baseUrl}auth/`; 
 
@@ -10,6 +11,8 @@ const Login = () => {
   const [otp, setOtp] = useState(new Array(4).fill(""));
   const [phone, setPhone] = useState(""); 
   const [name, setName] = useState(""); 
+
+  const navigate = useNavigate()
 
 
   const handelChange = (e, index) => {
@@ -37,8 +40,11 @@ const Login = () => {
     console.log(otpValue);
   };
 
+
   const handleSendOtpClick = async () => {
     try {
+      localStorage.setItem('login',true)
+      navigate('/')
       const response = await axios.post(signUpUrl, { phone });
       toast.success("Otp Send Successfully" , response.data)
       console.log("OTP sent successfully:", response.data);
@@ -46,9 +52,17 @@ const Login = () => {
     } catch (error) {
       console.error("Error sending OTP:", error);
       toast.error("Otp dont Send !")
-
     }
   };
+
+
+
+  useEffect(()=>{
+    let login = localStorage.getItem('login')
+    if(login){
+        navigate("/")
+    }
+})
 
   return (
     <>
@@ -119,14 +133,14 @@ const Login = () => {
                   <div className="space-y-2">
                     <input
                       type="text"
-                      className="h-9 border rounded w-[90%]"
+                      className="h-9 border p-2  rounded w-[90%]"
                       placeholder=" Name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                     <input
                       type="text"
-                      className="h-9 border rounded w-[90%]"
+                      className="h-9 border p-2 rounded w-[90%]"
                       placeholder=" Mobile Number "
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}

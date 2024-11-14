@@ -12,10 +12,10 @@ const Header = () => {
   return (
     <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4">
       <button className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer">
-        <Link to="/">Login</Link>
+        <Link to="/login">Login</Link>
       </button>
       <div className="font-bold text-2xl cursor-pointer">
-        <Link to="/home">
+        <Link to="/">
           <span className="text-red-300">LO</span><span className="text-sky-300">GO</span>
         </Link>
       </div>

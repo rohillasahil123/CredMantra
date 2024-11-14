@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const loanOptions = [
   { title: "Personal Loans", imgSrc: personalLoans, Route: "/personalloan" },
   { title: "Business Loans", imgSrc: businessLoans, Route: "/businessloan" },
-  { title: `Home Loans`, imgSrc: homeLoans  },
+  { title: `Home Loans`, imgSrc: homeLoans, Route: "/homeloan"   },
   { title: "Loan Against Security", imgSrc: securityLoans},
   { title: "Micro Loans", imgSrc: microLoans },
   { title: "Gold Loans", imgSrc: goldLoans },
