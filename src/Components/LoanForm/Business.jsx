@@ -6,7 +6,6 @@ import ApplyLoan from "../../assets/Applyloan.png";
 import InBusinessLoan from "../../assets/inbusinessLoan.png";
 import helpBusiness from "../../assets/HelpBusiness.jpg";
 
-
 const BusinessEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
   const [step, setStep] = useState(1);
@@ -33,21 +32,21 @@ const BusinessEligibilityForm = () => {
       image: determinehelp,
       theam:
         "The first step is to determine  how much money you need to borrow and for what purpopse.",
-        title:"Determine Needs"
+      title: "Determine Needs",
     },
     {
       id: 2,
       image: Gdocument,
       theam:
         "Most lenders will require you to submit documentation like financial statement tex returns and a business plen.",
-        title:"Gather Document"
+      title: "Gather Document",
     },
     {
       id: 3,
       image: ApplyLoan,
       theam:
         "Once you've determined your loan needs and gathered the necessary documents, you can start the application process.",
-        title:"Apply for the Loan"
+      title: "Apply for the Loan",
     },
   ];
 
@@ -67,287 +66,309 @@ const BusinessEligibilityForm = () => {
   };
 
   const DisplayForm = () => {
-    SetIsFormVisible(true)
+    SetIsFormVisible(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-  }
+  };
 
   return (
     <div className="sm:min-h-[200vh] min-h-[160vh]">
       {isFormVisible ? (
         <>
-        <h1 className="font-bold text-4xl text-center">Business Loan </h1>
-        <div className=" h-[80vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] " style={{justifySelf:"center" , justifyItems:"center"}} > 
-      <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center " >
-            <img src={InBusinessLoan} alt="" srcset="" className= " h-[100%] w-[100%]  sm:h-full sm:w-full" />
-          </div>
-          <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md">
-            <div className="flex justify-between border-b pb-2 mb-4">
-              <button
-                className={`w-1/2 text-center py-2 font-medium ${
-                  step === 1
-                    ? "text-white bg-blue-500"
-                    : "text-gray-500 bg-gray-200"
-                } rounded-l-md`}
-                onClick={() => setStep(1)}
-              >
-                1 Basic Details
-              </button>
-              <button
-                className={`w-1/2 text-center py-2 font-medium ${
-                  step === 2
-                    ? "text-white bg-blue-500"
-                    : "text-gray-500 bg-gray-200"
-                } rounded-r-md`}
-                onClick={() => setStep(2)}
-              >
-                2 Additional Details
-              </button>
+          <h1 className="font-bold text-4xl text-center">Business Loan </h1>
+          <div
+            className=" h-[80vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] "
+            style={{ justifySelf: "center", justifyItems: "center" }}
+          >
+            <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center ">
+              <img
+                src={InBusinessLoan}
+                alt=""
+                srcset=""
+                className=" h-[100%] w-[100%]  sm:h-full sm:w-full"
+              />
             </div>
-
-            <form onSubmit={handleSubmit}>
-              {step === 1 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Full Name:
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter full name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Phone Number:
-                    </label>
-                    <input
-                      type="text"
-                      name="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter phone number"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Email ID:
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter email"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Amount Required:
-                    </label>
-                    <input
-                      type="number"
-                      name="amountRequired"
-                      value={formData.amountRequired}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter amount"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Gender:
-                    </label>
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="MALE">MALE</option>
-                      <option value="FEMALE">FEMALE</option>
-                      <option value="OTHER">OTHER</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Company Type:
-                    </label>
-                    <select
-                      name="companyType"
-                      value={formData.companyType}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="Proprietorship">Proprietorship</option>
-                      <option value="Partnership">Partnership</option>
-                      <option value="Private Limited">Private Limited</option>
-                      <option value="Public Limited">Public Limited</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      PAN Number:
-                    </label>
-                    <input
-                      type="text"
-                      name="panNumber"
-                      value={formData.panNumber}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter PAN Number"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      DOB:
-                    </label>
-                    <input
-                      type="date"
-                      name="dob"
-                      value={formData.dob}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Business Name:
-                    </label>
-                    <input
-                      type="text"
-                      name="businessName"
-                      value={formData.businessName}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter Business Name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Registered for GST?
-                    </label>
-                    <select
-                      name="gstRegistered"
-                      value={formData.gstRegistered}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="YES">YES</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Business Age (in months):
-                    </label>
-                    <input
-                      type="number"
-                      name="businessAge"
-                      value={formData.businessAge}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter Business Age"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Annual Turnover:
-                    </label>
-                    <input
-                      type="number"
-                      name="annualTurnover"
-                      value={formData.annualTurnover}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter Annual Turnover"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Residential Pincode:
-                    </label>
-                    <input
-                      type="text"
-                      name="residentialPincode"
-                      value={formData.residentialPincode}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter Pincode"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Current Account?
-                    </label>
-                    <select
-                      name="currentAccount"
-                      value={formData.currentAccount}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="YES">YES</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              <div className="flex justify-between mt-6">
-                {step > 1 && (
-                  <button
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                    onClick={handlePrevious}
-                  >
-                    Previous
-                  </button>
-                )}
-                {step < 2 ? (
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={handleNext}
-                  >
-                    Next
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    Submit
-                  </button>
-                )}
+            <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md">
+              <div className="flex justify-between border-b pb-2 mb-4">
+                <button
+                  className={`w-1/2 text-center py-2 font-medium ${
+                    step === 1
+                      ? "text-white bg-blue-500"
+                      : "text-gray-500 bg-gray-200"
+                  } rounded-l-md`}
+                  onClick={() => setStep(1)}
+                >
+                  1 Basic Details
+                </button>
+                <button
+                  className={`w-1/2 text-center py-2 font-medium ${
+                    step === 2
+                      ? "text-white bg-blue-500"
+                      : "text-gray-500 bg-gray-200"
+                  } rounded-r-md`}
+                  onClick={() => setStep(2)}
+                >
+                  2 Additional Details
+                </button>
               </div>
-            </form>
-          </div>
 
+              <form onSubmit={handleSubmit}>
+                {step === 1 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Full Name:
+                      </label>
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter full name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Phone Number:
+                      </label>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter phone number"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Email ID:
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter email"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Amount Required:
+                      </label>
+                      <input
+                        type="number"
+                        name="amountRequired"
+                        value={formData.amountRequired}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter amount"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Gender:
+                      </label>
+                      <select
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                        <option value="OTHER">OTHER</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Company Type:
+                      </label>
+                      <select
+                        name="companyType"
+                        value={formData.companyType}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="Proprietorship">Proprietorship</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Private Limited">Private Limited</option>
+                        <option value="Public Limited">Public Limited</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        PAN Number:
+                      </label>
+                      <input
+                        type="text"
+                        name="panNumber"
+                        value={formData.panNumber}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter PAN Number"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        DOB:
+                      </label>
+                      <input
+                        type="date"
+                        name="dob"
+                        value={formData.dob}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Business Name:
+                      </label>
+                      <input
+                        type="text"
+                        name="businessName"
+                        value={formData.businessName}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter Business Name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Registered for GST?
+                      </label>
+                      <select
+                        name="gstRegistered"
+                        value={formData.gstRegistered}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Business Age (in months):
+                      </label>
+                      <input
+                        type="number"
+                        name="businessAge"
+                        value={formData.businessAge}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter Business Age"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Annual Turnover:
+                      </label>
+                      <input
+                        type="number"
+                        name="annualTurnover"
+                        value={formData.annualTurnover}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter Annual Turnover"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Residential Pincode:
+                      </label>
+                      <input
+                        type="text"
+                        name="residentialPincode"
+                        value={formData.residentialPincode}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter Pincode"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Current Account?
+                      </label>
+                      <select
+                        name="currentAccount"
+                        value={formData.currentAccount}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-between mt-6">
+                  {step > 1 && (
+                    <button
+                      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                      onClick={handlePrevious}
+                    >
+                      Previous
+                    </button>
+                  )}
+                  {step < 2 ? (
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Submit
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
-          <div className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[70%] sm:mt-[8%] items-center " style={{justifyItems:"center"}}>
+          <div
+            className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[70%] sm:mt-[8%] items-center "
+            style={{ justifyItems: "center" }}
+          >
             <div className="h-[50%] sm:h-full sm:w-[40%] w-[80%] sm:mt-[18%] space-y-2 ml-4">
-            <h1 className=" text-sm sm:text-xl font-semibold">How Can We help</h1>
-            <h1 className=" text-xl sm:text-3xl font-bold">We Love Help Small Business</h1>
-            <p className="sm:text-md text-sm ">
-              Small businesses are the backbone of many local economies and can have a significant impact on the communities they serve. As a small business owner. There are many resources available to help you grow and succeed.
-            </p>
-            <button className="text-md font-bold rounded-lg bg-yellow-500 h-[16%] w-[30%] sm:h-[10%] sm:w-[40%] mt-[3%] hover:bg-yellow-700">Apply</button>
+              <h1 className=" text-sm sm:text-xl font-semibold">
+                How Can We help
+              </h1>
+              <h1 className=" text-xl sm:text-3xl font-bold">
+                We Love Help Small Business
+              </h1>
+              <p className="sm:text-md text-sm ">
+                Small businesses are the backbone of many local economies and
+                can have a significant impact on the communities they serve. As
+                a small business owner. There are many resources available to
+                help you grow and succeed.
+              </p>
+              <button className="text-md font-bold rounded-lg bg-yellow-500 h-[16%] w-[30%] sm:h-[10%] sm:w-[40%] mt-[3%] hover:bg-yellow-700">
+                Apply
+              </button>
             </div>
             <div className="h-[80%] sm:h-[90%]   w-[60%] sm:w-[30%]  mr-[6%] ">
-                <img src={helpBusiness} alt="" className=" h-[50%] sm:h-[100%] w-[100%] rounded-lg" />
-              </div>
+              <img
+                src={helpBusiness}
+                alt=""
+                className=" h-[50%] sm:h-[100%] w-[100%] rounded-lg"
+              />
+            </div>
           </div>
         </>
       ) : (
@@ -387,7 +408,10 @@ const BusinessEligibilityForm = () => {
                 Get Started
               </button>
             </div>
-            <div className="text-center h-[26vh] sm:h-[40vh] mt-[4%] sm:mt-[2%] w-[80%]" style={{justifySelf:"center"}}>
+            <div
+              className="text-center h-[26vh] sm:h-[40vh] mt-[4%] sm:mt-[2%] w-[80%]"
+              style={{ justifySelf: "center" }}
+            >
               <h1 className="font-semibold text-md sm:text-lg">
                 {" "}
                 Take Your Business To New Heights With Our{" "}
@@ -397,19 +421,28 @@ const BusinessEligibilityForm = () => {
               </h1>
               <p className="sm:text-xl text-[10px] font-serif mt-[1%] ">
                 Running a successful business often involves strategic financial
-                management, and loans can be a key  resource for growth and
-                stability. Business loans offer  the capital needed to
-                expand operations, invest in new equipment, increase inventory,
-                or explore new markets. For entrepreneurs, securing a {" "}
-        
+                management, and loans can be a key resource for growth and
+                stability. Business loans offer the capital needed to expand
+                operations, invest in new equipment, increase inventory, or
+                explore new markets. For entrepreneurs, securing a{" "}
               </p>
             </div>
-            <div className="h-[67vh] w-[80%] flex-col sm:flex sm:flex-row justify-center sm:mt-[2%] space-x-4" style={{justifySelf:"center"}}>
+            <div
+              className="h-[67vh] w-[80%] flex-col sm:flex sm:flex-row justify-center sm:mt-[2%] space-x-4"
+              style={{ justifySelf: "center" }}
+            >
               {businessHelp.map((loan, index) => (
-                <div key={index} className=" space-x-3 text-center items-center justify-center " >
-                  <div className="" style={{justifyItems:"center"}}>
+                <div
+                  key={index}
+                  className=" space-x-3 text-center items-center justify-center "
+                >
+                  <div className="" style={{ justifyItems: "center" }}>
                     <h1 className="font-bold text-lg">{loan.title}</h1>
-                    <img src={loan.image} alt=" " className="h-[15%] w-[130px]" />
+                    <img
+                      src={loan.image}
+                      alt=" "
+                      className="h-[15%] w-[130px]"
+                    />
                   </div>
                   <h1>{loan.theam}</h1>
                 </div>
