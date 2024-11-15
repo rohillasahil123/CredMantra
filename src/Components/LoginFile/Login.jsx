@@ -3,8 +3,6 @@ import axios from "axios";
 import loginImage from "../../assets/Login.avif";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-const baseUrl = "https://credmantra.com/api/v1/";
-const signUpUrl = `${baseUrl}auth/`; 
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
@@ -40,20 +38,25 @@ const Login = () => {
     console.log(otpValue);
   };
 
-
   const handleSendOtpClick = async () => {
     try {
-      navigate('/')
-      const response = await axios.post(signUpUrl, { phone });
-      toast.success("Otp Send Successfully" , response.data)
-  
-      setIsOnScreen(true); 
+      if (!phone || phone.length !== 10 || isNaN(phone)) {
+        toast.error("Please enter a valid 10-digit mobile number.");
+        return;
+      }
+      const response = await axios.post("https://credmantra.com/0/api/v1/auth/send-otp", { phone });
+      if (response.data.success) {
+        toast.success(response.data.message || "OTP sent successfully!");
+        setIsOnScreen(true); 
+      } else {
+        toast.error(response.data.message || "Failed to send OTP.");
+      }
     } catch (error) {
       console.error("Error sending OTP:", error);
-      toast.error("Otp dont Send !")
+      toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
     }
   };
-
+  
 
 
 
