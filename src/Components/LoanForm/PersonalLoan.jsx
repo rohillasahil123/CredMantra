@@ -68,7 +68,7 @@ const BusinessEligibilityForm = () => {
         <>
           <h1 className="font-bold text-4xl text-center">Personal Loan </h1>
           <div
-            className=" h-[80vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] "
+            className=" h-[120vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] "
             style={{ justifySelf: "center", justifyItems: "center" }}
           >
             <div
@@ -79,7 +79,7 @@ const BusinessEligibilityForm = () => {
                 src={PersonalElegible}
                 alt=""
                 srcset=""
-                className=" h-[100%] w-[100%] rounded-lg sm:h-[80%] sm:w-[70%]"
+                className=" h-[90%] w-[100%] rounded-xl sm:h-[80%] sm:w-[70%]"
               />
             </div>
             <form onSubmit={handleSubmit}>
@@ -199,7 +199,7 @@ const BusinessEligibilityForm = () => {
             </form>
           </div>
           <div
-            className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[70%] sm:mt-[8%] items-center "
+            className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[4%] sm:mt-[8%] items-center "
             style={{ justifyItems: "center" }}
           >
             <div className="h-[50%] sm:h-full sm:w-[40%] w-[80%] sm:mt-[8%] space-y-2 ml-4">
@@ -221,11 +221,11 @@ const BusinessEligibilityForm = () => {
                 Apply
               </button>
             </div>
-            <div className="h-[80%] sm:h-[90%]   w-[60%] sm:w-[30%]  mr-[6%] ">
+            <div className="h-[80%] sm:h-[90%] mt-[20%] sm:mt-0 w-[80%] sm:w-[30%]  ">
               <img
                 src={helpPersonal}
                 alt=""
-                className=" h-[70%] sm:h-[100%] w-[100%] rounded-lg"
+                className=" h-[40%] sm:h-[100%] w-[80%] rounded-lg"
               />
             </div>
           </div>
