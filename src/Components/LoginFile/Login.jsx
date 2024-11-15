@@ -43,11 +43,10 @@ const Login = () => {
 
   const handleSendOtpClick = async () => {
     try {
-      localStorage.setItem('login',true)
       navigate('/')
       const response = await axios.post(signUpUrl, { phone });
       toast.success("Otp Send Successfully" , response.data)
-      console.log("OTP sent successfully:", response.data);
+  
       setIsOnScreen(true); 
     } catch (error) {
       console.error("Error sending OTP:", error);
@@ -57,12 +56,6 @@ const Login = () => {
 
 
 
-  useEffect(()=>{
-    let login = localStorage.getItem('login')
-    if(login){
-        navigate("/")
-    }
-})
 
   return (
     <>
