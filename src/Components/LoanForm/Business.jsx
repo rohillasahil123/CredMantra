@@ -3,6 +3,8 @@ import businesLoan from "../../assets/businessLoan.jpg";
 import determinehelp from "../../assets/Determine.png";
 import Gdocument from "../../assets/Gdocument.png";
 import ApplyLoan from "../../assets/Applyloan.png";
+import InBusinessLoan from "../../assets/inbusinessLoan.png";
+import helpBusiness from "../../assets/HelpBusiness.jpg";
 
 
 const BusinessEligibilityForm = () => {
@@ -64,15 +66,24 @@ const BusinessEligibilityForm = () => {
     setStep(step - 1);
   };
 
-  const DisplayForm = (e) => {
-    e.preventDefault();
-    console.log("Final Form Data:", formData);
+  const DisplayForm = () => {
+    SetIsFormVisible(true)
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
 
   return (
     <div className="sm:min-h-[200vh] min-h-[160vh]">
       {isFormVisible ? (
         <>
+        <h1 className="font-bold text-4xl text-center">Business Loan </h1>
+        <div className=" h-[80vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] " style={{justifySelf:"center" , justifyItems:"center"}} > 
+      <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center " >
+            <img src={InBusinessLoan} alt="" srcset="" className= " h-[100%] w-[100%]  sm:h-full sm:w-full" />
+          </div>
           <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md">
             <div className="flex justify-between border-b pb-2 mb-4">
               <button
@@ -322,6 +333,21 @@ const BusinessEligibilityForm = () => {
                 )}
               </div>
             </form>
+          </div>
+
+          </div>
+          <div className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[70%] sm:mt-[8%] items-center " style={{justifyItems:"center"}}>
+            <div className="h-[50%] sm:h-full sm:w-[40%] w-[80%] sm:mt-[18%] space-y-2 ml-4">
+            <h1 className=" text-sm sm:text-xl font-semibold">How Can We help</h1>
+            <h1 className=" text-xl sm:text-3xl font-bold">We Love Help Small Business</h1>
+            <p className="sm:text-md text-sm ">
+              Small businesses are the backbone of many local economies and can have a significant impact on the communities they serve. As a small business owner. There are many resources available to help you grow and succeed.
+            </p>
+            <button className="text-md font-bold rounded-lg bg-yellow-500 h-[16%] w-[30%] sm:h-[10%] sm:w-[40%] mt-[3%] hover:bg-yellow-700">Apply</button>
+            </div>
+            <div className="h-[80%] sm:h-[90%]   w-[60%] sm:w-[30%]  mr-[6%] ">
+                <img src={helpBusiness} alt="" className=" h-[50%] sm:h-[100%] w-[100%] rounded-lg" />
+              </div>
           </div>
         </>
       ) : (
