@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import businesLoan from "../../assets/businessLoan.jpg";
-import determinehelp from "../../assets/Determine.png";
-import Gdocument from "../../assets/Gdocument.png";
-import ApplyLoan from "../../assets/Applyloan.png";
-import InBusinessLoan from "../../assets/inbusinessLoan.png";
-import helpBusiness from "../../assets/HelpBusiness.jpg";
+import applyOnline from "../../assets/Applyloan.png";
+import ApproveLoan from "../../assets/Approval.png";
+import Recivingloan from "../../assets/recivingloan.png";
+import helpPersonal from "../../assets/HelpPersonal.jpg";
 import personalLoan from "../../assets/personalloan.jpg";
+import PersonalElegible from "../../assets/ElegibillityPersonal.png";
 
 const BusinessEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
-  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -30,40 +28,30 @@ const BusinessEligibilityForm = () => {
   const businessHelp = [
     {
       id: 1,
-      image: determinehelp,
+      image: applyOnline,
       theam:
-        "The first step is to determine  how much money you need to borrow and for what purpopse.",
-      title: "Determine Needs",
+        "Apply Online for Quick and Easy Personal Loans! Get instant approvals, flexible terms, and affordable rates to meet your financial needs. Secure your future from the comfort of your home.",
+      title: "Apply Online",
     },
     {
       id: 2,
-      image: Gdocument,
+      image: ApproveLoan,
       theam:
-        "Most lenders will require you to submit documentation like financial statement tex returns and a business plen.",
-      title: "Gather Document",
+        "Get Instant Loan Approval Today! Enjoy a hassle-free process with minimal documentation, flexible repayment options, and competitive rates. Your financial solution is just a click away. Apply now and relax.",
+      title: "Get Approval",
     },
     {
       id: 3,
-      image: ApplyLoan,
+      image: Recivingloan,
       theam:
-        "Once you've determined your loan needs and gathered the necessary documents, you can start the application process.",
-      title: "Apply for the Loan",
+        "Receive Funds Instantly with Our Hassle-Free Personal Loans! Enjoy quick approvals, flexible repayment options, and competitive rates to cover your needs. Apply today and access your funds in no time.",
+      title: "Recive Funds",
     },
   ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleNext = (e) => {
-    e.preventDefault();
-    setStep(step + 1);
-  };
-
-  const handlePrevious = (e) => {
-    e.preventDefault();
-    setStep(step - 1);
   };
 
   const DisplayForm = () => {
@@ -78,17 +66,20 @@ const BusinessEligibilityForm = () => {
     <div className="sm:min-h-[200vh] min-h-[160vh]">
       {isFormVisible ? (
         <>
-          <h1 className="font-bold text-4xl text-center">Business Loan </h1>
+          <h1 className="font-bold text-4xl text-center">Personal Loan </h1>
           <div
             className=" h-[80vh] sm:h-[90vh] w-[90%] border shadow-xl rounded-xl items-center flex-col sm:flex-row sm:flex justify-around mt-[3%] "
             style={{ justifySelf: "center", justifyItems: "center" }}
           >
-            <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center ">
+            <div
+              className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center"
+              style={{ justifyItems: "center", alignContent: "center" }}
+            >
               <img
-                src={InBusinessLoan}
+                src={PersonalElegible}
                 alt=""
                 srcset=""
-                className=" h-[100%] w-[100%]  sm:h-full sm:w-full"
+                className=" h-[100%] w-[100%] rounded-lg sm:h-[80%] sm:w-[70%]"
               />
             </div>
             <form onSubmit={handleSubmit}>
@@ -211,18 +202,20 @@ const BusinessEligibilityForm = () => {
             className="h-[60vh] w-full flex-col sm:flex-row sm:flex justify-around mt-[70%] sm:mt-[8%] items-center "
             style={{ justifyItems: "center" }}
           >
-            <div className="h-[50%] sm:h-full sm:w-[40%] w-[80%] sm:mt-[18%] space-y-2 ml-4">
+            <div className="h-[50%] sm:h-full sm:w-[40%] w-[80%] sm:mt-[8%] space-y-2 ml-4">
               <h1 className=" text-sm sm:text-xl font-semibold">
-                How Can We help
+                How Can We Help?
               </h1>
               <h1 className=" text-xl sm:text-3xl font-bold">
-                We Love Help Small Business
+                We Love Helping Individuals Achieve Their Dreams.
               </h1>
               <p className="sm:text-md text-sm ">
-                Small businesses are the backbone of many local economies and
-                can have a significant impact on the communities they serve. As
-                a small business owner. There are many resources available to
-                help you grow and succeed.
+                Personal loans can provide the financial support you need to
+                overcome challenges and reach your goals. Whether it’s
+                consolidating debt, covering unexpected expenses, or making a
+                big purchase, we’re here to help. With flexible terms and
+                competitive rates, we offer the resources you need to secure
+                your financial future and achieve success.
               </p>
               <button className="text-md font-bold rounded-lg bg-yellow-500 h-[16%] w-[30%] sm:h-[10%] sm:w-[40%] mt-[3%] hover:bg-yellow-700">
                 Apply
@@ -230,9 +223,9 @@ const BusinessEligibilityForm = () => {
             </div>
             <div className="h-[80%] sm:h-[90%]   w-[60%] sm:w-[30%]  mr-[6%] ">
               <img
-                src={helpBusiness}
+                src={helpPersonal}
                 alt=""
-                className=" h-[50%] sm:h-[100%] w-[100%] rounded-lg"
+                className=" h-[70%] sm:h-[100%] w-[100%] rounded-lg"
               />
             </div>
           </div>
@@ -250,20 +243,20 @@ const BusinessEligibilityForm = () => {
             </div>
             <div className="absolute top-[7%] sm:top-[23%] left-[2%] sm:left-[7%]  text-white ">
               <h1 className="font-bold uppercase text-lg sm:text-[40px] font-serif ">
-                Because Your Dreams are 
+                Because Your Dreams are
               </h1>
               <h1 className="font-bold uppercase text-lg sm:text-[30px] sm:mt-[2%] font-serif ">
                 Importent to us
               </h1>
               <h1 className="mt-[4%] text-[8px] sm:text-xl w-[40%]  text-white uppercase ">
-              ✅ Approval in Seconds
+                ✅ Approval in Seconds
               </h1>
               <h1 className="mt-[1%] text-[8px] sm:text-xl w-[40%]  text-white uppercase ">
-              ✅ No faxing
+                ✅ No faxing
               </h1>
               <h1 className="mt-[1%] text-[8px] sm:text-xl w-[40%]  text-white uppercase   ">
-              ✅ High Approval rate
-              </h1> 
+                ✅ High Approval rate
+              </h1>
 
               <button
                 className="bg-yellow-500 text-sm sm:text-sm  sm:ml-[4%] sm:mt-[4%] mt-4 text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
@@ -278,27 +271,29 @@ const BusinessEligibilityForm = () => {
             >
               <h1 className="font-semibold text-md sm:text-lg">
                 {" "}
-                Take Your Business To New Heights With Our{" "}
+                Fuel Your Dreams with Flexible and Affordable Personal Loans{" "}
               </h1>
-              <h1 className="font-bold text-xl sm:text-5xl">
-                Flexible and Affordable Loans !
+              <h1 className="font-bold text-xl sm:text-4xl">
+                Your Path to Financial Freedom Starts Here!
               </h1>
-              <p className="sm:text-xl text-[10px] font-serif mt-[1%] ">
-                Running a successful business often involves strategic financial
-                management, and loans can be a key resource for growth and
-                stability. Business loans offer the capital needed to expand
-                operations, invest in new equipment, increase inventory, or
-                explore new markets. For entrepreneurs, securing a{" "}
+              <p className="sm:text-xl text-[10px] font-semiboold mt-[1%] ">
+                Empower Your Future with Our Flexible and Affordable Personal
+                Loans! Personal loans can be the perfect solution for reaching
+                life goals or managing financial needs. Our loans offer fast
+                access to funds for covering expenses, consolidating debt, or
+                planning a major purchase. With our flexible terms and
+                competitive rates, achieving financial stability has never been
+                easier. Secure your loan today!
               </p>
             </div>
             <div
-              className="h-[67vh] w-[80%] flex-col sm:flex sm:flex-row justify-center sm:mt-[2%] space-x-4"
+              className="h-[67vh]   w-[80%] flex-col sm:flex sm:flex-row justify-center sm:mt-[2%] space-x-4"
               style={{ justifySelf: "center" }}
             >
               {businessHelp.map((loan, index) => (
                 <div
                   key={index}
-                  className=" space-x-3 text-center items-center justify-center "
+                  className=" space-x-3 text-center items-center justify-center sm:w-[50%] "
                 >
                   <div className="" style={{ justifyItems: "center" }}>
                     <h1 className="font-bold text-lg">{loan.title}</h1>
