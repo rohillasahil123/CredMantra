@@ -40,6 +40,7 @@ const Login = () => {
     axios.post('https://credmantra.com/api/v1/auth/', {phone: phone})
     .then((response) => {
       console.log(response.data);
+      setIsOnScreen(true)
       toast.success('OTP sent successfully');
     }
     )
