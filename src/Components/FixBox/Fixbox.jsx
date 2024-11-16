@@ -3,45 +3,62 @@ import toast from "react-hot-toast";
 
 const Fixbox = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [otp, setOtp] = useState("");
   const [isOnScreen, setIsOnScreen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "phoneNumber") {
       if (/^\d{0,10}$/.test(value)) {
         setPhoneNumber(value);
       }
-    } else if (name === "otp") {
-      setOtp(value);
     }
   };
 
-  const handelOtpSend = () => {
-    if(phoneNumber === ""){
-      toast.error("Please enter mobile number")
-  }
-else{
-  setIsOnScreen(true);
-  console.log("Sending OTP to:", phoneNumber);
-}
+  const validatePhoneNumber = (phoneNumber) => {
+    const regex = /^[0-9]{10}$/;
+    return regex.test(phoneNumber);
   };
 
+  const sendOtp = async (phoneNumber) => {
+    try {
+      const response = await fetch("http://3.108.59.193/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phoneNumber }),
+      });
 
+      const data = await response.json();
+      if (data.success) {
+        toast.success("OTP sent successfully! Check your phone.");
+        setIsOnScreen(true); 
+        setPhoneNumber("");
+      } else {
+        toast.error(data.message || "Failed to send OTP. Please try again.");
+        console.error("Error from API:", data.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred while sending OTP.");
+      console.error("Error sending OTP:", error);
+    }
+  };
 
-const handelOtpSubmit = ()=> {
-  if(otp === "") {
-    toast.error("Please enter OTP")
-  }else{
-    setIsOnScreen(false);
-  }
+  const handleOtpSend = () => {
+    if (!phoneNumber) {
+      toast.error("Please enter mobile number.");
+      return;
+    }
 
-}
+    if (!validatePhoneNumber(phoneNumber)) {
+      toast.error("Please enter a valid 10-digit phone number.");
+      return;
+    }
 
-
-
+    sendOtp(phoneNumber);
+  };
 
 
   useEffect(() => {
@@ -64,60 +81,31 @@ const handelOtpSubmit = ()=> {
       }`}
     >
       <div
-        className="h-full sm:flex space-x-5  border rounded-lg w-full shadow-2xl space-y-0 sm:space-y-1 text-center p-1 items-center "
+        className="h-full sm:flex space-x-5 border rounded-lg w-full shadow-2xl space-y-0 sm:space-y-1 text-center p-1 items-center"
         style={{ justifyContent: "center" }}
       >
         <h1 className="font-bold text-xl animate-blink">
-          {" "}
           <span className="text-red-500">Get Ins</span>
           <span className="text-sky-500">tant Loan</span> :
         </h1>
-        {isOnScreen ? (
-          <input
-            type="text"
-            placeholder="OTP"
-            className="border h-9 p-3 w-[60%] rounded-md ml-3"
-            onChange={handleChange}
-            value={otp}
-            name="otp"
-          />
-        ) : (
-          <input
-            type="text"
-            placeholder="+91 xxxxxxxxxxx"
-            className="border h-9 w-[50%] rounded-md ml-3"
-            onChange={handleChange}
-            value={phoneNumber}
-            name="phoneNumber"
-          />
-          
-        )}
+        <input
+          type="text"
+          placeholder="+91 xxxxxxxxxxx"
+          className="border h-9 w-[50%] rounded-md ml-3"
+          onChange={handleChange}
+          value={phoneNumber}
+          name="phoneNumber"
+        />
 
-        {
-          isOnScreen ? (
-            <button
-            className="h-9 w-[20%] sm:w-[15%] ml-[3%] border rounded-md text-gray-700 font-bold
-               bg-gradient-to-r from-sky-300 to-red-300"
-            onClick={handelOtpSubmit}
-          >
-            Submit
-          </button>
-          ):(
-            <button
-            className="h-9 w-[20%] sm:w-[15%] ml-[3%] border rounded-md text-gray-700 font-bold
-               bg-gradient-to-r from-sky-300 to-red-300"
-            onClick={handelOtpSend}
-          >
-            Send OTP
-          </button>
-          )
-        }
-
-
-      
+        <button
+          className="h-9 w-[20%] sm:w-[15%] ml-[3%] border rounded-md text-gray-700 font-bold bg-gradient-to-r from-sky-300 to-red-300"
+          onClick={handleOtpSend}
+        >
+          Send OTP
+        </button>
       </div>
     </div>
   );
 };
 
-export default Fixbox;
+export default Fixbox;

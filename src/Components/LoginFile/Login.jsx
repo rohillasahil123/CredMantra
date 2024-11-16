@@ -2,7 +2,6 @@ import React, { useState , useEffect } from "react";
 import axios from "axios";
 import loginImage from "../../assets/Login.avif";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
@@ -10,7 +9,6 @@ const Login = () => {
   const [phone, setPhone] = useState(""); 
   const [name, setName] = useState(""); 
 
-  const navigate = useNavigate()
 
 
   const handelChange = (e, index) => {
@@ -38,26 +36,18 @@ const Login = () => {
     console.log(otpValue);
   };
 
-  const handleSendOtpClick = async () => {
-    try {
-      if (!phone || phone.length !== 10 || isNaN(phone)) {
-        toast.error("Please enter a valid 10-digit mobile number.");
-        return;
-      }
-      const response = await axios.post("https://credmantra.com/0/api/v1/auth/send-otp", { phone });
-      if (response.data.success) {
-        toast.success(response.data.message || "OTP sent successfully!");
-        setIsOnScreen(true); 
-      } else {
-        toast.error(response.data.message || "Failed to send OTP.");
-      }
-    } catch (error) {
-      console.error("Error sending OTP:", error);
-      toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
+  const handleSendOtpClick =()=>{
+    axios.post('https://credmantra.com/api/v1/auth/', {phone: phone})
+    .then((response) => {
+      console.log(response.data);
+      toast.success('OTP sent successfully');
     }
-  };
-  
-
+    )
+    .catch((error) => {
+      console.error(error);
+      toast.error('Error sending OTP');
+      });
+  }
 
 
   return (
@@ -138,6 +128,7 @@ const Login = () => {
                       type="text"
                       className="h-9 border p-2 rounded w-[90%]"
                       placeholder=" Mobile Number "
+                      name="phone"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
