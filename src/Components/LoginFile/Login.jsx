@@ -30,11 +30,28 @@ const Login = () => {
     }
   };
 
-  const handelClick = (e) => {
+  const handelVerifyClick = (e) => {
     e.preventDefault();
     const otpValue = otp.join("");
-    console.log(otpValue);
-  };
+    try {
+      const result = axios.post("https://credmantra.com/api/v1/auth/verify-otp", {
+        phone: phone,
+        otp: otpValue
+      });  
+      if (result.data.status === "success") {
+        toast.success("OTP verified successfully");
+      }
+      else{
+        toast.error("Invalid OTP");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  
+    
+
+  }
+    
 
   const handleSendOtpClick =()=>{
     axios.post('https://credmantra.com/api/v1/auth/', {phone: phone})
@@ -48,6 +65,7 @@ const Login = () => {
       console.error(error);
       toast.error('Error sending OTP');
       });
+
   }
 
 
@@ -80,7 +98,7 @@ const Login = () => {
                 </div>
                 <button
                   className="w-[100px] mt-4 bg-sky-600 h-9 mb-2 text-white font-bold rounded-full hover:bg-sky-950"
-                  onClick={handelClick}
+                  onClick={handelVerifyClick}
                 >
                   SUBMIT
                 </button>
