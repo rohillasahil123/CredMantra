@@ -73,18 +73,18 @@ const Footer = () => {
             <div className="font-bold mb-4 ml-9">CONTACT</div>
             <div className="text-2xl flex justify-center lg:justify-start items-center mb-4">
               <div className="ml-3">
-                <h1 className="font-bold">CredMantra</h1>
+                <h1 className="font-bold">cashfelly</h1>
               </div>
             </div>
             <div className="flex justify-center lg:justify-start items-center">
               <IoMail className="mr-2" />
-              <h1>CredMantra.co.in</h1>
+              <h1>cashfelly.co.in</h1>
             </div>
           </div>
         </div>
         <div className="bg-black w-full h-auto text-white text-center flex flex-col lg:flex-row justify-between items-center px-4 lg:px-24">
           <div className="font-semibold mb-4 lg:mb-0">
-            @CopyRight CredMantra
+            @CopyRight cashfelly
           </div>
           <div className="flex space-x-3 ">
             <CiFacebook className="h-[40px] w-[40px] sm:h-[60px] sm:w-[40px] hover:cursor-pointer" />

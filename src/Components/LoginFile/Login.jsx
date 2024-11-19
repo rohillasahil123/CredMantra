@@ -38,7 +38,7 @@ const Login = () => {
         phone: phone,
         otp: otpValue
       });  
-      if (result.data.status === "success") {
+      if (result.data === otpValue) {
         toast.success("OTP verified successfully");
       }
       else{
@@ -47,9 +47,6 @@ const Login = () => {
     } catch (error) {
       console.error(error);
     }
-  
-    
-
   }
     
 
