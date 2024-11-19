@@ -21,8 +21,8 @@ const loanOptions = [
 const Hero = () => {
   return (
     <section className="text-gray-600 body-font">
-      <div className="container mx-auto flex  flex-col-reverse sm:flex-row">
-        <div className="md:w-1/2 w-full sm:h-[100%] h-[50vh] bg-red-300 ">
+      <div className="container mx-auto sm:flex sm:flex-row">
+        <div className="md:w-1/2 w-full sm:h-[100%] h-[40vh] bg-red-300 ">
           <img
             className="sm:object-cover object-top rounded sm:h-full w-full sm:w-[90%]  h-[100%] mt[-11%]  "
             alt="hero"
