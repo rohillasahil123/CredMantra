@@ -8,7 +8,7 @@ const Login = () => {
   const [otp, setOtp] = useState(new Array(4).fill(""));
   const [phone, setPhone] = useState(""); 
   const [name, setName] = useState(""); 
-  const [countdown, setCountdown] = useState(0)
+  const [countdown, setCountdown] = useState(60)
 
 
 
@@ -49,6 +49,9 @@ const Login = () => {
       console.error(error);
     }
   }
+
+
+  
     
 
   const handleSendOtpClick = async () => {
@@ -57,16 +60,7 @@ const Login = () => {
       console.log(response.data);
       setIsOnScreen(true);
       toast.success('OTP sent successfully');
-      setCountdown(60);
-      const timer = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(timer); 
-            return 0;
-          }
-          return prev - 1; 
-        });
-      }, 1000);
+
     } catch (error) {
       console.error(error);
       toast.error('Error sending OTP');
@@ -74,6 +68,27 @@ const Login = () => {
   };
   
   
+
+
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1; 
+      });
+    }, 1000);
+    return () => clearInterval(timer); 
+  }, []);
+
+
+
+
+
   return (
     <>
       <div className="md:flex justify-center text-align text-center w-[100%] mx-auto sm:h-[80vh] h-[90vh] space-x-4 bg-sky-300">
@@ -107,6 +122,9 @@ const Login = () => {
                 >
                   SUBMIT
                 </button>
+                <h6 className="font-semibold text-xs text-gradient">
+            {countdown > 0 ? `Resend Your OTP in ${countdown}s` : 'You can now resend the OTP'}
+          </h6>
               </div>
             </div>
           </>
@@ -159,14 +177,11 @@ const Login = () => {
                   </div>
                 </div>
                 <button
-            className={`w-[100px] mt-4 h-9 mb-2 text-white font-bold rounded-full ${
-              countdown > 0 ? 'bg-gray-500' : 'bg-sky-600 hover:bg-sky-950'
-            }`}
-            onClick={handleSendOtpClick}
-            disabled={countdown > 0}
-          >
-            {countdown > 0 ? `${countdown}s` : "Send OTP"}
-          </button>
+                  className="w-[100px] mt-4 bg-sky-600 h-9 mb-2 text-white font-bold rounded-full hover:bg-sky-950"
+                  onClick={handleSendOtpClick}
+                >
+                  Send Otp
+                </button>
               </div>
             </div>
           </>
