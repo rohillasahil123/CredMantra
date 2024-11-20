@@ -50,22 +50,18 @@ const Login = () => {
   }
     
 
-  const handleSendOtpClick =()=>{
-    axios.post('https://credmantra.com/api/v1/auth/', {phone: phone})
-    .then((response) => {
+  const handleSendOtpClick = async () => {
+    try {
+      const response = await axios.post('https://credmantra.com/api/v1/auth/', { phone: phone });
       console.log(response.data);
-      setIsOnScreen(true)
+      setIsOnScreen(true);
       toast.success('OTP sent successfully');
-    }
-    )
-    .catch((error) => {
+    } catch (error) {
       console.error(error);
       toast.error('Error sending OTP');
-      });
-
-  }
-
-
+    }
+  };
+  
   return (
     <>
       <div className="md:flex justify-center text-align text-center w-[100%] mx-auto sm:h-[80vh] h-[90vh] space-x-4 bg-sky-300">
