@@ -8,6 +8,7 @@ const Login = () => {
   const [otp, setOtp] = useState(new Array(4).fill(""));
   const [phone, setPhone] = useState(""); 
   const [name, setName] = useState(""); 
+  const [countdown, setCountdown] = useState(0)
 
 
 
@@ -56,11 +57,22 @@ const Login = () => {
       console.log(response.data);
       setIsOnScreen(true);
       toast.success('OTP sent successfully');
+      setCountdown(60);
+      const timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer); 
+            return 0;
+          }
+          return prev - 1; 
+        });
+      }, 1000);
     } catch (error) {
       console.error(error);
       toast.error('Error sending OTP');
     }
   };
+  
   
   return (
     <>
@@ -147,11 +159,14 @@ const Login = () => {
                   </div>
                 </div>
                 <button
-                  className="w-[100px] mt-4 bg-sky-600 h-9 mb-2 text-white font-bold rounded-full hover:bg-sky-950"
-                  onClick={handleSendOtpClick}
-                >
-                  Send Otp
-                </button>
+            className={`w-[100px] mt-4 h-9 mb-2 text-white font-bold rounded-full ${
+              countdown > 0 ? 'bg-gray-500' : 'bg-sky-600 hover:bg-sky-950'
+            }`}
+            onClick={handleSendOtpClick}
+            disabled={countdown > 0}
+          >
+            {countdown > 0 ? `${countdown}s` : "Send OTP"}
+          </button>
               </div>
             </div>
           </>
