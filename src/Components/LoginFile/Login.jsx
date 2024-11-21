@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import loginImage from "../../assets/Login.avif";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
@@ -11,7 +12,9 @@ const Login = () => {
   const [name, setName] = useState("");
   const [countdown, setCountdown] = useState(60);
   const [retryCount, setRetryCount] = useState(0);
-  const [isLoader, setIsLoder] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+
+  const navigate = useNavigate();
 
   const handelChange = (e, index) => {
     const value = e.target.value;
@@ -32,29 +35,44 @@ const Login = () => {
     }
   };
 
-  const handelVerifyClick = (e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
-    const otpValue = otp.join("");
+    const otpValue = otp.join(""); 
+
+    if (otpValue.length < 4) {
+      toast.error("Please enter a valid 4-digit OTP.");
+      return;
+    }
+
+    setIsLoader(true);
     try {
-      const result = axios.post(
-        "https://credmantra.com/api/v1/auth/verify-otp",
-        {
-          phone: phone,
-          otp: otpValue,
-        }
-      );
-      if (result.data === otpValue) {
-        toast.success("OTP verified successfully");
+      const response = await axios.post("https://credmantra.com/api/v1/auth/verify-otp", {
+        phone: phone,
+        otp: otpValue
+      }, {
+        headers: { "Content-Type": "application/json" }
+      });
+      if (response.data.type === "success") {
+        const { token, userId } = response.data.data;
+        localStorage.setItem("userToken", token);
+        localStorage.setItem("userId", userId);
+        
+        toast.success("OTP verified successfully!");
+        navigate("/");
       } else {
-        toast.error("Invalid OTP");
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error verifying OTP:", error);
+      toast.error("Failed to verify OTP. Please try again.");
+    } finally {
+      setIsLoader(false);
     }
   };
 
+
   const handleSendOtpClick = async () => {
-    setIsLoder(true);
+     setIsLoader(true);
     try {
       const response = await axios.post("https://credmantra.com/api/v1/auth/", {
         phone: phone,
@@ -134,12 +152,13 @@ const Login = () => {
                     Resend OTP
                   </button>
                 ) : (
-                  <button className={`w-[100px] mt-4 ${
+                  <button
+                    className={`w-[100px] mt-4 ${
                       isOtpFilled
                         ? "bg-green-600 hover:bg-green-800"
                         : "bg-gray-400 cursor-not-allowed"
                     } h-9 mb-2 text-white font-bold rounded-full`}
-                    onClick={handelVerifyClick}
+                    onClick={handleVerifyOtp}
                     disabled={!isOtpFilled}
                   >
                     Submit
@@ -210,11 +229,12 @@ const Login = () => {
                   </div>
                 </div>
                 {isLoader ? (
-             
-             <>
-             <div className="w-10 h-10 ml-[42%] mt-[6%] border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-               <h1 className="text-sm font-bold mt-2 text-white">Wait a few seconds</h1>
-               </>
+                  <>
+                    <div className="w-10 h-10 ml-[42%] mt-[6%] border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    <h1 className="text-sm font-bold mt-2 text-white">
+                      Wait a few seconds
+                    </h1>
+                  </>
                 ) : (
                   <button
                     className="w-[100px] mt-4 bg-sky-600 h-9 mb-2 text-white font-bold rounded-full hover:bg-sky-950"
@@ -222,12 +242,11 @@ const Login = () => {
                   >
                     Send Otp
                   </button>
-                )}  
+                )}
               </div>
             </div>
           </>
         )}
-     
       </div>
     </>
   );
