@@ -57,7 +57,7 @@ const Login = () => {
   
       if (response.data.type === "success") {
         const { token, userId } = response.data.data;
-        Cookies.set("Token", token, { secure: true, sameSite: "Strict", expires: 1 });
+        Cookies.set("userToken", token, { secure: true, sameSite: "Strict", expires: 1 });
         Cookies.set("userId", userId, { secure: true, sameSite: "Strict", expires: 1 });
   
         toast.success("OTP verified successfully!");
