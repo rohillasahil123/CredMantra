@@ -49,13 +49,13 @@ const Blog = () => {
             <img
               src={imageItem.image}
               alt={imageItem.title}
-              className="w-full h-[90vh]"
+              className="w-full sm:h-[90vh] h-[30vh]"
             />
           </div>
         ))}
         <div className="absolute top-20 w-[60%] h-8 text-center rounded-md ml-[20%]" >
           
-            <h1 className="text-white text-[50px]  font-serif ">Grow your business with our expert services</h1>
+            <h1 className="text-white text-lg sm:text-[50px]  font-serif ">Grow your business with our expert services</h1>
         </div>
       </div>
     </div>
