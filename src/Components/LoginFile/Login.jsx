@@ -107,6 +107,16 @@ const Login = () => {
 
   const handleResendOtp = () => {
     if (retryCount < 5) {
+      try {
+        const response = axios.post("https://credmantra.com/api/v1/auth/resend-otp",{
+          phone: phone
+        })
+        console.log(response)
+        toast.success(`OTP resent successfully your number ${phone}`);
+      } catch (error) {
+        toast.error(error);
+        console.log(error)
+      }
       setCountdown(60);
       setIsCountdownComplete(false);
       setOtp(new Array(4).fill(""));
