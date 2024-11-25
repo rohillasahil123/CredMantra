@@ -1,20 +1,22 @@
 import React, { useState , useEffect } from "react";
-import saftylist from "../../assets/safty.png";
+import Bhanix from "../../assets/bhanix.jpg";
+import moneytap from "../../assets/moneytap-logo.svg"
+import ClickMyLoan from "../../assets/clickmyloans.webp"
+import Fibe from "../../assets/FIBE.webp"
 import meter from "../../assets/meter.png";
+import Money from "../../assets/mv_new_pwa_logo.svg"
 import { GiMoneyStack } from "react-icons/gi";
 import { GrDocumentConfig } from "react-icons/gr";
-
-
 const LenderList = () => {
   const [user, setUser] = useState({});
   const [filteredLenders, setFilteredLenders] = useState([]);
 
   const leandersdetails = [
-    { name: 'Fibe', approvalRate: "Good",  LoanAmount:"3,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2%" ,image:"src/assets/bhanix.jpg" ,  Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
-    { name: 'Upwards', approvalRate: "Good", LoanAmount:"2,00,000", interestRate: "starting from 24% to 30%", Tenure:"Upto 30 month",processingFee:"Upto 3%", image:"src/assets/moneytap-logo.svg" , Collatera:"No Collatera",Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
-    { name: 'Cashe', approvalRate: "Good", LoanAmount:"5,00,000", interestRate: "starting from 26%", Tenure:"Upto 24 month",processingFee:"Upto 2.5%" , image:"src/assets/clickmyloans.webp" , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
-    { name: 'Faircent', approvalRate: "Good", LoanAmount:"3,00,000", interestRate: "starting from 22% to 26%", Tenure:"Upto 36 month",processingFee:"Upto 4%" , image:"src/assets/FIBE.webp" , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
-    { name: 'Prefr', approvalRate: "Good", LoanAmount:"2,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2.2%" , image:"src/assets/mv_new_pwa_logo.svg" , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
+    { name: 'Fibe', approvalRate: "Good",  LoanAmount:"3,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2%" ,image:Bhanix ,  Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
+    { name: 'Upwards', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 24% to 30%", Tenure:"Upto 30 month",processingFee:"Upto 3%", image:moneytap , Collatera:"No Collatera",Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
+    { name: 'Cashe', approvalRate: "Good", LoanAmount:"5,00,000", interestRate: "starting from 26%", Tenure:"Upto 24 month",processingFee:"Upto 2.5%" , image:ClickMyLoan , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
+    { name: 'Faircent', approvalRate: "Good", LoanAmount:"3,00,000", interestRate: "starting from 22% to 26%", Tenure:"Upto 36 month",processingFee:"Upto 4%" , image:Fibe , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
+    { name: 'Prefr', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2.2%" , image:Money , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
   ];
 
 
@@ -145,7 +147,6 @@ const LenderList = () => {
             </div>
             <button className="h-[35px] border w-[80%] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center">
               Apply Now
-             
             </button>
           </div>
         </div>
