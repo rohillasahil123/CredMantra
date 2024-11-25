@@ -10,7 +10,8 @@ const Header = () => {
   };
 
   return (
-    <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4">
+    <>
+    <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4 ">
       <button className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer">
         <Link to="/login">Login</Link>
       </button>
@@ -28,6 +29,7 @@ const Header = () => {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
+     
 
       {/* Mobile Menu */}
       {menuOpen && (
@@ -37,6 +39,10 @@ const Header = () => {
         </div>
       )}
     </div>
+    <div className='text-center font-bold'>
+        <h1>ॐ श्री श्याम देवाय नमः</h1>
+      </div>
+    </>
   );
 };
 

@@ -5,26 +5,25 @@ import Recivingloan from "../../assets/recivingloan.png";
 import helpPersonal from "../../assets/HelpPersonal.jpg";
 import personalLoan from "../../assets/personalloan.jpg";
 import PersonalElegible from "../../assets/ElegibillityPersonal.png";
+import axios from "axios";
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
 
 const BusinessEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
-    phoneNumber: "",
-    amountRequired: "",
-    gender: "MALE",
-    companyType: "Proprietorship",
-    panNumber: "",
-    dob: "",
-    businessName: "",
-    gstRegistered: "NO",
-    businessAge: "",
-    annualTurnover: "",
-    residentialPincode: "",
-    currentAccount: "NO",
+    dob:"",
+    employmentType:"",
+    phone: "",
+    amount: "",
+    pincode: "",
+    income:""
   });
 
+  const navigate = useNavigate()  
+  
   const businessHelp = [
     {
       id: 1,
@@ -58,9 +57,28 @@ const BusinessEligibilityForm = () => {
     SetIsFormVisible(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post("https://credmantra.com/api/v1/auth/eli", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        dob: formData.dob, 
+        employmentType: formData.employmentType,  
+        amount: formData.amount,  
+        income: formData.income,  
+        pincode: formData.pincode 
+      });
+      toast.success("Checking eligibleity Please Wait few Sec")
+      navigate("/landerlist")
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Error submitting form");
+    }
   };
+  
 
   return (
     <div className="sm:min-h-[200vh] min-h-[160vh]">
@@ -82,7 +100,7 @@ const BusinessEligibilityForm = () => {
                 className=" h-[90%] w-[100%] rounded-xl sm:h-[80%] sm:w-[70%]"
               />
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleFormSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -103,8 +121,8 @@ const BusinessEligibilityForm = () => {
                   </label>
                   <input
                     type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleChange}
                     className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105"
                     placeholder="Enter phone number"
@@ -129,8 +147,8 @@ const BusinessEligibilityForm = () => {
                   </label>
                   <input
                     type="number"
-                    name="amountRequired"
-                    value={formData.amountRequired}
+                    name="amount"
+                    value={formData.amount}
                     onChange={handleChange}
                     className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105"
                     placeholder="Enter amount"
@@ -163,11 +181,11 @@ const BusinessEligibilityForm = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    What to Do?
+                  employmentType
                   </label>
                   <select
-                    name="whattodo"
-                    value={formData.whattodo}
+                    name="employmentType"
+                    value={formData.employmentType}
                     onChange={handleChange}
                     className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out transform hover:scale-105"
                   >

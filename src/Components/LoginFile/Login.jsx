@@ -4,6 +4,8 @@ import loginImage from "../../assets/Login.avif";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import EligibleLendersService from "../EligibleLendersService/EligibleLendersService";
+// import EligibleLendersService from "../EligibleLendersService/EligibleLendersService";
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
@@ -40,12 +42,10 @@ const Login = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     const otpValue = otp.join("");
-  
     if (otpValue.length < 4) {
       toast.error("Please enter a valid 4-digit OTP.");
       return;
     }
-  
     setIsLoader(true);
     try {
       const response = await axios.post("https://credmantra.com/api/v1/auth/verify-otp", {
@@ -59,9 +59,8 @@ const Login = () => {
         const { token, userId } = response.data.data;
         Cookies.set("userToken", token, { secure: true, sameSite: "Strict", expires: 1 });
         Cookies.set("userId", userId, { secure: true, sameSite: "Strict", expires: 1 });
-  
-        toast.success("OTP verified successfully!");
-        navigate("/");
+        toast.success("OTP verified successfully!");       
+            navigate("/");
       } else {
         toast.error(response.data.message);
       }
@@ -71,6 +70,7 @@ const Login = () => {
     } finally {
       setIsLoader(false);
     }
+ 
   };
 
 

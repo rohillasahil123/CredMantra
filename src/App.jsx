@@ -16,6 +16,7 @@ import Partner from "./Components/Partners/Partner";
 import Blog from "./Components/Blog/Blog";
 import Protect from "./Components/Protectedroute/Protect";
 import HomeLoan from "./Components/LoanForm/HomeLoan";
+import EligibleLendersService from "./Components/EligibleLendersService/EligibleLendersService";
 
 const App = () => {
   return (
@@ -43,7 +44,9 @@ const App = () => {
           <Route path="/contect" element={<Contect />} />
           <Route path="/emicalculator" element={<EmiCalculator />} />
           <Route path="/partner" element={<Partner />} />
-          <Route path="blog" element={<Blog />}></Route>
+          <Route path="/blog" element={<Blog />}></Route>
+          <Route path="myAccount" element={<EligibleLendersService/>}></Route>
+
         </Routes>
         <Footer />
         <Toaster />
