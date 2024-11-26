@@ -1,29 +1,33 @@
 import React from 'react'
+import business from "../../../assets/Bussiness.png"
+import sales from "../../../assets/Sales.png"
+import support from "../../../assets/Support.jpeg"
+import hr from "../../../assets/Hr_company.png"
 
     const contactInfo = [
         {
           title: "Business",
           email: "info@credmantra.com",
           phone: "01244232917",
-          icon: "business-icon-url", 
+          icon: business, 
         },
         {
           title: "Sales/Operation",
           email: "sales@credmantra.info",
           phone: "01244232917",
-          icon: "sales-icon-url",
+          icon: sales,
         },
         {
           title: "Support",
           email: "support@credmantra.info",
           phone: "01244232917",
-          icon: "support-icon-url",
+          icon: support,
         },
         {
           title: "HR",
           email: "hr@credmantra.info",
           phone: "01244232917",
-          icon: "hr-icon-url",
+          icon: hr,
         },
       ];
 
@@ -46,7 +50,7 @@ const Contect = () => {
             <img
               src={contact.icon}
               alt=''
-              className="w-16 h-16 mb-4"
+              className="w-[80%] h-[70%] mb-4"
             />
             <h3 className="text-xl font-medium mb-2">{contact.title}</h3>
             <p className="text-gray-600 mb-2">{contact.email}</p>

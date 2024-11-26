@@ -17,6 +17,7 @@ import Blog from "./Components/Pages/Blog/Blog";
 import Protect from "./Components/AuthLogin/Protectedroute/Protect";
 import HomeLoan from "./Components/LoanForm/HomeLoan";
 import EligibleLendersService from "./Components/EligibleLendersService/EligibleLendersService";
+import LoanSecurity from "./Components/Pages/LoanSecurity/LoanSecurity";
 
 const App = () => {
   return (
@@ -45,8 +46,8 @@ const App = () => {
           <Route path="/emicalculator" element={<EmiCalculator />} />
           <Route path="/partner" element={<Partner />} />
           <Route path="/blog" element={<Blog />}></Route>
+          <Route path="/abhiLoans" element={<LoanSecurity/>}></Route>
           <Route path="myAccount" element={<EligibleLendersService/>}></Route>
-
         </Routes>
         <Footer />
         <Toaster />
