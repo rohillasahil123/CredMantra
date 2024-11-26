@@ -1,12 +1,12 @@
 import React from 'react'
-import oneImg from "../../assets/on.png"
-import twoImg from "../../assets/te.png"
-import fastApproval from '../../assets/loanfast.webp'
-import wildproject from '../../assets/wideproject.png'
-import documents from '../../assets/document.png'
-import process from '../../assets/pocess.png'
-import speed from '../../assets/speed.png'
-import secure from '../../assets/safty.png'
+import oneImg from "../../../assets/on.png"
+import twoImg from "../../../assets/te.png"
+import fastApproval from '../../../assets/loanfast.webp'
+import wildproject from '../../../assets/wideproject.png'
+import documents from '../../../assets/document.png'
+import process from '../../../assets/pocess.png'
+import speed from '../../../assets/speed.png'
+import secure from '../../../assets/safty.png'
 
 
 const Ourteam = () => {

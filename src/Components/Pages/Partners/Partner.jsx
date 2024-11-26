@@ -1,5 +1,5 @@
 import React from "react";
-import partnerImg from "../../assets/Partner.png";
+import partnerImg from "../../../assets/Partner.png";
 
 
 

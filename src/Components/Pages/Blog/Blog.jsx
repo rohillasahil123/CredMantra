@@ -1,7 +1,7 @@
-import mettingImage from "../../assets/Meeting_Blog.jpg";
-import metting1Image from "../../assets/Meeting2_bolg.jpg";
-import metting2Image from "../../assets/Metting3_blog.jpg";
-import SpecialLoan from "../../assets/perfectLoan.png";
+import mettingImage from "../../../assets/Meeting_Blog.jpg";
+import metting1Image from "../../../assets/Meeting2_bolg.jpg";
+import metting2Image from "../../../assets/Metting3_blog.jpg";
+import SpecialLoan from "../../../assets/perfectLoan.png";
 import { useEffect, useState } from "react";
 
 const Blog = () => {

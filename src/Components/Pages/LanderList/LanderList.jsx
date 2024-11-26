@@ -1,10 +1,10 @@
 import React, { useState , useEffect } from "react";
-import Bhanix from "../../assets/bhanix.jpg";
-import moneytap from "../../assets/moneytap-logo.svg"
-import ClickMyLoan from "../../assets/clickmyloans.webp"
-import Fibe from "../../assets/FIBE.webp"
-import meter from "../../assets/meter.png";
-import Money from "../../assets/mv_new_pwa_logo.svg"
+import Bhanix from "../../../assets/bhanix.jpg";
+import moneytap from "../../../assets/moneytap-logo.svg"
+import ClickMyLoan from "../../../assets/clickmyloans.webp"
+import Fibe from "../../../assets/FIBE.webp"
+import meter from "../../../assets/meter.png";
+import Money from "../../../assets/mv_new_pwa_logo.svg"
 import { GiMoneyStack } from "react-icons/gi";
 import { GrDocumentConfig } from "react-icons/gr";
 const LenderList = () => {
@@ -18,11 +18,6 @@ const LenderList = () => {
     { name: 'Faircent', approvalRate: "Good", LoanAmount:"3,00,000", interestRate: "starting from 22% to 26%", Tenure:"Upto 36 month",processingFee:"Upto 4%" , image:Fibe , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
     { name: 'Prefr', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2.2%" , image:Money , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
   ];
-
-
-
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,7 +79,7 @@ const LenderList = () => {
             <img
               src={lander.image}
               alt="Safety List"
-              className="sm:h-[86%] sm:w-[16%]"
+              className="sm:h-[86%] sm:w-[16%] h-[50%] w-[60%]"
             />
 
             <div className="text-center">

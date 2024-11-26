@@ -1,11 +1,11 @@
 import React from "react";
-import FrountGirl from "../../assets/FrountGirl.png";
-import personalLoans from "../../assets/personal.gif";
-import businessLoans from "../../assets/Business.gif";
-import homeLoans from "../../assets/homeloan.gif";
-import microLoans from "../../assets/microloan.gif";
-import goldLoans from "../../assets/Gold-Loan.gif";
-import securityLoans from "../../assets/security.gif";
+import FrountGirl from "../../../assets/FrountGirl.png";
+import personalLoans from "../../../assets/personal.gif";
+import businessLoans from "../../../assets/Business.gif";
+import homeLoans from "../../../assets/homeloan.gif";
+import microLoans from "../../../assets/microloan.gif";
+import goldLoans from "../../../assets/Gold-Loan.gif";
+import securityLoans from "../../../assets/security.gif";
 
 import { Link } from "react-router-dom";
 

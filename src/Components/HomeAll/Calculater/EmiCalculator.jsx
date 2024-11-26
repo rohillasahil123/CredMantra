@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import emiImage from "../../assets/emi.png";
+import emiImage from "../../../assets/emi.png";
 
 const EmiCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(0);

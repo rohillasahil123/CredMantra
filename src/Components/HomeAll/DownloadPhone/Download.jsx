@@ -1,6 +1,6 @@
 import React from 'react'
-import QrCode from "../../assets/QrCode.png"
-import phoneImg from "../../assets/PhoneImg.png";
+import QrCode from "../../../assets/QrCode.png"
+import phoneImg from "../../../assets/PhoneImg.png";
 
 
 const Download = () => {

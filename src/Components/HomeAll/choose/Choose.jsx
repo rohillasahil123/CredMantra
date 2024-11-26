@@ -1,5 +1,5 @@
 import React from 'react';
-import clock from '../../assets/clock.gif';
+import clock from '../../../assets/clock.gif';
 
 const Choose = () => {
     return (
@@ -29,7 +29,6 @@ const Choose = () => {
                 </div>
             </div>
 
-            {/* Right Side */}
             <div className="flex flex-col items-center  bg-red-300 w-full md:w-1/2 p-4 ">    
             <div className=" mt-10 space-y-4 sm:space-y-2">
                     <div className=" bg-white h-[45%] mt-[8%] sm:mt-[17%] sm:mr-[20%] w-max sm:w-full  rounded-lg shadow-lg flex flex-col items-center mr-[30%] p-2 hover:cursor-pointer transition-transform hover:scale-105">
