@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Components/Pages/Header/Header";
 import Login from "./Components/AuthLogin/LoginFile/Login";
@@ -18,6 +18,7 @@ import Protect from "./Components/AuthLogin/Protectedroute/Protect";
 import HomeLoan from "./Components/LoanForm/HomeLoan";
 import EligibleLendersService from "./Components/EligibleLendersService/EligibleLendersService";
 import LoanSecurity from "./Components/Pages/LoanSecurity/LoanSecurity";
+import Microloans from "./Components/LoanForm/Microloans";
 
 const App = () => {
   return (
@@ -47,6 +48,9 @@ const App = () => {
           <Route path="/partner" element={<Partner />} />
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/abhiLoans" element={  < Protect Component={LoanSecurity} />}></Route>
+          <Route path="/micro_loan" element={ <Protect Component={Microloans}/>}></Route>
+
+          }}
           <Route path="myAccount" element={<EligibleLendersService/>}></Route>
         </Routes>
         <Footer />

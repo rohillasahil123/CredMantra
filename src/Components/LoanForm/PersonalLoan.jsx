@@ -9,7 +9,7 @@ import axios from "axios";
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
 
-const BusinessEligibilityForm = () => {
+const PersonalEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -332,4 +332,4 @@ const BusinessEligibilityForm = () => {
   );
 };
 
-export default BusinessEligibilityForm;
+export default PersonalEligibilityForm;
