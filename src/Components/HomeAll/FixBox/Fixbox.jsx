@@ -103,7 +103,9 @@ const Fixbox = () => {
         >
           Send OTP
         </button>
+
       </div>
+      
     </div>
   );
 };

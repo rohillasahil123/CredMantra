@@ -41,12 +41,12 @@ const App = () => {
             element={ < Protect Component={HomeLoan} /> }
           />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/landerlist" element={<LanderList />} />
-          <Route path="/contect" element={<Contect />} />
+          <Route path="/landerlist" element={< Protect Component={LanderList} />} />
+          <Route path="/contect" element={ <Protect Component={Contect} />} />
           <Route path="/emicalculator" element={<EmiCalculator />} />
           <Route path="/partner" element={<Partner />} />
           <Route path="/blog" element={<Blog />}></Route>
-          <Route path="/abhiLoans" element={<LoanSecurity/>}></Route>
+          <Route path="/abhiLoans" element={  < Protect Component={LoanSecurity} />}></Route>
           <Route path="myAccount" element={<EligibleLendersService/>}></Route>
         </Routes>
         <Footer />

@@ -133,7 +133,7 @@ const LoanSecurity = () => {
         <div className="w-[80%]">
           <p className="text-[13px]">
             By agreeing and accepting the{" "}
-            <span className="text-blue-800 underline">
+            <span className="text-blue-800 underline hover:cursor-pointer">
               Terms and Conditions
             </span>{" "}
             set out herein, you provide your express consent to AbhiLoans
@@ -146,7 +146,7 @@ const LoanSecurity = () => {
       </div>
       <div className="sm:w-[60%] w-[90%] h-[20%]" style={{ justifySelf: "center" }}>
         <button
-          className="bg-blue-800 rounded-lg ml-[30%] h-[30%] w-[50%] sm:w-[30%] text-white mt-5"
+          className="bg-blue-800 rounded-lg ml-[30%] h-[30%] w-[50%] sm:w-[30%] text-white mt-5 hover:bg-blue-950 text-xl uppercase "
           onClick={handleSubmit}
         >
           Submit
