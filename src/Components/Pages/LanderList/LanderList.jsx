@@ -72,10 +72,10 @@ const LenderList = () => {
     </p>
     {leandersdetails.map((lander, index) => (
         <div
-          className="sm:w-[93%] h-[30vh] w-full sm:h-[40vh] mt-[3%] shadow-2xl rounded-2xl items-center text-center " style={{justifySelf:"center"}}
+          className="sm:w-[93%] h-[30vh] w-[90%] sm:h-[40vh] mt-[3%] shadow-2xl rounded-2xl items-center text-center " style={{justifySelf:"center"}}
           key={index}
         >
-          <div className="border flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-4 sm:space-x-0 ">
+          <div className="border flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-3 sm:space-x-0 ">
             <img
               src={lander.image}
               alt="Safety List"
