@@ -27,7 +27,7 @@ const Microloans = () => {
   };
 
   return (
-    <div className="sm:min-h-[200vh] min-h-[160vh]">
+    <div className="sm:min-h-[100vh] min-h-[160vh]">
       <h1 className="font-bold text-4xl text-center">Micro Loan</h1>
       <div className="h-[120vh] sm:h-[70vh] w-[90%] border shadow-xl rounded-xl flex flex-col sm:flex-row justify-around mt-[3%] sm:items-center "style={{justifySelf:"center"}}>
         <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center ">
