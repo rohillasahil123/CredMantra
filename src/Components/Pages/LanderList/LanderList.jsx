@@ -75,7 +75,7 @@ const LenderList = () => {
           className="sm:w-[93%] h-[23vh] w-[90%] sm:h-[40vh] mt-[3%] border border-gray-800 rounded-2xl items-center text-center " style={{justifySelf:"center"}}
           key={index}
         >
-          <div className=" flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-3 sm:space-x-0 ">
+          <div className=" flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-4 sm:space-x-0 ">
             <img
               src={lander.image}
               alt="Safety List"
