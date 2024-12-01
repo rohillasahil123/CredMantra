@@ -30,11 +30,11 @@ const Microloans = () => {
     <div className="sm:min-h-[100vh] min-h-[160vh]">
       <h1 className="font-bold text-4xl text-center">Micro Loan</h1>
       <div className="h-[120vh] sm:h-[70vh] w-[90%] border shadow-xl rounded-xl flex flex-col sm:flex-row justify-around mt-[3%] sm:items-center "style={{justifySelf:"center"}}>
-        <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center ">
+        <div className="h-[30%] sm:h-[90%] sm:w-[50%] w-[70%] items-center text-center " style={{alignSelf:"center"}} >
           <img
             src={PersonalElegible}
             alt="Personal Eligibility"
-            className="h-[100%] w-[100%] rounded-xl sm:h-[80%] sm:w-[70%]" style={{justifySelf:"center"}}
+            className="h-[300px] w-[600px] rounded-xl sm:h-[80%] sm:w-[70%]" style={{justifySelf:"center"}}
           />
         </div>
         <form onSubmit={handleFormSubmit} className="w-full sm:w-[50%]" style={{justifySelf:"center"}}>
@@ -48,7 +48,7 @@ const Microloans = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter full name"
                 required
               />
@@ -64,7 +64,7 @@ const Microloans = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter phone number"
                 required
               />
@@ -80,7 +80,7 @@ const Microloans = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter email"
                 required
               />
@@ -96,7 +96,7 @@ const Microloans = () => {
                 name="amount"
                 value={formData.amount}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter amount"
                 required
               />
@@ -112,7 +112,7 @@ const Microloans = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />
             </div>
@@ -127,7 +127,7 @@ const Microloans = () => {
                 name="pincode"
                 value={formData.pincode}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter pincode"
                 required
               />
@@ -142,7 +142,7 @@ const Microloans = () => {
                 name="employmentType"
                 value={formData.employmentType}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               >
                 <option value="">Select an option</option>
@@ -161,7 +161,7 @@ const Microloans = () => {
                 name="income"
                 value={formData.income}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-[90%] border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your income"
                 required
               />
