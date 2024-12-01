@@ -9,49 +9,49 @@ const Partner = () => {
       ImageSrc: "Airtel Bank",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "Airtel Payment Bank offers instant loans with quick approval, minimal documentation, and flexible repayment options. It caters to diverse financial needs, providing personal loans, business loans, and credit access directly through its app or partnered platforms",
     },
     {
-      ImageSrc: "Casye",
+      ImageSrc: "Cashe",
       imgdata: Bhanix_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "A cash lender provides quick loans, offering immediate financial support with simple terms. Borrowers repay with interest, enabling access to urgent funds for personal or business needs, ensuring convenience and flexibility for short-term financial solutions.",
     },
     {
       ImageSrc: "Ramfin",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "Ramfan Lender provides quick, reliable loans with flexible repayment options. Whether personal, business, or emergency needs, they offer competitive interest rates, fast approvals, and tailored solutions to meet financial goals, ensuring seamless borrowing experiences for all clients.",
     },
     {
       ImageSrc: "Try",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "Zype Lender offers quick, hassle-free loans tailored to your needs. Get personal, business, or home loans with flexible repayment terms and low interest rates. Simplified application process ensures easy access to funds when you need them most.",
     },
     {
       ImageSrc: "Zype",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "Zype Lender offers quick, hassle-free loans tailored to your needs. Get personal, business, or home loans with flexible repayment terms and low interest rates. Simplified application process ensures easy access to funds when you need them most.",
     },
     {
-      ImageSrc: "ManiTap",
+      ImageSrc: "MoneyTap",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "MoneyTap offers instant loans with flexible repayment options. Borrowers can access credit for personal needs, emergencies, or purchases. With quick approvals, low interest rates, and easy EMIs, it simplifies borrowing for salaried professionals and self-employed individuals.",
     },
     {
       ImageSrc: "Payme",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "PayMe offers instant loans, quick approval, flexible repayment, and competitive interest rates. Tailored for personal, business, or emergency needs, it ensures seamless loan applications with minimal documentation, empowering borrowers with financial solutions anytime, anywhere.",
     },
     {
       ImageSrc: "MoneyView",
       imgdata: Airtel_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "MoneyView offers instant personal loans with flexible repayment terms, low-interest rates, and quick approvals. Loans are available for various needs like education, medical emergencies, or travel, ensuring seamless access to credit through a user-friendly digital platform.",
     },
     {
       ImageSrc: "pocketLoan",
