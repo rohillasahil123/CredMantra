@@ -50,7 +50,6 @@ const App = () => {
           <Route path="/abhiLoans" element={  < Protect Component={LoanSecurity} />}></Route>
           <Route path="/micro_loan" element={ <Protect Component={Microloans}/>}></Route>
 
-          }}
           <Route path="myAccount" element={<EligibleLendersService/>}></Route>
         </Routes>
         <Footer />
