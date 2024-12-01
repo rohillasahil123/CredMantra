@@ -2,6 +2,13 @@ import React from "react";
 import partnerImg from "../../../assets/Partner.png";
 import Airtel_logo from "../../../assets/Airtel_logo.png";
 import Bhanix_logo from "../../../assets/bhanix.jpg";
+import fibe_logo from "../../../assets/FIBE.webp";
+import moneytap_logo from "../../../assets/moneytap-logo.svg";
+import payme_logo from "../../../assets/payme.svg";
+import moneyview_logo from "../../../assets/moneyview.svg";
+import zype_logo from "../../../assets/Zipe.webp";
+import pocket_loan_logo from "../../../assets/pocket_loan.svg";
+import ramfan_logo from "../../../assets/ramfan_logo.png";
 
 const Partner = () => {
   const PartnerIamge = [
@@ -19,45 +26,45 @@ const Partner = () => {
     },
     {
       ImageSrc: "Ramfin",
-      imgdata: Airtel_logo,
+      imgdata: ramfan_logo,
       imageMessage:
         "Ramfan Lender provides quick, reliable loans with flexible repayment options. Whether personal, business, or emergency needs, they offer competitive interest rates, fast approvals, and tailored solutions to meet financial goals, ensuring seamless borrowing experiences for all clients.",
     },
     {
-      ImageSrc: "Try",
-      imgdata: Airtel_logo,
+      ImageSrc: "Fibe",
+      imgdata: fibe_logo,
       imageMessage:
-        "Zype Lender offers quick, hassle-free loans tailored to your needs. Get personal, business, or home loans with flexible repayment terms and low interest rates. Simplified application process ensures easy access to funds when you need them most.",
+        "Fibe Lender offers quick, hassle-free loans tailored to your needs. Get personal, business, or home loans with flexible repayment terms and low interest rates. Simplified application process ensures easy access to funds when you need them most.",
     },
     {
       ImageSrc: "Zype",
-      imgdata: Airtel_logo,
+      imgdata:zype_logo,
       imageMessage:
         "Zype Lender offers quick, hassle-free loans tailored to your needs. Get personal, business, or home loans with flexible repayment terms and low interest rates. Simplified application process ensures easy access to funds when you need them most.",
     },
     {
       ImageSrc: "MoneyTap",
-      imgdata: Airtel_logo,
+      imgdata: moneytap_logo,
       imageMessage:
         "MoneyTap offers instant loans with flexible repayment options. Borrowers can access credit for personal needs, emergencies, or purchases. With quick approvals, low interest rates, and easy EMIs, it simplifies borrowing for salaried professionals and self-employed individuals.",
     },
     {
       ImageSrc: "Payme",
-      imgdata: Airtel_logo,
+      imgdata: payme_logo,
       imageMessage:
         "PayMe offers instant loans, quick approval, flexible repayment, and competitive interest rates. Tailored for personal, business, or emergency needs, it ensures seamless loan applications with minimal documentation, empowering borrowers with financial solutions anytime, anywhere.",
     },
     {
       ImageSrc: "MoneyView",
-      imgdata: Airtel_logo,
+      imgdata: moneyview_logo,
       imageMessage:
         "MoneyView offers instant personal loans with flexible repayment terms, low-interest rates, and quick approvals. Loans are available for various needs like education, medical emergencies, or travel, ensuring seamless access to credit through a user-friendly digital platform.",
     },
     {
       ImageSrc: "pocketLoan",
-      imgdata: Airtel_logo,
+      imgdata: pocket_loan_logo,
       imageMessage:
-        "A moneylender partner is a financial collaborator who provides funds or credit to individuals or businesses, sharing risks and profits. They help borrowers meet financial needs, often with agreed interest rates and repayment terms.",
+        "A pocket loan lender offers small, short-term loans, typically with quick approval and minimal paperwork. These loans are designed to cover urgent expenses, often with higher interest rates, and are repaid quickly, usually within a few weeks or months.",
     },
   ];
 
@@ -94,9 +101,9 @@ const Partner = () => {
                   className="w-[80%] h-[40%]"
                   style={{ justifySelf: "center" }}
                 />
-                <h1 className="title-font font-bold text-gray-700- text-2xl ">
+                {/* <h1 className="title-font font-bold text-gray-700- text-2xl ">
                   {loan.ImageSrc}
-                </h1>
+                </h1> */}
                 <p className="text-[10px]">{loan.imageMessage}</p>
               </div>
             </div>
