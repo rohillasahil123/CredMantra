@@ -18,7 +18,7 @@ const Footer = () => {
   return (
     <>
       <div className="w-full h-auto ">
-        <div className="flex flex-col lg:flex-row justify-around  bg-gray-500 text-white py-8 items-center sm:items-start mt-[10%] h-[60%] ">
+        <div className="flex flex-col lg:flex-row justify-around  bg-gray-500 text-white py-8 items-center sm:items-start mt-[13%] h-[60%] ">
           <div className="mb-8 lg:mb-0">
             <div className="font-bold">CATEGORIES</div>
             <Link to="/personalloan">
