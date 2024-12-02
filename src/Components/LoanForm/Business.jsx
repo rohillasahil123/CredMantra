@@ -5,26 +5,36 @@ import Gdocument from "../../assets/Gdocument.png";
 import ApplyLoan from "../../assets/Applyloan.png";
 import InBusinessLoan from "../../assets/inbusinessLoan.png";
 import helpBusiness from "../../assets/HelpBusiness.jpg";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const BusinessEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
+    lastName: "",
     email: "",
-    phoneNumber: "",
-    amountRequired: "",
-    gender: "MALE",
-    companyType: "Proprietorship",
-    panNumber: "",
+    phone: "",
     dob: "",
-    businessName: "",
-    gstRegistered: "NO",
-    businessAge: "",
-    annualTurnover: "",
-    residentialPincode: "",
-    currentAccount: "NO",
+    employmentType: "",
+    ammount: "",
+    income: "",
+    pincode: "",
+    gender: "",
+    pan: "",
+    business_details: {
+      company_type: "",
+      business_name: "",
+      gstRegistered: true,
+      business_age: "",
+      annual_turnover: "",
+      currentAccount: true,
+    },
   });
+
+  const navigate = useNavigate()
 
   const businessHelp = [
     {
@@ -51,9 +61,23 @@ const BusinessEligibilityForm = () => {
   ];
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name.includes(".")) {
+      const [parent, child] = name.split(".");
+      setFormData({
+        ...formData,
+        [parent]: {
+          ...formData[parent],
+          [child]: value,
+        },
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+  
+
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -69,9 +93,21 @@ const BusinessEligibilityForm = () => {
     SetIsFormVisible(true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post("https://credmantra.com/api/v1/auth/eli", formData);
+      console.log(response.data);
+      toast.success("Form submitted successfully!");
+      if(response.data === "Success"){
+        navigate("/landerlist")
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      toast.error("An error occurred while submitting the form.");
+    }
   };
+  
 
   return (
     <div className="sm:min-h-[200vh] min-h-[160vh]">
@@ -119,12 +155,12 @@ const BusinessEligibilityForm = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        Full Name:
+                        FullName:
                       </label>
                       <input
                         type="text"
-                        name="fullName"
-                        value={formData.fullName}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter full name"
@@ -136,8 +172,9 @@ const BusinessEligibilityForm = () => {
                       </label>
                       <input
                         type="text"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
+                        name="phone"
+                          minLength={10}
+                        value={formData.phone}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter phone number"
@@ -158,12 +195,12 @@ const BusinessEligibilityForm = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        Amount Required:
+                        Ammount Required:
                       </label>
                       <input
                         type="number"
-                        name="amountRequired"
-                        value={formData.amountRequired}
+                        name="ammount"
+                        value={formData.ammount}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter amount"
@@ -186,11 +223,29 @@ const BusinessEligibilityForm = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
+                        PAN Number:
+                      </label>
+                      <input
+                        type="text"
+                        name="pan"
+                        value={formData.pan}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border uppercase border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="PAN "
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                 <div>
+                      <label className="block text-sm font-medium text-gray-700">
                         Company Type:
                       </label>
                       <select
-                        name="companyType"
-                        value={formData.companyType}
+                        name="company_type"
+                        value={formData.company_type}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                       >
@@ -199,24 +254,6 @@ const BusinessEligibilityForm = () => {
                         <option value="Private Limited">Private Limited</option>
                         <option value="Public Limited">Public Limited</option>
                       </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">
-                        PAN Number:
-                      </label>
-                      <input
-                        type="text"
-                        name="panNumber"
-                        value={formData.panNumber}
-                        onChange={handleChange}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter PAN Number"
-                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
@@ -236,8 +273,8 @@ const BusinessEligibilityForm = () => {
                       </label>
                       <input
                         type="text"
-                        name="businessName"
-                        value={formData.businessName}
+                        name="business_name"
+                        value={formData.business_name}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter Business Name"
@@ -263,8 +300,8 @@ const BusinessEligibilityForm = () => {
                       </label>
                       <input
                         type="number"
-                        name="businessAge"
-                        value={formData.businessAge}
+                        name="business_age"
+                        value={formData.business_age}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter Business Age"
@@ -276,8 +313,8 @@ const BusinessEligibilityForm = () => {
                       </label>
                       <input
                         type="number"
-                        name="annualTurnover"
-                        value={formData.annualTurnover}
+                        name="annual_turnover"
+                        value={formData.annual_turnover}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter Annual Turnover"
