@@ -7,9 +7,11 @@ import meter from "../../../assets/meter.png";
 import Money from "../../../assets/mv_new_pwa_logo.svg"
 import { GiMoneyStack } from "react-icons/gi";
 import { GrDocumentConfig } from "react-icons/gr";
+import Cookies from "js-cookie";
+import axios from "axios";
 const LenderList = () => {
   const [user, setUser] = useState({});
-  const [filteredLenders, setFilteredLenders] = useState([]);
+
 
   const leandersdetails = [
     { name: 'Fibe', approvalRate: "Good",  LoanAmount:"3,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2%" ,image:Bhanix ,  Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
@@ -20,44 +22,57 @@ const LenderList = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = Cookies.get("userToken");
-      if (!token) {
-        console.error('JWT token not found  local storage');
-        return;
-      }
-      try {
-        const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const userData = response.data.user;
-        const dob = new Date(userData.dob);
-        const currentDate = new Date();
-        const age = currentDate.getFullYear() - dob.getFullYear();
-        setUser({ ...userData, age });
-      } catch (error) {
-        console.error('SerVer Error:', error);
+    const fetchUserIdFromCookies = () => {
+      const userId = Cookies.get("userId");
+      if (userId) {
+        setUser(userId); 
       }
     };
-    fetchData();
+    fetchUserIdFromCookies();
   }, []);
 
   useEffect(() => {
-    if (user.age && user.income) {
-      const eligibleLenders = [
-        { name: 'Fibe', minAge: 21, maxAge: 55, minSalary: 15000 },
-        { name: 'Upwards', minAge: 21, maxAge: 55, minSalary: 18000 },
-        { name: 'Cashe', minAge: 18, maxAge: 60, minSalary: 15000 },
-        { name: 'Faircent', minAge: 25, maxAge: 55, minSalary: 25000 },
-        { name: 'Prefr', minAge: 22, maxAge: 55, minSalary: 15000 },
-      ];
-      const filtered = eligibleLenders.filter(
-        (lender) =>
-          lender.minAge <= user.age &&  lender.maxAge >= user.age && lender.minSalary <= user.income );
-      setFilteredLenders(filtered.map((lender) => lender.name));
-      console.log('Avlable Lender:', filtered.map((lender) => lender.name));
-    }
-  }, [user]);
+    const getLanderUser = async () => {
+      if (!user) {
+        console.warn("UserId is not available yet.");
+        return;
+      }
+      try {
+       
+        const response = await axios.post(
+          "https://credmantra.com/api/v1/auth/get-lenders",
+          { userId: user } 
+        );
+
+        console.log("Response from API:", response.data);
+    
+      } catch (error) {
+        console.error("Error fetching lender user:", error);
+      }
+    };
+    getLanderUser();
+  }, [user])
+
+
+  
+
+
+  // useEffect(() => {
+  //   if (user.age && user.income) {
+  //     const eligibleLenders = [
+  //       { name: 'Fibe', minAge: 21, maxAge: 55, minSalary: 15000 },
+  //       { name: 'Upwards', minAge: 21, maxAge: 55, minSalary: 18000 },
+  //       { name: 'Cashe', minAge: 18, maxAge: 60, minSalary: 15000 },
+  //       { name: 'Faircent', minAge: 25, maxAge: 55, minSalary: 25000 },
+  //       { name: 'Prefr', minAge: 22, maxAge: 55, minSalary: 15000 },
+  //     ];
+  //     const filtered = eligibleLenders.filter(
+  //       (lender) =>
+  //         lender.minAge <= user.age &&  lender.maxAge >= user.age && lender.minSalary <= user.income );
+  //     setFilteredLenders(filtered.map((lender) => lender.name));
+  //     console.log('Avlable Lender:', filtered.map((lender) => lender.name));
+  //   }
+  // }, [user]);
 
   return (
     <>
@@ -146,7 +161,10 @@ const LenderList = () => {
           </div>
         </div>
       ))}
+
+
   </div>
+
   </>
   );
 };
