@@ -11,72 +11,94 @@ import Cookies from "js-cookie";
 import axios from "axios";
 const LenderList = () => {
   const [user, setUser] = useState({});
+  const [filteredLenders, setFilteredLenders] = useState([])
 
 
   const leandersdetails = [
-    { name: 'Fibe', approvalRate: "Good",  LoanAmount:"3,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2%" ,image:Bhanix ,  Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
+    { name: 'Fibe', approvalRate: "Good",  LoanAmount:"3,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2%" ,image:Fibe ,  Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
     { name: 'Upwards', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 24% to 30%", Tenure:"Upto 30 month",processingFee:"Upto 3%", image:moneytap , Collatera:"No Collatera",Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction" },
     { name: 'Cashe', approvalRate: "Good", LoanAmount:"5,00,000", interestRate: "starting from 26%", Tenure:"Upto 24 month",processingFee:"Upto 2.5%" , image:ClickMyLoan , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
-    { name: 'Faircent', approvalRate: "Good", LoanAmount:"3,00,000", interestRate: "starting from 22% to 26%", Tenure:"Upto 36 month",processingFee:"Upto 4%" , image:Fibe , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
-    { name: 'Prefr', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2.2%" , image:Money , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
+    { name: 'Faircent', approvalRate: "Good", LoanAmount:"3,00,000", interestRate: "starting from 22% to 26%", Tenure:"Upto 36 month",processingFee:"Upto 4%" , image:Bhanix , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
+    { name: 'Prefr  ', approvalRate: "Excellent", LoanAmount:"2,00,000", interestRate: "starting from 22% to 28%", Tenure:"Upto 18 month",processingFee:"Upto 2.2%" , image:Money , Collatera:"No Collatera" , Flexible :"Flexible Repayment" , Restriction:"No Usage Restriction"},
   ];
 
   useEffect(() => {
-    const fetchUserIdFromCookies = () => {
-      const userId = Cookies.get("userId");
-      if (userId) {
-        setUser(userId); 
-      }
-    };
-    fetchUserIdFromCookies();
-  }, []);
-
-  useEffect(() => {
-    const getLanderUser = async () => {
-      if (!user) {
-        console.warn("UserId is not available yet.");
-        return;
-      }
-      try {
-       
-        const response = await axios.post(
-          "https://credmantra.com/api/v1/auth/get-lenders",
-          { userId: user } 
-        );
-
-        console.log("Response from API:", response.data);
-    
-      } catch (error) {
-        console.error("Error fetching lender user:", error);
-      }
-    };
-    getLanderUser();
-  }, [user])
-
-
   
-
-
+ 
+  }, []);
+  
   // useEffect(() => {
-  //   if (user.age && user.income) {
-  //     const eligibleLenders = [
-  //       { name: 'Fibe', minAge: 21, maxAge: 55, minSalary: 15000 },
-  //       { name: 'Upwards', minAge: 21, maxAge: 55, minSalary: 18000 },
-  //       { name: 'Cashe', minAge: 18, maxAge: 60, minSalary: 15000 },
-  //       { name: 'Faircent', minAge: 25, maxAge: 55, minSalary: 25000 },
-  //       { name: 'Prefr', minAge: 22, maxAge: 55, minSalary: 15000 },
-  //     ];
-  //     const filtered = eligibleLenders.filter(
-  //       (lender) =>
-  //         lender.minAge <= user.age &&  lender.maxAge >= user.age && lender.minSalary <= user.income );
-  //     setFilteredLenders(filtered.map((lender) => lender.name));
-  //     console.log('Avlable Lender:', filtered.map((lender) => lender.name));
-  //   }
+  //   const fetchUserIdFromCookies = () => {
+  //     const userId = Cookies.get("userId");
+  //     if (userId) {
+  //       setUser(userId); 
+  //       console.log("User ID from cookies:", userId);
+  //     }
+  //   };
+
+
+
+  //   const fetchLanderData = async () => {
+  //     if (!user) {
+  //       console.log("User ID is not set yet");
+  //       return;
+  //     }
+  //     try {
+  //       const response = await axios.post(
+  //         "https://credmantra.com/api/v1/auth/get-lenders",
+  //         { userId: user }
+  //       );
+  //       console.log("API Response:", response.data.data);
+  //       const apiNames = response.data.data.map((name) => name.trim().toLowerCase());
+  //       const matchedLenders = leandersdetails.filter((lender) =>
+  //         apiNames.includes(lender.name.trim().toLowerCase())
+  //       );
+  //       setFilteredLenders(matchedLenders);
+  //       console.log("Matched Lenders:", matchedLenders);
+  //     } catch (error) {
+  //       console.error("Error fetching lender data:", error);
+  //     }
+  //   };
+  
+  //   fetchLanderData();
   // }, [user]);
 
+
+  useEffect(() => {
+    const fetchUserIdFromCookiesAndLenderData = async () => {
+      const userId = Cookies.get("userId");
+      if (userId) {
+        setUser(userId);
+        console.log("User ID from cookies:", userId);
+  
+        try {
+          const response = await axios.post(
+            "https://credmantra.com/api/v1/auth/get-lenders",
+            { userId }
+          );
+          console.log("API Response:", response.data.data);
+  
+          const apiNames = response.data.data.map((name) => name.trim().toLowerCase());
+          const matchedLenders = leandersdetails.filter((lender) =>
+            apiNames.includes(lender.name.trim().toLowerCase())
+          );
+          setFilteredLenders(matchedLenders);
+          console.log("Matched Lenders:", matchedLenders);
+        } catch (error) {
+          console.error("Error fetching lender data:", error);
+        }
+      }
+    };
+  
+    fetchUserIdFromCookiesAndLenderData();
+  }, []); // Runs once on mount
+  
+  
+  
+
   return (
-    <>
-    <div className="text-center items-center h-auto">
+   
+<div className="text-center items-center h-auto">
     <div className="flex items-center text-4xl font-semibold justify-center mt-3">
       <GiMoneyStack />
       <h1 className="mx-2">Select a Lender</h1>
@@ -85,7 +107,7 @@ const LenderList = () => {
     <p className="text-2xl mt-[1.3%]">
       Here are the offers that will best suit your needs.
     </p>
-    {leandersdetails.map((lander, index) => (
+    {filteredLenders.map((lander, index) => (
         <div
           className="sm:w-[93%] h-[23vh] w-[90%] sm:h-[40vh] mt-[3%] border border-gray-800 rounded-2xl items-center text-center " style={{justifySelf:"center"}}
           key={index}
@@ -164,8 +186,6 @@ const LenderList = () => {
 
 
   </div>
-
-  </>
   );
 };
 
