@@ -11,7 +11,6 @@ import zype from "../../../assets/Zipe.webp";
 import moneyview from "../../../assets/moneyview.svg";
 import SmartCoin from "../../../assets/smartcoin.jpg";
 import landingkart from "../../../assets/Lendingkart.svg"
-// import upwords2 from "../../../assets/Upwards2.PNG"
 import mpocket from "../../../assets/mpkt.svg"
 import meter from "../../../assets/meter.png";
 import { GiMoneyStack } from "react-icons/gi";
@@ -63,7 +62,7 @@ const LenderList = () => {
       name: "Faircent",
       approvalRate: "Good",
       LoanAmount: "3,00,000",
-      interestRate: "starting from 22% to 26%",
+      interestRate: "starting from 24% to 28%",
       Tenure: "Upto 36 month",
       processingFee: "Upto 4%",
       image: faircent.webp,
@@ -74,7 +73,7 @@ const LenderList = () => {
     {
       name: "MoneyTap  ",
       approvalRate: "Excellent",
-      LoanAmount: "2,00,000",
+      LoanAmount: "3,00,000",
       interestRate: "starting from 22% to 28%",
       Tenure: "Upto 18 month",
       processingFee: "Upto 2.2%",
@@ -86,8 +85,8 @@ const LenderList = () => {
     {
       name: "MoneyView ",
       approvalRate: "Good",
-      LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      LoanAmount: "8,00,000",
+      interestRate: "starting from 26% to 28%",
       Tenure: "Upto 38 month",
       processingFee: "Upto 2.4%",
       image: moneyview,
@@ -98,7 +97,7 @@ const LenderList = () => {
     {
       name: "SmartCoin ",
       approvalRate: "Excellent",
-      LoanAmount: "2,00,000",
+      LoanAmount: "3,00,000",
       interestRate: "starting from 22% to 28%",
       Tenure: "Upto 18 month",
       processingFee: "Upto 3.0%",
@@ -110,8 +109,8 @@ const LenderList = () => {
     {
       name: "LendingKart ",
       approvalRate: "Good",
-      LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      LoanAmount: "4,00,000",
+      interestRate: "starting from 24% to 28%",
       Tenure: "Upto 32 month",
       processingFee: "Upto 2.5%",
       image: landingkart,
@@ -134,8 +133,8 @@ const LenderList = () => {
     {
       name: "RamFin  ",
       approvalRate: "Good",
-      LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      LoanAmount: "3,00,000",
+      interestRate: "starting from 26% to 28%",
       Tenure: "Upto 30 month",
       processingFee: "Upto 2.6%",
       image: ramfin,
@@ -147,7 +146,7 @@ const LenderList = () => {
       name: "piramal ",
       approvalRate: "Excellent",
       LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      interestRate: "starting from 24% to 26%",
       Tenure: "Upto 24 month",
       processingFee: "Upto 2.6%",
       image: piramal,
@@ -159,7 +158,7 @@ const LenderList = () => {
       name: "prefr ",
       approvalRate: "Good",
       LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      interestRate: "starting from 23% to 28%",
       Tenure: "Upto 36 month",
       processingFee: "Upto 2.6%",
       image: prefr,
@@ -171,7 +170,7 @@ const LenderList = () => {
       name: "zype ",
       approvalRate: "Excellent",
       LoanAmount: "2,00,000",
-      interestRate: "starting from 22% to 28%",
+      interestRate: "starting from 26% to 30%",
       Tenure: "Upto 30 month",
       processingFee: "Upto 2.6%",
       image: zype,
@@ -183,7 +182,7 @@ const LenderList = () => {
       name: "Upwards2",
       approvalRate: "Excellent",
       LoanAmount: "2,00,000",
-      interestRate: "starting from 24% to 30%",
+      interestRate: "starting from 22% to 28%",
       Tenure: "Upto 36 month",
       processingFee: "Upto 3%",
       image: Upwards,
