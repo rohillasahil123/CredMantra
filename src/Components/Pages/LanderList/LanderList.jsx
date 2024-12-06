@@ -194,18 +194,18 @@ const LenderList = () => {
 
   useEffect(() => {
     const fetchUserIdFromCookiesAndLenderData = async () => {
-      const userId = Cookies.get("userId");
-      if (userId) {
-        setUser(userId);
-        console.log("User ID from cookies:", userId);
-
+      const dob = Cookies.get("userdob");
+      const income = Cookies.get("userincome");
+      const pincode = Cookies.get("userpincode");
+      if (pincode , dob , income ) {
+        setUser(pincode , dob , income );
+        console.log("User ID from cookies:", user);
         try {
           const response = await axios.post(
-            "https://credmantra.com/api/v1/auth/get-lenders",
-            { userId }
+            "https://credmantra.com/api/v1/auth/lender",
+            { dob , income, pincode }
           );
           console.log("API Response:", response.data.data);
-
           const apiNames = response.data.data.map((name) =>
             name.trim().toLowerCase()
           );
@@ -219,7 +219,6 @@ const LenderList = () => {
         }
       }
     };
-
     fetchUserIdFromCookiesAndLenderData();
   }, []);
 
@@ -322,5 +321,6 @@ const LenderList = () => {
     </div>
   );
 };
+
 
 export default LenderList;

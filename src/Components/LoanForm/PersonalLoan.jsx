@@ -6,6 +6,7 @@ import helpPersonal from "../../assets/HelpPersonal.jpg";
 import personalLoan from "../../assets/personalloan.jpg";
 import PersonalElegible from "../../assets/ElegibillityPersonal.png";
 import axios from "axios";
+import Cookies from "js-cookie";
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
 
@@ -70,6 +71,10 @@ const PersonalEligibilityForm = () => {
         income: formData.income,  
         pincode: formData.pincode 
       });
+    
+      Cookies.set("userpincode", formData.pincode, { secure: true, sameSite: "Strict", expires: 1 });
+      Cookies.set("userdob", formData.dob, { secure: true, sameSite: "Strict", expires: 1 });
+      Cookies.set("userincome", formData.income, { secure: true, sameSite: "Strict", expires: 1 });
       toast.success("Checking eligibleity Please Wait few Sec")
       navigate("/landerlist")
       console.log("Response:", response.data);

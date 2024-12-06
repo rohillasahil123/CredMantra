@@ -4,7 +4,7 @@ import loginImage from "../../../assets/Login.avif";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import EligibleLendersService from "../../EligibleLendersService/EligibleLendersService";
+// import EligibleLendersService from "../../EligibleLendersService/EligibleLendersService";
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);

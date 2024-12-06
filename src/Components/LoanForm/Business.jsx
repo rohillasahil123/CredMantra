@@ -100,7 +100,7 @@ const BusinessEligibilityForm = () => {
       console.log(response.data);
       toast.success("Form submitted successfully!");
       if(response.data === "Success"){
-        navigate("/landerlist")
+        navigate("/bussineslist")
       }
     } catch (error) {
       console.error("Error submitting form", error);

@@ -24,7 +24,6 @@ const OtpVerificationComponent = () => {
       const response = await axios.post("https://credmantra.com/api/v1/auth/", {
         phone : phone,
       });
-
       if (!response.data.type == 'success') {
         toast.error(response.data.message || "Failed to send OTP")
         console.log(response.data.message , "try" )
