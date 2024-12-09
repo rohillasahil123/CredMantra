@@ -38,7 +38,7 @@ const Hero = () => {
             {loanOptions.map((loan, index) => (
               <div
                 key={index}
-                className="w-full sm:w-[48%]  h-[12vh] sm:h-[21vh] flex  items-center justify-center shadow-2xl rounded-xl bg-white  hover:cursor-pointer transition-transform hover:scale-105"
+                className="w-full sm:w-[46%]  h-[12vh] sm:h-[19vh] flex  items-center justify-center shadow-2xl rounded-xl bg-white  hover:cursor-pointer transition-transform hover:scale-105"
               >
                 <img
                   alt={loan.title}

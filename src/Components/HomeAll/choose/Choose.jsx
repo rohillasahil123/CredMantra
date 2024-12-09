@@ -19,7 +19,7 @@ const Choose = () => {
                         <h1 className="text-xl font-semibold">Fast Disbursal</h1>
                         <p>Our team helps customers <br /> make informed loan decisions.</p>
                     </div>
-                    <div className=" bg-white h-[45%] mt-[10%] sm:ml-[80%] w-max sm:w-full  rounded-lg shadow-lg flex flex-col items-center mr-[30%] p-2 hover:cursor-pointer transition-transform hover:scale-105">
+                    <div className=" bg-white h-[45%] mt-[10%] sm:ml-[35%] w-max sm:w-full  rounded-lg shadow-lg flex flex-col items-center mr-[30%] p-2 hover:cursor-pointer transition-transform hover:scale-105">
                         <div className="rounded-full bg-white h-[60px] flex mt-3 mx-auto w-[60px] justify-center shadow-2xl">
                             <img src={clock} alt="Fast Disbursal" className="w-full h-full" />
                         </div>
@@ -38,7 +38,7 @@ const Choose = () => {
                         <h1 className="text-xl font-semibold">Fast Disbursal</h1>
                         <p>Our team helps customers <br /> make informed loan decisions.</p>
                     </div>
-                    <div className=" bg-white h-[45%] mt-[10%] sm:ml-[80%] w-max sm:w-full  rounded-lg shadow-lg flex flex-col items-center mr-[30%] p-2 hover:cursor-pointer transition-transform hover:scale-105">
+                    <div className=" bg-white h-[45%] mt-[10%] sm:ml-[35%] w-max sm:w-full  rounded-lg shadow-lg flex flex-col items-center mr-[30%] p-2 hover:cursor-pointer transition-transform hover:scale-105">
                         <div className="rounded-full bg-white h-[60px] flex mt-3 mx-auto w-[60px] justify-center shadow-2xl">
                             <img src={clock} alt="Fast Disbursal" className="w-full h-full" />
                         </div>
