@@ -45,17 +45,12 @@ const Hero = () => {
                   className="w-[90%] sm:h-[46%] md:h-[62%] md:w-[72%]  h-[94%] mb-[-12px] mt-[-2%] ml-1"
                   src={loan.imgSrc}
                 />
-                <div className="space-y-2 text-center h-[62%] w-full">
+                <div className="space-y-1 text-center h-[62%] w-full">
                   <h1 className="title-font  text-black text-[18px] sm:text-[10px] md:text-[14px] font-bold uppercase">
                     {loan.title}
                   </h1>
-                  <button className="bg-gray-600 h-5 w-[80px]   sm:w-[51%] sm:h-[40%]    text-white rounded-lg hover:bg-gray-800">
-                    <Link to={loan.Route}>
-                      {" "}
-                      <span className="font-bold sm:text-[10px]  md:text-[12px]  ">
-                        Apply
-                      </span>
-                    </Link>
+                  <button className="bg-gray-600 h-7 w-[80px] sm:text-[9px]   sm:w-[56%] sm:h-[33%] md:text-[11px] font-bold  md:h-[36%] md:w-[50%]   text-white rounded-lg hover:bg-gray-800">
+                    <Link to={loan.Route}> Apply</Link>
                   </button>
                 </div>
               </div>
