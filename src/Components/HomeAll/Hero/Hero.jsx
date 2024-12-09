@@ -10,16 +10,35 @@ import securityLoans from "../../../assets/security.gif";
 import { Link } from "react-router-dom";
 
 const loanOptions = [
-  { title: "Personal Loans", imgSrc: personalLoans, Route: "/personalloan" },
-  { title: "Business Loans", imgSrc: businessLoans, Route: "/businessloan" },
-  { title: `Home Loans`, imgSrc: homeLoans, Route: "/homeloan" },
+  {
+    title: "Personal Loans",
+    imgSrc: personalLoans,
+    Route: "/personalloan",
+  },
+  {
+    title: "Business Loans",
+    imgSrc: businessLoans,
+    Route: "/businessloan",
+  },
+  {
+    title: `Home Loans`,
+    imgSrc: homeLoans,
+    Route: "/homeloan",
+  },
   {
     title: "Loan Against Security",
     imgSrc: securityLoans,
     Route: "/abhiLoans",
   },
-  { title: "Micro Loans", imgSrc: microLoans, Route: "/micro_loan" },
-  { title: "Gold Loans", imgSrc: goldLoans },
+  {
+    title: "Micro Loans",
+    imgSrc: microLoans,
+    Route: "/micro_loan",
+  },
+  {
+    title: "Gold Loans",
+    imgSrc: goldLoans,
+  },
 ];
 
 const Hero = () => {
