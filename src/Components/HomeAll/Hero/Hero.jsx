@@ -24,7 +24,7 @@ const loanOptions = [
 
 const Hero = () => {
   return (
-    <div className="  sm:flex sm:flex-row w-[100%] md:flex-row">
+    <div className="  sm:flex sm:flex-row w-[100%] md:flex-row ">
       <div className="w-full h-[70vh] bg-red-300 sm:h-[87vh] md:h-[100vh] lg:h-[83vh] xl:h-[100vh] 2xl:h-[100vh] sm:w-[50%] md:w-[50%]  ">
         <img
           className=" w-[100%] h-[100%] sm:w-[100%] sm:h-[100%] md:w-[100%] md:h-[90%]  lg:h-[100%] xl:w-[100%] xl:h-[90%] 2xl:w-[75%] 2xl:h-[75%] object-cover object-top sm:rounded-md lg:rounded-lg"
