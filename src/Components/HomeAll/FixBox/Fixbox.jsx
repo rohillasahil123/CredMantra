@@ -49,7 +49,6 @@ const OtpVerificationComponent = () => {
         phone : phone,
         otp : otp,
       });
-
       if (!response.data.type == 'success') {
         toast.error(response.data.message || "Failed to send OTP")
         console.log(response.data.message )
@@ -60,7 +59,6 @@ const OtpVerificationComponent = () => {
         toast.success("OTP verified successfully!");       
         setMessage(response.data.message || "Invalid OTP");
         setOtp("")
-
       }
     } catch (error) {
       setMessage("Error verifying OTP. Please try again.");
@@ -76,7 +74,6 @@ const OtpVerificationComponent = () => {
         setIsVisible(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

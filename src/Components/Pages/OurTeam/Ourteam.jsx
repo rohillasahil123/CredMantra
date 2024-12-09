@@ -12,10 +12,10 @@ import secure from '../../../assets/safty.png'
 const Ourteam = () => {
   return (
     <>
-    <div className='h-auto text-center '>
+    <div className=' text-center '>
       <h1 className='text-[60px] font-bold text-orange-700'>Our Story</h1>
       
-    <div className="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-12 bg-white text-gray-900">
+    <div className="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-12 bg-white text-gray-900 ">
       <div className="lg:w-1/2 mb-6 lg:mb-0">
         <p className="text-lg lg:text-xl leading-relaxed">
           "Credmantra is a pioneering fintech startup headquartered in Gurugram,
@@ -66,12 +66,12 @@ const Ourteam = () => {
           <h1 className='text-xl font-bold'>
           "At Credmantra, we believe financial empowerment is the cornerstone of progress. We’re here to help you build, manage, and grow your wealth with confidence."</h1>
       </div>
-      <div className='flex h-[90vh] sm:h-[50vh] w-full justify-center sm:justify-around flex-col sm:flex-row mt-[2%] items-center space-y-3 sm:space-y-0'>
+      <div className='flex h-[100vh] sm:h-[50vh] w-full justify-center sm:justify-around flex-col sm:flex-row mt-[2%] items-center space-y-6 sm:space-y-0'>
         <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
           <img src={fastApproval} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Fast approval rate</h1>
         </div>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%] mt-[20%] sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
           <img src={process} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>100% paperless process</h1>
         </div>
@@ -80,7 +80,7 @@ const Ourteam = () => {
           <h1 className='font-bold text-2xl '>Hassle free documentation</h1>
         </div>
       </div>
-      <div className='flex h-[90vh] sm:h-[50vh] w-full justify-center sm:justify-around flex-col sm:flex-row mt-[1%] items-center space-y-3 sm:space-y-0'>
+      <div className='flex h-[120vh] sm:h-[50vh] w-full sm:mt-0 justify-center sm:justify-around flex-col sm:flex-row  items-center space-y-3 sm:space-y-0'>
         <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
           <img src={speed} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Fast disbursal</h1>
@@ -93,6 +93,7 @@ const Ourteam = () => {
           <img src={secure} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Safe data ecosystem</h1>
         </div>
+       
       </div>
       </>
   )

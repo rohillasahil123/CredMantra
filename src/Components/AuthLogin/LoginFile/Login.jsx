@@ -155,7 +155,7 @@ const Login = () => {
         {/* Content Section */}
         <div className="relative flex right-0 sm:right-[24%]  justify-center items-center h-full overflow-y-auto  ">
           <div
-            className="max-h-full w-[90%] sm:w-[70%] md:w-[50%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%]   shadow-2xl rounded-xl p-6 space-y-4 overflow-y-auto hover:shadow-[0_0_30px_15px_rgba(255,192,203,0.5)]
+            className="max-h-full w-[90%] sm:w-[70%] md:w-[50%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] rounded-xl p-6 space-y-4 overflow-y-auto shadow-[0_0_30px_15px_rgba(255,192,203,0.5)]
 "
           >
             {isOnScreen ? (
