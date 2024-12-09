@@ -46,7 +46,7 @@ const Hero = () => {
                   src={loan.imgSrc}
                 />
                 <div className="space-y-1 text-center h-[62%] w-full">
-                  <h1 className="title-font  text-black text-[18px] sm:text-[10px] md:text-[14px] font-bold uppercase">
+                  <h1 className="title-font  text-black text-[13px] sm:text-[10px] md:text-[14px] font-bold uppercase">
                     {loan.title}
                   </h1>
                   <button className="bg-gray-600 h-7 w-[80px] sm:text-[9px]   sm:w-[56%] sm:h-[33%] md:text-[11px] font-bold  md:h-[36%] md:w-[50%]   text-white rounded-lg hover:bg-gray-800">
