@@ -41,7 +41,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4  hover:cursor-pointer">
+      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4 ">
         {Cookies.get("userToken") ? (
           <>
             <button
