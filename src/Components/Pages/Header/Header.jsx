@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loginButton, setLoginButton] = useState(false);
+  const [isLoginButton, setisLoginButton] = useState(false);
 
 
-    const handleLogout = ()=>{
-      document.cookie()
+
+  useEffect(() => {
+    if(document.cookie.includes === true){
+      const isLoggedIn = document.cookie.includes("authToken"); 
+    setisLoginButton(true);
+    console.log(isLoggedIn)
     }
+    else{
+      setisLoginButton(false);
+    }
+    
+  }, []);
+
+ 
+  const handleLogout = () => {
+    const deleteCookies = () => {
+      const cookiesToDelete = ["userId", "userToken"];
+      cookiesToDelete.forEach((cookieName) => {
+        document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+      });
+      console.log("Selected cookies deleted");
+    };
+    deleteCookies()
+
+  };
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -18,10 +41,13 @@ const Header = () => {
   return (
     <>
       <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4 ">
-        {loginButton ? (
-         <button className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer" onClick={handleLogout}>
-         <Link to="/">Logout</Link>
-       </button>
+        {isLoginButton ? (
+          <button
+            className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         ) : (
           <button className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer">
             <Link to="/login">Login</Link>
@@ -41,7 +67,15 @@ const Header = () => {
           <Link className="cursor-pointer" to="/blog">
             Blog
           </Link>
+          <div>
+          <h1>
+            {
+
+            }
+          </h1>
         </div>
+        </div>
+      
         <div className="md:hidden flex items-center">
           <button onClick={toggleMenu} className="text-xl">
             {menuOpen ? <FaTimes /> : <FaBars />}
@@ -66,7 +100,9 @@ const Header = () => {
               Blog
             </Link>
           </div>
+          
         )}
+   
       </div>
       <div className="text-center font-bold">
         <h1>ॐ श्री श्याम देवाय नमः</h1>

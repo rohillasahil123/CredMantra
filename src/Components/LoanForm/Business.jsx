@@ -8,6 +8,10 @@ import helpBusiness from "../../assets/HelpBusiness.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+
+
+
 
 const BusinessEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
@@ -101,6 +105,7 @@ const BusinessEligibilityForm = () => {
       toast.success("Form submitted successfully!");
       if(response.data === "Success"){
         navigate("/bussineslist")
+          Cookies.set("username", formData.name, { secure: true, sameSite: "Strict", expires: 1 });
       }
     } catch (error) {
       console.error("Error submitting form", error);

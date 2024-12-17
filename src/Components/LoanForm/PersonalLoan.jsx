@@ -75,9 +75,9 @@ const PersonalEligibilityForm = () => {
       Cookies.set("userpincode", formData.pincode, { secure: true, sameSite: "Strict", expires: 1 });
       Cookies.set("userdob", formData.dob, { secure: true, sameSite: "Strict", expires: 1 });
       Cookies.set("userincome", formData.income, { secure: true, sameSite: "Strict", expires: 1 });
+  console.log(response.data)
       toast.success("Checking eligibleity Please Wait few Sec")
       navigate("/landerlist")
-      console.log("Response:", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form");
@@ -86,7 +86,7 @@ const PersonalEligibilityForm = () => {
   
 
   return (
-    <div className="sm:min-h-[200vh] min-h-[160vh]">
+    <div className="sm:min-h-[200vh] min-h-[180vh]">
       {isFormVisible ? (
         <>
           <h1 className="font-bold text-4xl text-center">Personal Loan </h1>
@@ -264,11 +264,11 @@ const PersonalEligibilityForm = () => {
                 className="w-[100%]  h-[100%] rounded-lg mt-2 "
               />
             </div>
-            <div className="absolute top-[7%] sm:top-[23%] left-[2%] sm:left-[7%]  text-white ">
-              <h1 className="font-bold uppercase text-lg sm:text-[40px] font-serif ">
+            <div className="absolute top-[10%] sm:top-[23%]  left-[2%] sm:left-[7%]  text-white ">
+              <h1 className="font-bold uppercase text- md:text-[40px] font-serif ">
                 Because Your Dreams are
               </h1>
-              <h1 className="font-bold uppercase text-lg sm:text-[30px] sm:mt-[2%] font-serif ">
+              <h1 className="font-bold uppercase text-md sm:text-[30px] sm:mt-[2%] font-serif ">
                 Importent to us
               </h1>
               <h1 className="mt-[4%] text-[8px] sm:text-xl w-[40%]  text-white uppercase ">

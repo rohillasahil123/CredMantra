@@ -174,6 +174,7 @@ const Login = () => {
                   {otp.map((value, index) => (
                     <input
                       key={index}
+                      id={`otp-input-${index}`}
                       type="text"
                       className="h-12 w-10 border text-center text-xl font-bold rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                       onChange={(e) => handelChange(e, index)}
