@@ -1,38 +1,39 @@
-import React, { useState , useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoginButton, setisLoginButton] = useState(false);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
+  const user = JSON.stringify(Cookies.get("userToken"));
 
-
-  useEffect(() => {
-    if(document.cookie.includes === true){
-      const isLoggedIn = document.cookie.includes("authToken"); 
-    setisLoginButton(true);
-    console.log(isLoggedIn)
+  const handleLogin = () => {
+    Cookies.set("userToken", token, { expires: 1 });
+    const savedName = Cookies.get("userName");
+    if (savedName) {
+      setName(savedName);
     }
-    else{
-      setisLoginButton(false);
-    }
-    
-  }, []);
-
- 
-  const handleLogout = () => {
-    const deleteCookies = () => {
-      const cookiesToDelete = ["userId", "userToken"];
-      cookiesToDelete.forEach((cookieName) => {
-        document.cookie = `${cookieName}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
-      });
-      console.log("Selected cookies deleted");
-    };
-    deleteCookies()
-
   };
 
+  const handleLogout = () => {
+    Cookies.remove("userToken");
+    Cookies.remove("userName");
+    Cookies.remove("userId");
+    if (!Cookies.get("usertoken")) {
+      navigate("/Login");
+    }
+  };
+
+  useEffect(() => {
+    const token = Cookies.get("userToken");
+    const name = Cookies.get("userName");
+    if (token) {
+      setUserName(name || "");
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -40,20 +41,26 @@ const Header = () => {
 
   return (
     <>
-      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4 ">
-        {isLoginButton ? (
-          <button
-            className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4  hover:cursor-pointer">
+        {Cookies.get("userToken") ? (
+          <>
+            <button
+              onClick={handleLogout}
+              className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
+            >
+              Logout
+            </button>
+          </>
         ) : (
-          <button className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer">
-            <Link to="/login">Login</Link>
-          </button>
+          <>
+            <button
+              onClick={handleLogin}
+              className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
+            >
+              <Link to="/Login">Login</Link>
+            </button>
+          </>
         )}
-
         <div className="font-bold text-2xl cursor-pointer">
           <Link to="/">
             <span className="text-red-300">LO</span>
@@ -67,15 +74,9 @@ const Header = () => {
           <Link className="cursor-pointer" to="/blog">
             Blog
           </Link>
-          <div>
-          <h1>
-            {
+          <h1>{name}</h1>
+        </div>
 
-            }
-          </h1>
-        </div>
-        </div>
-      
         <div className="md:hidden flex items-center">
           <button onClick={toggleMenu} className="text-xl">
             {menuOpen ? <FaTimes /> : <FaBars />}
@@ -99,10 +100,9 @@ const Header = () => {
             >
               Blog
             </Link>
+            <h1>{name}</h1>
           </div>
-          
         )}
-   
       </div>
       <div className="text-center font-bold">
         <h1>ॐ श्री श्याम देवाय नमः</h1>

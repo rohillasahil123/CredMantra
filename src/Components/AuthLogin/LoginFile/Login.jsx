@@ -88,6 +88,9 @@ const Login = () => {
       const response = await axios.post("https://credmantra.com/api/v1/auth/", {
         phone: phone,
       });
+      if (name) {
+        Cookies.set("userName", name, { expires: 7 }); 
+      }
       console.log(response.data);
       setIsOnScreen(true);
       toast.success("OTP sent successfully");
@@ -113,10 +116,10 @@ const Login = () => {
     return () => clearInterval(timer);
   }, [retryCount]);
 
-  const handleResendOtp = () => {
+  const handleResendOtp =async() => {
     if (retryCount < 5) {
       try {
-        const response = axios.post(
+        const response = await axios.post(
           "https://credmantra.com/api/v1/auth/resend-otp",
           {
             phone: phone,
