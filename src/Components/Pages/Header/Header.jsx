@@ -31,7 +31,7 @@ const Header = () => {
     const token = Cookies.get("userToken");
     const name = Cookies.get("userName");
     if (token) {
-      setUserName(name || "");
+      setName(name || "");
     }
   }, []);
 
