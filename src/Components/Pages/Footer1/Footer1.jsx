@@ -4,63 +4,53 @@ import logo from "../../../assets/logo.png";
 
 const Footer1 = () => {
   return (
-    <div className="bg-customBlue h-[70vh] sm:h-[50vh] w-full">
-    <div className= " h-[50vh] sm:h-[80%] w-full  text-white flex flex-col sm:flex-row items-center sm:justify-around  ">
-      <div className="w-[40%] h-[40%] ml-0 sm:ml-[7%]">
-        <div className=" sm:mt-0 mt-[40%]">
-            <img src={logo} alt=""className=" h-[70%] sm:h-[30%] ml-0 sm:ml-[3%] w-[100%] sm:w-[40%] mt-0 sm:mt-[-5%]" />
-        </div>
-      </div>
-      <div className="flex flex-col sm:flex-row w-[60%] justify-around mt-3 items-center">
-        <div className="mb-8 lg:mb-0 font-serif">
-          <div className="font-bold">CATEGORIES</div>
-          <Link to="/personalloan">
-            <div className="mt-4 ">
-              Personal loan
-            </div>{" "}
-          </Link>
-          <Link to="/businessloan">
-            <div className="mt-2">
+    <div className="bg-customBlue py-10 sm:py-6 text-white">
+      <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row justify-around items-center px-5">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-6 sm:space-y-0 sm:space-x-10">
+        
+          <div>
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="w-32 sm:w-40 h-auto mb-4 sm:mb-0"
+            />
+          </div >
+           </div>
+
+        {/* Links Section */}
+        <div className=" w-[50%] flex flex-col sm:flex-row justify-around text-center sm:text-left mt-10 sm:mt-0 sm:space-x-10">
+          {/* Categories */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Categories</h3>
+            <Link to="/personalloan" className="block mb-2 hover:underline">
+              Personal Loan
+            </Link>
+            <Link to="/businessloan" className="block mb-2 hover:underline">
               Business Loan
-            </div>
-          </Link>
-          <div className=" mt-2">
-            Credit card
+            </Link>
+            <p className="mb-2 hover:underline cursor-pointer">Credit Card</p>
+            <p className="mb-2 hover:underline cursor-pointer">Paylater</p>
+            <Link to="/partner" className="block mb-2 hover:underline">
+              Our Partner
+            </Link>
           </div>
 
-          <div className=" mt-2">
-            Paylater
+          {/* Resources */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Resources</h3>
+            <Link to="/emicalculator" className="block mb-2 hover:underline">
+              EMI Calculator
+            </Link>
+            <Link to="/hiring" className="block mb-2 hover:underline">
+              Hiring
+            </Link>
+            <p className="mb-2 hover:underline cursor-pointer">Contact Us</p>
           </div>
-          <Link to="/partner">
-            <div className=" mt-2">
-              Our Partner
-            </div>{" "}
-          </Link>
-          <Link to="/contect ">
-            {" "}
-       
-          </Link>
-        </div>
-        <div className=" lg:mb-0 font-serif items-center mt-0  sm:mt-[-9%]   ">
-          <div className="font-bold uppercase ">Resources</div>
-          <Link to="/emicalculator">
-            {" "}
-            <div className=" mt-4">
-            EMI Caluculator
-            </div>
-          </Link>
-          <Link to="/hiring">
-            <div className=" hover:cursor-pointer mt-2">
-            Hiring
-            </div>
-          </Link>
-          <div className=" mt-2">
-              {" "}
-            Contect Us{" "}
-            </div>{" "}
         </div>
       </div>
-    </div>
+      <div className="text-center text-xs sm:text-sm mt-10 sm:mt-6 border-t border-white pt-4">
+        © {new Date().getFullYear()} Your Company Name. All rights reserved.
+      </div>
     </div>
   );
 };
