@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { CiFacebook, CiLinkedin, CiTwitter, CiInstagram } from "react-icons/ci";
 
 const Footer1 = () => {
   return (
@@ -44,12 +45,20 @@ const Footer1 = () => {
             <div className=" mt-2"> Contect Us </div>{" "}
           </div>
         </div>
-        <div className="text-center text-xs sm:text-sm mt-10 sm:mt-6 border-t border-white pt-4">
-        © {new Date().getFullYear()} Your Company Name. All rights reserved.
+       
       </div>
-      </div>
+      <div className="bg-black w-full mt-[26%]  text-white text-center flex flex-col lg:flex-row justify-between items-center px-4 lg:px-24">
+          <div className="font-semibold mb-4 lg:mb-0">@CopyRight cashfelly</div>
+          <div className="flex space-x-3 ">
+            <CiFacebook className="h-[40px] w-[40px] sm:h-[60px] sm:w-[40px] hover:cursor-pointer" />
+            <CiInstagram className="h-[40px] w-[40px] sm:h-[60px] sm:w-[40px] hover:cursor-pointer" />
+            <CiLinkedin className="h-[40px] w-[40px] sm:h-[60px] sm:w-[40px] hover:cursor-pointer" />
+            <CiTwitter className="h-[40px] w-[40px] sm:h-[60px] sm:w-[40px] hover:cursor-pointer" />
+          </div>
+        </div>
     </div>
   );
 };
 
 export default Footer1;
+  
