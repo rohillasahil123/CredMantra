@@ -21,6 +21,7 @@ import Microloans from "./Components/LoanForm/Microloans";
 import BussinesLanderList from "./Components/Pages/LanderList/BussinesLanderList";
 import Hiring from "./Components/Pages/Hiring/Hiring";
 import Profile from "./Components/Pages/Profile/Profile";
+import Footer1 from "./Components/Pages/Footer1/Footer1";
 
 const App = () => {
   return (
@@ -55,7 +56,7 @@ const App = () => {
           <Route path="/hiring" element={ <Hiring/>}></Route>
           <Route path="/profile" element={ <Protect Component={Profile } />}></Route>
         </Routes>
-        <Footer />
+        <Footer1/>
         <Toaster />
       </BrowserRouter>
     </div>

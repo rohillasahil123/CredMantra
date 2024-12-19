@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import profileImage from "../../../assets/profile.png"
+import profileImage from "../../../assets/profile.png";
 import Cookies from "js-cookie";
 
 const Header = () => {
@@ -42,7 +42,7 @@ const Header = () => {
         {Cookies.get("userToken") ? (
           <>
             <button
-            type="button"
+              type="button"
               onClick={handleLogout}
               className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
             >
@@ -52,7 +52,7 @@ const Header = () => {
         ) : (
           <>
             <button
-              onClick={ handleLogin}
+              onClick={handleLogin}
               type="button"
               className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
             >
@@ -74,11 +74,15 @@ const Header = () => {
             Blog
           </Link>
           <div className="hidden md:flex space-x-6 font-medium items-center">
-            <Link to='/profile'>
-            <img src={profileImage} alt="profile" srcset="" className="h-[25px] w-[30px]"/>
+            <Link to="/profile">
+              <img
+                src={profileImage}
+                alt="profile"
+                srcset=""
+                className="h-[25px] w-[30px]"
+              />
             </Link>
           </div>
-        
         </div>
 
         <div className="md:hidden flex items-center">
@@ -104,7 +108,6 @@ const Header = () => {
             >
               Blog
             </Link>
-         
             <Link
               onClick={toggleMenu}
               className="block py-2 text-center font-medium"
@@ -112,7 +115,6 @@ const Header = () => {
             >
               Profile
             </Link>
-          
           </div>
         )}
       </div>

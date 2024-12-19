@@ -29,11 +29,11 @@ const Hiring = () => {
   return (
     <div className="min-h-screen flex flex-col sm:flex-row items-center justify-around bg-gray-50 p-4">
       {/* Left Section with Image */}
-      <div className="lg:flex w-[50%] sm:w-1/2  justify-center">
+      <div className="lg:flex w-[70%] sm:w-1/2  justify-center ">
         <img src={hiring} alt="Hiring" className="max-w-md w-[100%] animate-bounce "/>
       </div>
       {/* Right Section with Form */}
-      <div className="bg-white rounded-lg shadow-lg p-8 sm:0 sm:mr-[7%] w-full max-w-2xl lg:w-1/2">
+      <div className="bg-white rounded-lg shadow-lg p-3 sm:0 sm:mr-[7%] w-full max-w-2xl lg:w-1/2">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Join Our Team
         </h1>
