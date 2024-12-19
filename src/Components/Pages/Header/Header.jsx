@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import profileImage from "../../../assets/profile.png"
 import Cookies from "js-cookie";
 
 const Header = () => {
@@ -11,11 +12,7 @@ const Header = () => {
   const user = JSON.stringify(Cookies.get("userToken"));
 
   const handleLogin = () => {
-    Cookies.set("userToken", token, { expires: 1 });
-    const savedName = Cookies.get("userName");
-    if (savedName) {
-      setName(savedName);
-    }
+    navigate("/Login");
   };
 
   const handleLogout = () => {
@@ -33,7 +30,7 @@ const Header = () => {
     if (token) {
       setName(name || "");
     }
-  }, []);
+  }, [name]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -41,10 +38,11 @@ const Header = () => {
 
   return (
     <>
-      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4 ">
+      <div className="border h-11 w-full flex justify-between shadow-xl items-center p-4">
         {Cookies.get("userToken") ? (
           <>
             <button
+            type="button"
               onClick={handleLogout}
               className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
             >
@@ -54,10 +52,11 @@ const Header = () => {
         ) : (
           <>
             <button
-              onClick={handleLogin}
+              onClick={ handleLogin}
+              type="button"
               className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
             >
-              <Link to="/Login">Login</Link>
+              Login
             </button>
           </>
         )}
@@ -74,7 +73,12 @@ const Header = () => {
           <Link className="cursor-pointer" to="/blog">
             Blog
           </Link>
-          <h1>{name}</h1>
+          <div className="hidden md:flex space-x-6 font-medium items-center">
+            <Link to='/profile'>
+            <img src={profileImage} alt="profile" srcset="" className="h-[25px] w-[30px]"/>
+            </Link>
+          </div>
+        
         </div>
 
         <div className="md:hidden flex items-center">
@@ -100,7 +104,15 @@ const Header = () => {
             >
               Blog
             </Link>
-            <h1>{name}</h1>
+         
+            <Link
+              onClick={toggleMenu}
+              className="block py-2 text-center font-medium"
+              to="/profile"
+            >
+              Profile
+            </Link>
+          
           </div>
         )}
       </div>

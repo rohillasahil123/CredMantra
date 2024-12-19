@@ -13,6 +13,7 @@ import {
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
+import { AiFillAlert } from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -60,13 +61,18 @@ const Footer = () => {
           </div>
 
           <div className="text-center mb-8 lg:mb-0">
-            <div className="font-bold">Resources</div>
+            <div className="font-bold uppercase">Resources</div>
             <Link to="/emicalculator">
               {" "}
               <div className="flex">
                 <CiHeart className="mt-[5px] mr-[3px]" /> EMI Caluculator
               </div>
             </Link>
+            <Link to="/hiring">
+            <div className="flex hover:cursor-pointer">
+                <AiFillAlert  className="mt-[5px] mr-[3px]" /> Hiring
+              </div>
+              </Link>
           </div>
 
           <div className="text-center lg:text-left  ">

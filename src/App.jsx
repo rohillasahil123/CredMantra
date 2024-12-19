@@ -19,6 +19,8 @@ import HomeLoan from "./Components/LoanForm/HomeLoan";
 import LoanSecurity from "./Components/Pages/LoanSecurity/LoanSecurity";
 import Microloans from "./Components/LoanForm/Microloans";
 import BussinesLanderList from "./Components/Pages/LanderList/BussinesLanderList";
+import Hiring from "./Components/Pages/Hiring/Hiring";
+import Profile from "./Components/Pages/Profile/Profile";
 
 const App = () => {
   return (
@@ -50,6 +52,8 @@ const App = () => {
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/abhiLoans" element={  < Protect Component={LoanSecurity} />}></Route>
           <Route path="/micro_loan" element={ <Protect Component={Microloans}/>}></Route>
+          <Route path="/hiring" element={ <Hiring/>}></Route>
+          <Route path="/profile" element={ <Protect Component={Profile } />}></Route>
         </Routes>
         <Footer />
         <Toaster />
