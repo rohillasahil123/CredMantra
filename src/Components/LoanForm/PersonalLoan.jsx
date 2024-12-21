@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import applyOnline from "../../assets/Applyloan.png";
 import ApproveLoan from "../../assets/Approval.png";
 import Recivingloan from "../../assets/recivingloan.png";
@@ -12,6 +12,12 @@ import { useNavigate } from "react-router-dom";
 
 const PersonalEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
+  const [eformFilled , setEformFilled] = useState(false)
+
+  const navigate = useNavigate()
+
+
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +29,30 @@ const PersonalEligibilityForm = () => {
     income:""
   });
 
-  const navigate = useNavigate()  
+
+
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const token = Cookies.get("userToken");
+        const response = await axios.get("https://credmantra.com/api/v1/auth/verify-user", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        const data = response.data.data.user;
+        if(data.eformFilled === true){
+          setEformFilled(true);
+          navigate("/landerlist");
+        }
+      } catch (error) {
+        console.error("Error verifying user:", error);
+      }
+    };
+     verifyUser();
+  }, [navigate]);
+ 
   
   const businessHelp = [
     {

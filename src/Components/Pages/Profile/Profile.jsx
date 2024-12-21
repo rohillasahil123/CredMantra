@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState("");
-  const [employment , setEmployment] = useState("");
+  const [profileCompletion, setProfileCompletion] = useState(0);
 
   useEffect(() => {
     const userdata = async () => {
@@ -20,17 +20,61 @@ const Profile = () => {
       );
       const data = response.data.data.user
       setUserDetails(data);
-      setEmployment(data.accounts[3].sent);
-      console.log(employment)
     };
     userdata();
   }, []);
+
+
+  useEffect(() => {
+    if (userDetails) {
+      const fields = [
+        userDetails.name,
+         userDetails.last_name,
+        userDetails.dob,
+        userDetails.gender,
+        userDetails.marital_status,
+        userDetails.employment,
+        userDetails.email,
+        userDetails.phone,
+        userDetails.pan,
+        userDetails.education,
+        userDetails.company_name,
+        userDetails.residential_type,
+        userDetails.residential_pincode,
+        userDetails.residential_address,
+        userDetails.city,
+        userDetails.state,
+        userDetails.year_of_residency,
+        userDetails.work_exp,
+        userDetails.office_pincode,
+        userDetails.office_address,
+        userDetails.city,
+        userDetails.state,
+        userDetails.total_year_of_work_exp,
+        userDetails.income,
+      ];
+      
+      const filledFields = fields.filter(field => field && field.toString().trim() !== '').length;
+      const totalFields = fields.length;
+      const percentage = Math.round((filledFields / totalFields) * 100);
+      setProfileCompletion(percentage);
+    }
+  }, [userDetails]);
   
   return (
     <div className="w-[100%] mx-auto bg-white shadow-lg rounded-lg p-5">
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center mb-4 flex-col items-center">
         <h1 className="text-2xl font-semibold">My Profile</h1>
-      </div>
+         <div className="flex justify-between w-[80%] mb-1">
+           <span className="text-md font-medium text-gray-700">{profileCompletion}%</span>
+         </div>
+         <div className="w-full bg-gray-200 rounded-full h-2.5">
+           <div 
+             className="bg-blue-600 h-2.5 rounded-full transition-all duration-500" 
+             style={{ width: `${profileCompletion}%` }}
+           ></div>
+         </div>
+       </div>      
       <hr className="h-px my-8 bg-gray-200 border-b-3" />
       <div className="flex flex-col sm:flex-row justify-around w-[95%] items-center  " style={{justifySelf:"center"}} >
         <div className="sm:h-[40vh] sm:w-[48%] h-[24vh]  w-[90%]">
@@ -44,7 +88,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
               <h1 className="text-gray-600 text-[14px]" >Last Name</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.last_name}</h1>
+              <h1 className="text-gray-600 text-[14px]"></h1>
             </div>
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
@@ -73,7 +117,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
               <h1 className="text-gray-600 text-[14px]" >Phone Number</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.mobile_number1}</h1>
+              <h1 className="text-gray-600 text-[14px]">{userDetails.phone}</h1>
             </div>
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
@@ -88,7 +132,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
               <h1 className="text-gray-600 text-[14px]">Educational Qualification</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.qualification}</h1>
+              <h1 className="text-gray-600 text-[14px]"></h1>
             </div>
           </div>
         </div>
@@ -101,7 +145,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
               <h1 className="text-gray-600 text-[14px]">Residential Type</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.current_city}</h1>
+              <h1 className="text-gray-600 text-[14px]"></h1>
             </div>
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
@@ -111,7 +155,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
               <h1 className="text-gray-600 text-[14px]">Residential Address</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.current_city}</h1>
+              <h1 className="text-gray-600 text-[14px]"></h1>
             </div>
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
@@ -137,7 +181,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
               <h1 className="text-gray-600 text-[14px]">Company's Name</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.company}</h1>
+              <h1 className="text-gray-600 text-[14px]"></h1>
             </div>
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3"/>
             <div className="flex justify-between w-[85%]">
@@ -172,7 +216,7 @@ const Profile = () => {
             <hr className="my-2 bg-gray-200 w-[90%] border-b-3" />
             <div className="flex justify-between w-[85%] ">
               <h1 className="text-gray-600 text-[14px]">Monthly Income</h1>
-              <h1 className="text-gray-600 text-[14px]">{employment.salary}</h1>
+              <h1 className="text-gray-600 text-[14px]">{userDetails.income}</h1>
             </div>
           </div>
         </div>

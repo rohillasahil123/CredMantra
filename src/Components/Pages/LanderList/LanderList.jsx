@@ -242,9 +242,7 @@ const LenderList = () => {
             <img
               src={lander.image}
               alt="Safety List"
-              className="sm:h-[86%] sm:w-[16%] h-full w-full ml-1 sm:ml-0 mt-3 sm:mt-0 "
-            />
-
+              className="sm:h-[86%] sm:w-[16%] h-full w-full ml-1 sm:ml-0 mt-3 sm:mt-0 " />
             <div className="text-center">
               <h2 className="text-[10px] sm:text-lg">Approval Rating</h2>
               <div className="flex items-center justify-center">
