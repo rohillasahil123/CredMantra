@@ -12,8 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const PersonalEligibilityForm = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
-  const [eformFilled , setEformFilled] = useState(false)
-
   const navigate = useNavigate()
 
 
@@ -43,9 +41,10 @@ const PersonalEligibilityForm = () => {
         });
         const data = response.data.data.user;
         console.log(data)
-        if(data.eformFilled === true){
-          setEformFilled(true);
-          console.log(eformFilled)
+        console.log(data.eformFilled)
+        if(data.eformFilled === !true){
+          navigate("/personalloan")
+        }else{
           navigate("/landerlist");
         }
       } catch (error) {

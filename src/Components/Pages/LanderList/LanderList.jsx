@@ -310,7 +310,7 @@ const LenderList = () => {
                 <h2 className="text-[10px] sm:text-lg">{lander.Restriction}</h2>
               </div>
             </div>
-            <button className="h-[35px] border w-[zzz%] text-[13px] sm:text-[17px]  sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center">
+            <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px]  sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center">
               Apply Now
             </button>
           </div>
