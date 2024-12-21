@@ -42,8 +42,10 @@ const PersonalEligibilityForm = () => {
           }
         });
         const data = response.data.data.user;
+        console.log(data)
         if(data.eformFilled === true){
           setEformFilled(true);
+          console.log(eformFilled)
           navigate("/landerlist");
         }
       } catch (error) {
