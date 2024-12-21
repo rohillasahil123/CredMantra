@@ -101,12 +101,7 @@ const PersonalEligibilityForm = () => {
         income: formData.income,  
         pincode: formData.pincode 
       });
-    
-      Cookies.set("userpincode", formData.pincode, { secure: true, sameSite: "Strict", expires: 1 });
-      Cookies.set("userdob", formData.dob, { secure: true, sameSite: "Strict", expires: 1 });
-      Cookies.set("userincome", formData.income, { secure: true, sameSite: "Strict", expires: 1 });
-  console.log(response.data)
-      toast.success("Checking eligibleity Please Wait few Sec")
+     toast.success("Checking eligibleity Please Wait few Sec")
       navigate("/landerlist")
     } catch (error) {
       console.error("Error submitting form:", error);

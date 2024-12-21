@@ -194,33 +194,41 @@ const LenderList = () => {
 
   useEffect(() => {
     const fetchUserIdFromCookiesAndLenderData = async () => {
-      const dob = Cookies.get("userdob");
-      const income = Cookies.get("userincome");
-      const pincode = Cookies.get("userpincode");
-      if (pincode , dob , income ) {
-        setUser(pincode , dob , income );
-        console.log("User ID from cookies:", user);
+      const userData = Cookies.get("userId");
+  
+      if (userData) {
+        setUser(userData);
+        console.log("User ID from cookies:", userData);
+  
         try {
           const response = await axios.post(
-            "https://credmantra.com/api/v1/auth/lender",
-            { dob , income, pincode }
+            "https://credmantra.com/api/v1/auth/get-lenders",
+            { userId: userData } 
           );
-          console.log("API Response:", response.data.data);
-          const apiNames = response.data.data.map((name) =>
-            name.trim().toLowerCase()
-          );
-          const matchedLenders = leandersdetails.filter((lender) =>
-            apiNames.includes(lender.name.trim().toLowerCase())
-          );
-          setFilteredLenders(matchedLenders);
-          console.log("Matched Lenders:", matchedLenders);
+  
+          if (response.data && Array.isArray(response.data.data)) {
+            const apiNames = response.data.data.map((name) =>
+              name.trim().toLowerCase()
+            );
+  
+            const matchedLenders = leandersdetails.filter((lender) =>
+              apiNames.includes(lender.name.trim().toLowerCase())
+            );
+  
+            setFilteredLenders(matchedLenders);
+            console.log("Matched Lenders:", matchedLenders);
+          } else {
+            console.error("Unexpected API response format:", response.data);
+          }
         } catch (error) {
           console.error("Error fetching lender data:", error);
         }
       }
     };
+  
     fetchUserIdFromCookiesAndLenderData();
   }, []);
+  
 
   return (
     <div className="text-center items-center h-auto">
