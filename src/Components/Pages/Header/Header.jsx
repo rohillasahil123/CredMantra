@@ -44,7 +44,7 @@ const Header = () => {
             <button
               type="button"
               onClick={handleLogout}
-              className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
+              className="font-bold  text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer" style={{zIndex:100}}
             >
               Logout
             </button>
@@ -54,13 +54,13 @@ const Header = () => {
             <button
               onClick={handleLogin}
               type="button"
-              className="font-bold text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer"
+              className="font-bold  text-xl border w-[100px] bg-yellow-400 h-7 rounded-lg hover:bg-yellow-700 hover:cursor-pointer" style={{zIndex:100}}
             >
               Login
             </button>
           </>
         )}
-        <div className="font-bold text-2xl cursor-pointer">
+        <div className="font-bold text-2xl z-[-100] cursor-pointer" style={{zIndex:100}}>
           <Link to="/">
             <span className="text-red-300">LO</span>
             <span className="text-sky-300">GO</span>

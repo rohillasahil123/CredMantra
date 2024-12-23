@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect , useState}   from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState("");
   const [profileCompletion, setProfileCompletion] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userdata = async () => {
@@ -23,6 +25,11 @@ const Profile = () => {
     };
     userdata();
   }, []);
+
+
+  const handleEditProfile = ()=>{
+    navigate("/editprofile");
+  }
 
 
   useEffect(() => {
@@ -219,9 +226,9 @@ const Profile = () => {
               <h1 className="text-gray-600 text-[14px]">{userDetails.income}</h1>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
-      
+        <button className="bg-blue-600 text-white p-2 mt-[7%] sm:mt-[-7%] h-[5vh] sm:h-[6vh]  w-[80%] sm:w-[10%] ml-[6%] sm:ml-[30%] rounded-md" onClick={handleEditProfile} > Edit Profile</button>
     </div>
   );
 };
