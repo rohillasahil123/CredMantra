@@ -24,8 +24,7 @@ const Footer1 = () => {
             <Link to="/businessloan">
               <div className="mt-2">Business Loan</div>
             </Link>
-            <div className=" mt-2">Credit card</div>
-
+            <div className=" mt-2">Credit card</div> 
             <div className=" mt-2">Paylater</div>
             <Link to="/partner">
               <div className=" mt-2">Our Partner</div>{" "}

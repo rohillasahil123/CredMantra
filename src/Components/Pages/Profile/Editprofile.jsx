@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Editprofile = () => {
 
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         dateOfBirth: '',
@@ -39,7 +39,6 @@ const Editprofile = () => {
 
 
     const handleSubmit = () => {
-        // Add your save logic here
         console.log('Form data:', formData);
     };
 

@@ -105,7 +105,6 @@ const BusinessEligibilityForm = () => {
       toast.success("Form submitted successfully!");
       if(response.data === "Success"){
         navigate("/bussineslist")
-          Cookies.set("username", formData.name, { secure: true, sameSite: "Strict", expires: 1 });
       }
     } catch (error) {
       console.error("Error submitting form", error);
