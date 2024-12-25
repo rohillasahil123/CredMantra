@@ -36,7 +36,7 @@ const Profile = () => {
     if (userDetails) {
       const fields = [
         userDetails.name,
-         userDetails.last_name,
+        userDetails.last_name,
         userDetails.dob,
         userDetails.gender,
         userDetails.marital_status,

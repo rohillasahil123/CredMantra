@@ -18,7 +18,7 @@ const loanOptions = [
   {
     title: "Business Loans",
     imgSrc: businessLoans,
-    Route: "/businessloan",
+    Route: "/business-list",
   },
   {
     title: `Home Loans`,

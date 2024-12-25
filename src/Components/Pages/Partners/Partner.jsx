@@ -28,7 +28,7 @@ const Partner = () => {
       ImageSrc: "Ramfin",
       imgdata: ramfan_logo,
       imageMessage:
-        "Ramfan Lender provides quick, reliable loans with flexible repayment options. Whether personal, business, or emergency needs, they offer competitive interest rates, fast approvals, and tailored solutions to meet financial goals, ensuring seamless borrowing experiences for all clients.",
+        "Ramfin Lender provides quick, reliable loans with flexible repayment options. Whether personal, business, or emergency needs, they offer competitive interest rates, fast approvals, and tailored solutions to meet financial goals, ensuring seamless borrowing experiences for all clients.",
     },
     {
       ImageSrc: "Fibe",

@@ -45,7 +45,7 @@ const PersonalEligibilityForm = () => {
         if(data.eformFilled === !true){
           navigate("/personalloan")
         }else{
-          navigate("/landerlist");
+          navigate("/lenderlist");
         }
       } catch (error) {
         console.error("Error verifying user:", error);
@@ -102,7 +102,7 @@ const PersonalEligibilityForm = () => {
         pincode: formData.pincode 
       });
      toast.success("Checking eligibleity Please Wait few Sec")
-      navigate("/landerlist")
+      navigate("/lenderlist")
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form");

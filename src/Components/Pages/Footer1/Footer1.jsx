@@ -36,7 +36,7 @@ const Footer1 = () => {
             <div className="font-bold uppercase ">Resources</div>
             <Link to="/emicalculator">
               {" "}
-              <div className=" mt-4">EMI Caluculator</div>
+              <div className=" mt-4">EMI Calculator</div>
             </Link>
             <Link to="/hiring">
               <div className=" hover:cursor-pointer mt-2">Hiring</div>

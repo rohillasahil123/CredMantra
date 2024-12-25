@@ -6,6 +6,7 @@ import vitto from "../../../assets/vitto.png";
 import meter from "../../../assets/meter.png";
 import { GiMoneyStack } from "react-icons/gi";
 import { GrDocumentConfig } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const BussinesLanderList = () => {
   const leandersdetails = [
@@ -17,9 +18,10 @@ const BussinesLanderList = () => {
       Tenure: "Upto 18 month",
       processingFee: "Upto 2%",
       image: iifl,
-      Collatera: "No Collatera",
+      Collatera: "No Collateral",
       Flexible: "Flexible Repayment",
       Restriction: "No Usage Restriction",
+     route:"https://iifl-loans.finbox.in/?partnerCode=CR_RHNEFJ"
     },
     {
       name: "Faircent",
@@ -29,9 +31,10 @@ const BussinesLanderList = () => {
       Tenure: "Upto 36 month",
       processingFee: "Upto 4%",
       image: faircent,
-      Collatera: "No Collatera",
+      Collatera: "No Collateral",
       Flexible: "Flexible Repayment",
       Restriction: "No Usage Restriction",
+      route: "/faircent",
     },
     {
       name: "LendingKart ",
@@ -41,9 +44,10 @@ const BussinesLanderList = () => {
       Tenure: "Upto 32 month",
       processingFee: "Upto 2.5%",
       image: landingKart,
-      Collatera: "No Collatera",
+      Collatera: "No Collateral",
       Flexible: "Flexible Repayment",
       Restriction: "No Usage Restriction",
+      route: "/landingkart",
     },
     {
       name: "vitto",
@@ -56,6 +60,7 @@ const BussinesLanderList = () => {
       Collatera: "No Collatera",
       Flexible: "Flexible Repayment",
       Restriction: "No Usage Restriction",
+      route: "/vitto",
     },
   ];
 
@@ -150,13 +155,14 @@ const BussinesLanderList = () => {
               </div>
             </div>
             <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px]  sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center">
-              Apply Now
+              
+              <Link to={lander.route}>Apply Now</Link>
             </button>
           </div>
         </div>
       ))}
     </div>
-  );
+  );  
 };
 
 export default BussinesLanderList;

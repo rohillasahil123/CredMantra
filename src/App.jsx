@@ -23,7 +23,9 @@ import Hiring from "./Components/Pages/Hiring/Hiring";
 import Profile from "./Components/Pages/Profile/Profile";
 import Footer1 from "./Components/Pages/Footer1/Footer1";
 import Editprofile from "./Components/Pages/Profile/Editprofile";
-
+import VittoLoanForm from "./Components/BusinessLoan/Vitto";
+import Faircent from "./Components/BusinessLoan/Faircent";
+import LendingKart from "./Components/BusinessLoan/LandingKart";
 
 const App = () => {
   return (
@@ -47,8 +49,8 @@ const App = () => {
             element={ < Protect Component={HomeLoan} /> }
           />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/landerlist" element={< Protect Component={LanderList} />} />
-          <Route path="/bussineslist" element={< Protect Component={ BussinesLanderList} />} />
+          <Route path="/lenderlist" element={< Protect Component={LanderList} />} />
+          <Route path="/business-list" element={< Protect Component={ BussinesLanderList} />} />
           <Route path="/contect" element={ <Protect Component={Contect} />} />
           <Route path="/emicalculator" element={<EmiCalculator />} />
           <Route path="/partner" element={<Partner />} />
@@ -58,6 +60,9 @@ const App = () => {
           <Route path="/hiring" element={ <Hiring/>}></Route>
           <Route path="/profile" element={ <Protect Component={Profile } />}></Route>
           <Route path="/editprofile" element={ <Protect Component={Editprofile} />}></Route>
+          <Route path="/vitto" element={ <Protect Component={VittoLoanForm} />}></Route>
+          <Route path="/faircent" element={ <Protect Component={Faircent} />}></Route>
+          <Route path="/landingkart" element={ <Protect Component={LendingKart} />}></Route>
         </Routes>
         <Footer1/>
         <Toaster />

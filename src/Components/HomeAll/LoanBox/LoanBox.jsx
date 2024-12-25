@@ -28,7 +28,7 @@ const LoanBox = () => {
         <h2 className="text-xl font-semibold">Business Loan</h2>
         <p className="mt-2 text-sm">Get Business Loans in a few quick steps</p>
         <button className="mt-4 px-4 py-2 bg-white text-blue-600 font-semibold rounded shadow hover:bg-gray-200">
-        <Link to='/businessloan' >
+        <Link to='/business-list' >
         Apply Business Loan
           </Link>
         </button>
