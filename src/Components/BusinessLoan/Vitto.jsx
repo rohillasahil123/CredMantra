@@ -99,7 +99,7 @@ const VittoLoanForm = () => {
         }
     };
 
-    const handleOtpVerification = async (e) => {
+      const handleOtpVerification = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {

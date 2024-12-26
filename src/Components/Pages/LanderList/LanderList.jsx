@@ -22,328 +22,343 @@ import axios from "axios";
 const LenderList = () => {
   const [user, setUser] = useState({});
   const [filteredLenders, setFilteredLenders] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
 
   const leandersdetails = [
     {
-        name: 'AbhiLoans',
-        respName: 'abhi',
-        imageUrl: abhiloan,
-        approvalRating: 'Excellent',
-        loanAmount: 'Upto ₹ 5,00,000',
-        interestRate: 'Starting from 24% to 30%',
-        tenure: 'Upto 24 months',
-        processingFee: 'Upto 2.5%',
-        features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
-        showForm: true,
-        formUrl: '/abhiloans',
-        type: 'security',
+      name: 'AbhiLoans',
+      respName: 'abhi',
+      imageUrl: abhiloan,
+      approvalRating: 'Excellent',
+      loanAmount: 'Upto ₹ 5,00,000',
+      interestRate: 'Starting from 24% to 30%',
+      tenure: 'Upto 24 months',
+      processingFee: 'Upto 2.5%',
+      features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
+      showForm: true,
+      formUrl: '/abhiloans',
+      type: 'security',
     },
     {
-        name: 'Cashe',
-        respName: 'cashe',
-        imageUrl: cashe,
-        type: 'pl',
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'https://cashe.co.in',
-            red2Url: 'https://cashe.co.in',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.cashe.message === 'Successfully Created',
+      name: 'Cashe',
+      respName: 'cashe',
+      imageUrl: cashe,
+      type: 'pl',
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/cashe',
+      offerConfig: {
+        redUrl: 'https://cashe.co.in',
+        red2Url: 'https://cashe.co.in',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.cashe.message === 'Successfully Created',
+      },
+    },
+    {
+      name: 'ClickMyLoans',
+      respName: 'ClickMyLoans',
+      type: 'pl',
+      imageUrl: ClickLoan,
+      approvalRating: 'Excellent',
+      loanAmount: 'Upto ₹ 5,00,000',
+      interestRate: 'Starting from 24% to 30%',
+      tenure: 'Upto 24 months',
+      processingFee: 'Upto 2.5%',
+      features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
+      showForm: true,
+      formUrl: 'https://clickmyloan.cloudbankin.com/onboard/?referral_code=clA4jK9pR6',
+    },
+    {
+      name: 'Faircent',
+      respName: 'faircent',
+      imageUrl: faircent,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/faircent',
+      offerConfig: {
+        redUrl: 'https://pq.faircent.com/',
+        red2Url: 'https://pq.faircent.com/',
+        displayText: 'You have an offer!!',
+        errorText: 'You are not eligible for Faircent',
+        successCondition: (response) => response.faircent.success === true,
+      },
+    },
+    {
+      name: 'Fibe',
+      respName: 'fibe',
+      type: 'pl',
+      imageUrl: Fibe,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/fibe',
+      offerConfig: {
+        redUrl: 'redirectionUrl',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.reason === 'customer lead updated',
+      },
+    },
+    {
+      name: 'Loantap',
+      respName: 'loantap',
+      type: 'pl',
+      imageUrl: 'assets/loantap.png',
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: true,
+      formUrl: '/loantap',
+    },
+    {
+      name: 'MoneyTap',
+      respName: 'moneytap',
+      type: 'pl',
+      imageUrl: moneytap,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/moneytap',
+      offerConfig: {
+        redUrl: 'reponse.pwa',
+        errorText: 'You are not eligible for MoneyView',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.status !== 'reject',
+      },
+    },
+    {
+      name: 'MoneyView',
+      respName: 'moneyview',
+      type: 'pl',
+      imageUrl: moneyview,
+      approvalRating: 'Excellent',
+      loanAmount: 'Upto ₹ 2,00,000',
+      interestRate: 'Starting from 26%',
+      tenure: 'Upto 36 months',
+      processingFee: 'Upto 3%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/moneyview',
+      offerConfig: {
+        redUrl: 'reponse.pwa',
+        errorText: 'You are not eligible for MoneyView',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.message === 'success',
+      },
+    },
+    {
+      name: 'MPocket',
+      respName: 'Mpocket',
+      type: 'pl',
+      imageUrl: mpocket,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/mpocket',
+      offerConfig: {
+        redUrl: 'redirectionUrl',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.reason === 'customer lead updated',
+      },
+    },
+    {
+      name: 'Payme',
+      respName: 'payme',
+      type: 'pl',
+      imageUrl: piramal,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/payme',
+      offerConfig: {
+        redUrl: 'reponse.cibil.message',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.cibil.message === 'Cibil fetched successfully',
+      },
+    },
+    {
+      name: 'Prefr',
+      respName: 'prefr',
+      type: 'pl',
+      imageUrl: prefr,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/prefr',
+      offerConfig: {
+        redUrl: 'reponse.pwa',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response === 'success',
+      },
+    },
+    {
+      name: 'RamFin',
+      respName: 'ramfin',
+      type: 'pl',
+      imageUrl: ramfin,
+      approvalRating: 'Excellent',
+      loanAmount: 'Upto ₹ 5,00,000',
+      interestRate: 'Starting from 24% to 30%',
+      tenure: 'Upto 24 months',
+      processingFee: 'Upto 2.5%',
+      features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/ramfin',
+      offerConfig: {
+        redUrl: 'https://www.ramfincorp.com/',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => response.ramfin.message === 'Lead created successfully.',
+      },
+    },
+    {
+      name: 'SmartCoin',
+      respName: 'SmartCoin',
+      type: 'pl',
+      imageUrl: SmartCoin,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/smartcoin',
+      offerConfig: {
+        redUrl: 'https://www.olyv.co.in/',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => {
+          console.log(response);
+          response.reason === 'customer lead updated';
+          return false;
         },
+      },
     },
     {
-        name: 'ClickMyLoans',
-        respName: 'ClickMyLoans',
-        type: 'pl',
-        imageUrl: ClickLoan,
-        approvalRating: 'Excellent',
-        loanAmount: 'Upto ₹ 5,00,000',
-        interestRate: 'Starting from 24% to 30%',
-        tenure: 'Upto 24 months',
-        processingFee: 'Upto 2.5%',
-        features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
-        showForm: true,
-        formUrl: 'https://clickmyloan.cloudbankin.com/onboard/?referral_code=clA4jK9pR6',
-    },
-    {
-        name: 'Faircent',
-        respName: 'faircent',
-        imageUrl: faircent,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'https://pq.faircent.com/',
-            red2Url: 'https://pq.faircent.com/',
-            displayText: 'You have an offer!!',
-            errorText: 'You are not eligible for Faircent',
-            successCondition: (response) => response.faircent.success === true,
+      name: 'Upwards Marketplace',
+      respName: 'upwards',
+      imageUrl: Upwards,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/upwards',
+      offerConfig: {
+        redUrl: 'redirectionUrl',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => {
+          console.log(response);
+          response.reason === 'customer lead updated';
+          return true;
         },
+      },
     },
     {
-        name: 'Fibe',
-        respName: 'fibe',
-        type: 'pl',
-        imageUrl: Fibe,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'redirectionUrl',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.reason === 'customer lead updated',
+      name: 'Upwards',
+      respName: 'upwards',
+      imageUrl: Upwards,
+      approvalRating: 'Good',
+      loanAmount: 'Upto ₹ 3,00,000',
+      interestRate: 'Starting from 22% to 28%',
+      tenure: 'Upto 18 months',
+      processingFee: 'Upto 2%',
+      features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/upwards',
+      offerConfig: {
+        redUrl: 'redirectionUrl',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => {
+          console.log(response);
+          response.reason === 'customer lead updated';
+          return true;
         },
-    },
-     {
-        name: 'Loantap',
-        respName: 'loantap',
-        type: 'pl',
-        imageUrl: 'assets/loantap.png',
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: true,
-        formUrl: '/loantap',
+      },
     },
     {
-        name: 'MoneyTap',
-        respName: 'moneytap',
-        type: 'pl',
-        imageUrl: moneytap,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'reponse.pwa',
-            errorText: 'You are not eligible for MoneyView',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.status !== 'reject',
+      name: 'Zype',
+      respName: 'zype',
+      type: 'pl',
+      imageUrl: zype,
+      approvalRating: 'Excellent',
+      loanAmount: 'Upto ₹ 5,00,000',
+      interestRate: 'Starting from 24% to 30%',
+      tenure: 'Upto 24 months',
+      processingFee: 'Upto 2.5%',
+      features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
+      showForm: false,
+      formUrl: '/zype',
+      offerConfig: {
+        redUrl: 'https://www.getzype.com/',
+        displayText: 'You have an offer!!',
+        successCondition: (response) => {
+          console.log(response);
+          response.reason === 'customer lead updated';
+          return false;
         },
+      },
     },
-    {
-        name: 'MoneyView',
-        respName: 'moneyview',
-        type: 'pl',
-        imageUrl: moneyview,
-        approvalRating: 'Excellent',
-        loanAmount: 'Upto ₹ 2,00,000',
-        interestRate: 'Starting from 26%',
-        tenure: 'Upto 36 months',
-        processingFee: 'Upto 3%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'reponse.pwa',
-            errorText: 'You are not eligible for MoneyView',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.message === 'success',
-        },
-    },
-    {
-        name: 'MPocket',
-        respName: 'Mpocket',
-        type: 'pl',
-        imageUrl:mpocket,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'redirectionUrl',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.reason === 'customer lead updated',
-        },
-    },
-    {
-        name: 'Payme',
-        respName: 'payme',
-        type: 'pl',
-        imageUrl: piramal,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'reponse.cibil.message',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.cibil.message === 'Cibil fetched successfully',
-        },
-    },
-    {
-        name: 'Prefr',
-        respName: 'prefr',
-        type: 'pl',
-        imageUrl: prefr,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'reponse.pwa',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response === 'success',
-        },
-    },
-    {
-        name: 'RamFin',
-        respName: 'ramfin',
-        type: 'pl',
-        imageUrl: ramfin,
-        approvalRating: 'Excellent',
-        loanAmount: 'Upto ₹ 5,00,000',
-        interestRate: 'Starting from 24% to 30%',
-        tenure: 'Upto 24 months',
-        processingFee: 'Upto 2.5%',
-        features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'https://www.ramfincorp.com/',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => response.ramfin.message === 'Lead created successfully.',
-        },
-    },
-    {
-        name: 'SmartCoin',
-        respName: 'SmartCoin',
-        type: 'pl',
-        imageUrl: SmartCoin,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'https://www.olyv.co.in/',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => {
-                console.log(response);
-                response.reason === 'customer lead updated';
-                return false;
-            },
-        },
-    },
-    {
-        name: 'Upwards Marketplace',
-        respName: 'upwards',
-        imageUrl: Upwards,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'redirectionUrl',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => {
-                console.log(response);
-                response.reason === 'customer lead updated';
-                return true;
-            },
-        },
-    },
-    {
-        name: 'Upwards',
-        respName: 'upwards',
-        imageUrl: Upwards,
-        approvalRating: 'Good',
-        loanAmount: 'Upto ₹ 3,00,000',
-        interestRate: 'Starting from 22% to 28%',
-        tenure: 'Upto 18 months',
-        processingFee: 'Upto 2%',
-        features: ['No Collateral', 'Flexible Repayment', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'redirectionUrl',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => {
-                console.log(response);
-                response.reason === 'customer lead updated';
-                return true;
-            },
-        },
-    },
-    {
-        name: 'Zype',
-        respName: 'zype',
-        type: 'pl',
-        imageUrl: zype,
-        approvalRating: 'Excellent',
-        loanAmount: 'Upto ₹ 5,00,000',
-        interestRate: 'Starting from 24% to 30%',
-        tenure: 'Upto 24 months',
-        processingFee: 'Upto 2.5%',
-        features: ['No Collateral', 'Repayment Flexibility', 'No Usage Restriction'],
-        showForm: false,
-        offerConfig: {
-            redUrl: 'https://www.getzype.com/',
-            displayText: 'You have an offer!!',
-            successCondition: (response) => {
-                console.log(response);
-                response.reason === 'customer lead updated';
-                return false;
-            },
-        },
-    },
-];
+  ];
 
   useEffect(() => {
     const fetchUserIdFromCookiesAndLenderData = async () => {
       const userData = Cookies.get("userId");
-  
+
       if (userData) {
         setUser(userData);
         console.log("User ID from cookies:", userData);
-  
+
         try {
           const response = await axios.post(
             "https://credmantra.com/api/v1/auth/get-lenders",
-            { userId: userData } 
+            { userId: userData }
           );
-  
+
           if (response.data && Array.isArray(response.data.data)) {
             const apiNames = response.data.data.map((name) =>
               name.trim().toLowerCase()
             );
-  
+
             const matchedLenders = leandersdetails.filter((lender) =>
               apiNames.includes(lender.name.trim().toLowerCase())
             );
-  
+
             setFilteredLenders(matchedLenders);
             console.log("Matched Lenders:", matchedLenders);
           } else {
@@ -354,9 +369,49 @@ const LenderList = () => {
         }
       }
     };
-  
+
     fetchUserIdFromCookiesAndLenderData();
   }, []);
+
+  const handleLenderApply = async (lender) => {
+    const userId = Cookies.get("userId");
+    if (!userId) {
+      console.error('User ID not found');
+      return;
+    }
+    console.log(lender, userId);
+
+    setLoading(true);
+    try {
+      const response = await axios.post('https://credmantra.com/api/v1/leads2/inject_by_id',
+        { lenders: [lender], userId : userId },
+        {
+          headers: {
+            'x-api-key': 'vs65Cu06INTER1GB2qSdJejP',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      console.log(response);
+      const lenderResponse = response.data[respName];
+      console.log(lenderResponse.redirectUrl);
+      // Handle success/failure logic here
+      if (lenderResponse?.redirectUrl) {
+        window.location.href = lenderResponse.redirectUrl;
+      } else {
+        setError('No offer available');
+        setTimeout(() => setError(null), 5000);
+      }
+    } catch (error) {
+      setError('An error occurred while processing your application');
+      setTimeout(() => setError(null), 5000);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
 
   return (
     <div className="text-center items-center h-auto">
@@ -441,7 +496,8 @@ const LenderList = () => {
                 </div>
               ))}
             </div>
-            <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center">
+            <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center"
+              onClick={() => handleLenderApply(lender)}>
               Apply Now
             </button>
           </div>

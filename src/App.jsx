@@ -26,6 +26,15 @@ import Editprofile from "./Components/Pages/Profile/Editprofile";
 import VittoLoanForm from "./Components/BusinessLoan/Vitto";
 import Faircent from "./Components/BusinessLoan/Faircent";
 import LendingKart from "./Components/BusinessLoan/LandingKart";
+import FibeForm from "./Components/PersonalLoanForm/Fibe";
+import CasheForm from "./Components/PersonalLoanForm/Cashe";
+import MoneyView from "./Components/PersonalLoanForm/MoneyView";
+import Ramfin from "./Components/PersonalLoanForm/Ramfin";
+import SmartCoin from "./Components/PersonalLoanForm/SmartCoin";
+import Perfer from "./Components/PersonalLoanForm/Perfer";
+import FatakPay from "./Components/PersonalLoanForm/FatakPay";
+import MoneyTap from "./Components/PersonalLoanForm/MoneyTap";
+
 
 const App = () => {
   return (
@@ -63,6 +72,14 @@ const App = () => {
           <Route path="/vitto" element={ <Protect Component={VittoLoanForm} />}></Route>
           <Route path="/faircent" element={ <Protect Component={Faircent} />}></Route>
           <Route path="/landingkart" element={ <Protect Component={LendingKart} />}></Route>
+          <Route path="/fibe" element={ <Protect Component={FibeForm} />}></Route>
+          <Route path="/cashe" element={ <Protect Component={CasheForm} />}></Route>
+          <Route path="/moneyview" element={ <Protect Component={MoneyView} />}></Route>
+          <Route path="/ramfin" element={ <Protect Component={Ramfin} />}></Route>
+          <Route path="/smartcoin" element={ <Protect Component={SmartCoin} />}></Route>
+          <Route path="/perfer" element={ <Protect Component={Perfer} />}></Route>
+          <Route path="/fatakpay" element={ <Protect Component={FatakPay} />}></Route>
+          <Route path="/moneytap" element={ <Protect Component={MoneyTap} />}></Route>
         </Routes>
         <Footer1/>
         <Toaster />
