@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import FatakPayImage from "../../assets/fatakpay.svg"
 
 const FatakPay = () => {
   const [formData, setFormData] = useState({
@@ -52,7 +53,11 @@ const FatakPay = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
       <h2 className="text-2xl font-bold mb-6">Connect with FatakPay</h2>
+      <img src={FatakPayImage} alt="FatakPay" className="h-5" />
+      </div>  
+
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
           

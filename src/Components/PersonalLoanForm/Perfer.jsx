@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PrefrImage from "../../assets/prefr copy.png"
 
 const PrefrLoanForm = () => {
   const [stage, setStage] = useState(0);
@@ -127,6 +128,10 @@ const PrefrLoanForm = () => {
   };
 return(
     <div className="max-w-4xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold">Connect with Prefr</h1>
+        <img src={PrefrImage} alt="Prefr" className="h-12" />
+      </div>
   
       <form onSubmit={handleMainFormSubmit} className="bg-white p-6 rounded-lg shadow">
   

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import CasheImage from "../../assets/cashe.jpg"
 
 const CasheForm = () => {
   const [stage, setStage] = useState(1);
@@ -303,7 +304,7 @@ const CasheForm = () => {
           <h1 className="text-3xl font-semibold font-sans">
             Connect with Cashe
           </h1>
-          <img src="/assets/cashe-logo.png" alt="Cashe" className="h-12" />
+          <img src={CasheImage} alt="Cashe" className="h-12" />
         </div>
 
         {stage === 1 && renderDeDupeForm()}

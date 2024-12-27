@@ -1,6 +1,7 @@
 // src/components/MoneyTap.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import MoneyTapImage from "../../assets/moneytap-logo.svg"
 
 const MoneyTap = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -76,7 +77,11 @@ const MoneyTap = () => {
 
   return (
     <div className="flex flex-col items-center mt-5 min-h-screen w-full self-center">
+      <div className="flex flex-col md:flex-row justify-between w-[90%] items-center mb-8">
       <h1 className="text-2xl font-semibold mb-5">Connect with MoneyTap</h1>
+      <img src={MoneyTapImage} alt="MoneyTap" className="h-12" />
+      </div>
+
       {!formSubmitted ? (
         <form onSubmit={handleSubmit} className="w-full max-w-md "style={{justifyItems:'center'}} >
           {activeIndex === 0 && (

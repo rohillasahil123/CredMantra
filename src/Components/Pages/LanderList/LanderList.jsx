@@ -18,6 +18,7 @@ import { GiMoneyStack } from "react-icons/gi";
 import { GrDocumentConfig } from "react-icons/gr";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const LenderList = () => {
   const [user, setUser] = useState({});
@@ -498,7 +499,7 @@ const LenderList = () => {
             </div>
             <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center"
               onClick={() => handleLenderApply(lender)}>
-              Apply Now
+                <Link to={lender.formUrl}>Apply Now</Link>
             </button>
           </div>
         </div>

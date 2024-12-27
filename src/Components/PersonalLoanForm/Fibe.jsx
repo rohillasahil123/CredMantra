@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import fibeImage from "../../assets/FIBE.webp"
 const FibeForm = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -365,7 +364,7 @@ const FibeForm = () => {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-2xl font-bold">Connect with Fibe</h1>
-            <img src="/fibe-logo.png" alt="Fibe" className="h-12" />
+            <img src={fibeImage} alt="Fibe" className="h-12" />
           </div>
 
           {renderStepIndicator()}

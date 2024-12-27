@@ -42,10 +42,10 @@ const PersonalEligibilityForm = () => {
         const data = response.data.data.user;
         console.log(data)
         console.log(data.eformFilled)
-        if(data.eformFilled === !true){
-          navigate("/personalloan")
-        }else{
+        if(data.eformFilled === true){
           navigate("/lenderlist");
+        }else{
+          navigate("/personalloan")
         }
       } catch (error) {
         console.error("Error verifying user:", error);

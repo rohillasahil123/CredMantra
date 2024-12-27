@@ -34,6 +34,9 @@ import SmartCoin from "./Components/PersonalLoanForm/SmartCoin";
 import Perfer from "./Components/PersonalLoanForm/Perfer";
 import FatakPay from "./Components/PersonalLoanForm/FatakPay";
 import MoneyTap from "./Components/PersonalLoanForm/MoneyTap";
+import LoanTap from "./Components/PersonalLoanForm/LoanTap";
+import Payme from "./Components/PersonalLoanForm/Payme";
+import Mpocket from "./Components/PersonalLoanForm/Mpocket";
 
 
 const App = () => {
@@ -80,6 +83,9 @@ const App = () => {
           <Route path="/perfer" element={ <Protect Component={Perfer} />}></Route>
           <Route path="/fatakpay" element={ <Protect Component={FatakPay} />}></Route>
           <Route path="/moneytap" element={ <Protect Component={MoneyTap} />}></Route>
+          <Route path="/loantap" element={ <Protect Component={LoanTap} />}></Route>
+          <Route path="/payme" element={ <Protect Component={Payme} />}></Route>
+          <Route path="/mpocket" element={ <Protect Component={Mpocket} />}></Route>
         </Routes>
         <Footer1/>
         <Toaster />
