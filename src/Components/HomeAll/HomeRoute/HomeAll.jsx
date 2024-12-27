@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState, useEffect} from "react";
 import Hero from "../Hero/Hero";
 import Choose from "../choose/Choose";
 import Management from "../Management/Management";
@@ -7,11 +7,23 @@ import LoanBox from "../LoanBox/LoanBox";
 import EmiCalculator from "../Calculater/EmiCalculator";
 import Download from "../DownloadPhone/Download";
 import Fixbox from "../FixBox/Fixbox";
+import Cookies from "js-cookie";
 
 const HomeAll = () => {
+  const [showFixbox, setShowFixbox] = useState(false);
+
+
+  useEffect(() => {
+    if (Cookies.get("userToken")) {
+      setShowFixbox(false);
+    } else {
+      setShowFixbox(true); 
+    }
+  }, []);
+  
   return (
     <div>
-      <Fixbox />
+     {showFixbox && <Fixbox />}
       <Hero />
       <Choose />
       <Management />
