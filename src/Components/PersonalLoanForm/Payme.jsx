@@ -1,5 +1,6 @@
 // src/components/Payme.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from "js-cookie"
 import axios from 'axios';
 import PaymeImage from "../../assets/payme copy.svg"
 
@@ -20,18 +21,35 @@ const Payme = () => {
     }));
   };
 
+
+  useEffect(()=>{
+    const filldata =async ()=>{
+      const token = Cookies.get('userToken')
+      const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',{
+        headers:{
+          "Authorization":`Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
+      const data = response.data.data.user 
+        setFormData(data)
+        console.log(data)
+    }
+    filldata()
+  },[])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    // setLoading(true);
-    // try {
-    //   const res = await axios.post('https://credmantra.com/api/payme', formData);
-    //   setResponse(res.data);
-    // } catch (error) {
-    //   console.error('API Error:', error);
-    // } finally {
-    //   setLoading(false);
-    // }
+    setLoading(true);
+    try {
+      const res = await axios.post('https://credmantra.com/api/payme', formData);
+      setResponse(res.data);
+    } catch (error) {
+      console.error('API Error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +60,7 @@ const Payme = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <div className='w-[94%]' style={{justifySelf:"center"}} >
         <div className="flex flex-col mb-4">
             <label htmlFor="name" className="mb-2">Name:</label>
             <input
@@ -51,7 +70,7 @@ const Payme = () => {
                 placeholder="Name"
             value={formData.name}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[100%]"
             required
           />
         </div>
@@ -64,30 +83,30 @@ const Payme = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[100%]"
             required
           />
         </div>
         <div className="flex flex-col mb-4">
           <label htmlFor="amount" className="mb-2">Amount:</label>
-          <input
-            id="amount"
+          <input            id="amount"
             name="amount"
             type="number"
             placeholder="Amount"
             value={formData.amount}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[100%]"
             required
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded"
+          className="bg-blue-500 text-white py-2 px-4 rounded w-[100%]"
           disabled={loading}
         >
           {loading ? 'Submitting...' : 'Submit'}
         </button>
+        </div>
       </form>
       {response && (
         <div className="mt-5">

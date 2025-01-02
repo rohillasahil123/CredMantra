@@ -21,9 +21,12 @@ const Profile = () => {
         }
       );
       const data = response.data.data.user
+      console.log(data, "response");
       setUserDetails(data);
     };
     userdata();
+
+
   }, []);
 
 

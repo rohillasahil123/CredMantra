@@ -1,17 +1,39 @@
 // src/components/LoanTap.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import LoanTapImage from "../../assets/LoanTap.svg"
 
 const LoanTap = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    loanAmount: '',
+    loan_required: '',
     loanTerm: '',
   });
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
+
+
+  useEffect(()=>{
+    const filldata = async()=>{
+      const token = Cookies.get('userToken')
+      const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',
+        {
+          headers:{
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+
+          }
+        }
+      )
+      const data = response.data.data.user
+      setFormData(data)
+      console.log(data)
+
+    }
+    filldata()
+  },[])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +55,8 @@ const LoanTap = () => {
       <img src={LoanTapImage} alt="LoanTap" className="h-12" />
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-md">
+      <form onSubmit={handleSubmit} className="w-full max-w-md ">
+        <div className='w-[93%]' style={{justifySelf:"center"}}>
         <div className="flex flex-col mb-4">
           <label htmlFor="name" className="mb-2">Name:</label>
           <input
@@ -43,7 +66,7 @@ const LoanTap = () => {
             placeholder="Name"
             value={formData.name}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[95%]"
             required
           />
         </div>
@@ -56,7 +79,7 @@ const LoanTap = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[95%]"
             required
           />
         </div>
@@ -67,9 +90,9 @@ const LoanTap = () => {
             name="loanAmount"
             type="number"
             placeholder="Loan Amount"
-            value={formData.loanAmount}
+            value={formData.loan_required}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[95%]"
             required
           />
         </div>
@@ -82,7 +105,7 @@ const LoanTap = () => {
             placeholder="Loan Term (years)"
             value={formData.loanTerm}
             onChange={handleInputChange}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded w-[95%]"
             required
           />
         </div>
@@ -93,6 +116,7 @@ const LoanTap = () => {
         >
           {loading ? 'Submitting...' : 'Submit'}
         </button>
+        </div>
       </form>
       {response && (
         <div className="mt-5">

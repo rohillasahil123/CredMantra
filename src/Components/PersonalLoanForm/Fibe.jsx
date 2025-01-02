@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import fibeImage from "../../assets/FIBE.webp"
 import toast from 'react-hot-toast';
@@ -7,14 +8,14 @@ const FibeForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     dob: '',
-    mobile: '',
+    phone: '',
     maritalStatus: '',
     gender: '',
-    address1: '',
-    address2: '',
+    addr: '',
+    addr2: '',
     landmark: '',
     city: '',
     state: '',
@@ -24,10 +25,32 @@ const FibeForm = () => {
     officeAddress: '',
     officeCity: '',
     officePincode: '',
-    salary: '',
+    income: '',
     pan: '',
     consent: false
   });
+
+
+  useEffect(() => {
+    const autofilldetails = async () => {
+      const token = Cookies.get("userToken");
+      const response = await axios.get("https://credmantra.com/api/v1/auth/verify-user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    )
+    const data = response.data.data.user;
+    setFormData(data)
+    console.log(data, "response");
+    }
+    autofilldetails();
+
+  }, []);
+
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -58,25 +81,25 @@ const FibeForm = () => {
       const response = await axios.post('https://credmantra.com/api/v1/partner-api/fibe', {
         mobilenumber: formData.mobile,
         profile: {
-          firstname: formData.firstName,
+          name: formData.name,
           lastname: formData.lastName,
           dob: formData.dob,
           maritalstatus: formData.maritalStatus,
           gender: formData.gender,
-          address1: formData.address1,
-          address2: formData.address2,
+          address1: formData.addr,
+          address2: formData.addr2,
           landmark: formData.landmark,
           city: formData.city,
           state: formData.state,
           pincode: formData.pincode,
-          profession: formData.profession
+          employment: formData.employment
         },
         employeedetails: {
           employername: formData.employerName,
           officeaddress: formData.officeAddress,
           officeCity: formData.officeCity,
           officepincode: formData.officePincode,
-          salary: formData.salary
+          income: formData.income
         },
         finance: {
           pan: formData.pan
@@ -122,8 +145,8 @@ const FibeForm = () => {
         <label className="block mb-2">First Name</label>
         <input
           type="text"
-          name="firstName"
-          value={formData.firstName}
+          name="name"
+          value={formData.name}
           placeholder="first name"
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
@@ -158,11 +181,11 @@ const FibeForm = () => {
         <label className="block mb-2">Mobile Number</label>
         <input
           type="tel"
-          name="mobile"
+          name="phone"
           maxLength={10}
           pattern="\d*"
           placeholder="mobile number"
-          value={formData.mobile}
+          value={formData.phone}
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
           required
@@ -206,8 +229,8 @@ const FibeForm = () => {
         <label className="block mb-2">Address Line 1</label>
         <input
           type="text"
-          name="address1"
-          value={formData.address1}
+          name="addr"
+          value={formData.addr}
           placeholder="address line"
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
@@ -218,8 +241,8 @@ const FibeForm = () => {
         <label className="block mb-2">Address Line 2</label>
         <input
           type="text"
-          name="address2"
-          value={formData.address2}
+          name="addr2"
+          value={formData.addr2}
           placeholder="address line 2"
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
@@ -307,9 +330,9 @@ const FibeForm = () => {
         <label className="block mb-2">Employer Name</label>
         <input
           type="text"
-          name="employerName"
+          name="name"
           placeholder="employer name"
-          value={formData.employerName}
+          value={formData.name}
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
           required
@@ -356,8 +379,9 @@ const FibeForm = () => {
         <label className="block mb-2">Monthly Salary</label>
         <input
           type="number"
-          name="salary"
-          value={formData.salary}
+          name="income"
+          value={formData.income}
+          placeholder="monthly salary"
           onChange={handleChange}
           className="w-[90%] p-2 border rounded"
           required

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import FatakPayImage from "../../assets/fatakpay.svg";
 import Cookies from "js-cookie";
-import toast from "react-hot-toast";
 
 const FatakPay = () => {
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    mobile: "",
-    first_name: "",
+    phone: "",
+    name: "",
     last_name: "",
     gender: "",
     email: "",
@@ -21,9 +20,19 @@ const FatakPay = () => {
 
   useEffect(  ()=>{
    const getData = async ()=>{
-
     const token = Cookies.get("userToken");
-    console.log(token)
+    const response = await axios.get(
+      "https://credmantra.com/api/v1/auth/verify-user",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      const data = response.data.data.user
+      setFormData(data)
+      console.log(data)
 
    }
    getData()
@@ -93,9 +102,9 @@ const FatakPay = () => {
             <label className="block mb-1">First Name</label>
             <input
               type="text"
-              name="first_name"
+              name="name"
               placeholder="first name"
-              value={formData.first_name}
+              value={formData.name}
               onChange={handleChange}
               className="w-full border rounded p-2"
               required
@@ -120,11 +129,11 @@ const FatakPay = () => {
             <label className="block mb-1">Mobile Number</label>
             <input
               type="tel"
-              name="mobile"
+              name="phone"
               maxLength={10}
               pattern="\d*"
               placeholder="mobile number"
-              value={formData.mobile}
+              value={formData.phone}
               onChange={handleChange}
               className="w-full border rounded p-2"
               required

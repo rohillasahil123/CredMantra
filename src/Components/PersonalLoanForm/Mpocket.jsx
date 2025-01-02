@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import MpocketImage from "../../assets/mpkt.svg"
 import toast from 'react-hot-toast';
 const Mpocket = () => {
@@ -11,6 +12,25 @@ const Mpocket = () => {
         dob: '',
         gender: '',
     });
+
+
+    useEffect(()=>{
+        const filldata =async ()=>{
+        const token = Cookies.get("userToken")
+        const response = await axios.get("https://credmantra.com/api/v1/auth/verify-user",{
+            headers:{
+                "Authorization":`Bearer ${token}`,
+                "Content-Type": "application/json",
+            }
+        }) 
+        const data = response.data.data.user
+        setFormData(data)
+        console.log(data , "grt")
+        }
+        filldata()
+    },[])
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -91,8 +111,8 @@ const Mpocket = () => {
                     <input
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         type="text"
-                        name="firstName"
-                        value={formData.firstName}
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         placeholder="First Name"
                         required

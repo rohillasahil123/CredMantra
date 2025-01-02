@@ -1,41 +1,56 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import CasheImage from "../../assets/cashe.jpg";
 
 const CasheForm = () => {
   const [stage, setStage] = useState(1);
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [deDupeLoading, setDeDupeLoading] = useState(false);
+  // const [deDupeLoading, setDeDupeLoading] = useState(false);
   const [uploadButton, setUploadButton] = useState("Submit");
   const [consent, setConsent] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
+
+
+
+
+  useEffect(() => {
+      const autofilldetails = async () => {
+        const token = Cookies.get("userToken");
+        const response = await axios.get(
+          "https://credmantra.com/api/v1/auth/verify-user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        }
+      )
+      const data = response.data.data.user
+      console.log(data, "response");
+      setMainForm(data);  
+      }
+      autofilldetails();
+  }, []);
 
   // File refs
   const aadharFileRef = useRef();
   const panFileRef = useRef();
   const bankFileRef = useRef();
 
-  // Form States
-  const [deDupeForm, setDeDupeForm] = useState({
-    mobile_no: "",
-    email_id: "",
-    pan: "",
-    partner_name: "CredMantra_Partner1",
-  });
-
   const [mainForm, setMainForm] = useState({
     name: "",
     dob: "",
     gender: "",
     pan: "",
-    mobileNo: "",
-    addressLine1: "",
+    phone: "",
+    addr: "",
     locality: "",
-    pinCode: "",
+    pincode: "",
     city: "",
     state: "",
-    emailId: "",
+    email: "",
     companyName: "",
     employmentType: "",
     salary: "",
@@ -77,7 +92,6 @@ const CasheForm = () => {
     "MADHYA PRADESH",
     "MAHARASHTRA",
     "MANIPUR",
-    "MEGHALAYA",
     "MEGHALAYA",
     "MIZORAM",
     "NAGALAND",
@@ -141,12 +155,12 @@ const CasheForm = () => {
   // Handle DeDupe Form Submit
   const handleDeDupeSubmit = async (e) => {
     e.preventDefault();
-    setDeDupeLoading(true);
+    setLoading(true);
 
     try {
       const response = await axios.post(
         "https://credmantra.com/api/v1/partner-api/cashe/checkDuplicateLead",
-        deDupeForm
+        mainForm
       );
       console.log(response.data, "response");
       if (response.data.status === "VALIDATION_ERROR") {
@@ -157,7 +171,7 @@ const CasheForm = () => {
     } catch (error) {
       console.error("API Error:", error);
     } finally {
-      setDeDupeLoading(false);
+      setLoading(false);
     }
   };
 
@@ -263,11 +277,11 @@ const CasheForm = () => {
             pattern="\d*"
             required
             placeholder="mobile number"
-            value={deDupeForm.mobile_no}
+            value={mainForm.phone}
             onChange={(e) =>
-              setDeDupeForm((prev) => ({
+              setMainForm((prev) => ({
                 ...prev,
-                mobile_no: e.target.value,
+                phone: e.target.value,
               }))
             }
             className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -282,11 +296,11 @@ const CasheForm = () => {
             type="email"
             required
             placeholder="email id"
-            value={deDupeForm.email_id}
+            value={mainForm.email}
             onChange={(e) =>
-              setDeDupeForm((prev) => ({
+              setMainForm((prev) => ({
                 ...prev,
-                email_id: e.target.value,
+                email: e.target.value,
               }))
             }
             className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -303,9 +317,9 @@ const CasheForm = () => {
             maxLength={10}
             pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
             placeholder="pan number"
-            value={deDupeForm.pan}
+            value={mainForm.pan}
             onChange={(e) =>
-              setDeDupeForm((prev) => ({
+              setMainForm((prev) => ({
                 ...prev,
                 pan: e.target.value.toUpperCase(),
               }))
@@ -316,10 +330,10 @@ const CasheForm = () => {
 
         <button
           type="submit"
-          disabled={deDupeLoading}
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+          disabled={loading}
+          className="w-[90%] flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
         >
-          {deDupeLoading ? "Processing..." : "Submit"}
+          {loading ? "Processing..." : "Submit"}
         </button>
       </form>
 
@@ -458,7 +472,7 @@ const CasheForm = () => {
                         <option value="">Select Gender</option>
                         {genderOptions.map((option) => (
                           <option key={option} value={option}>
-                            {option === "M" ? "Male" : "Female"}
+                            {option === "M" ? "MALE" : "FEMALE"}
                           </option>
                         ))}
                       </select>
@@ -474,11 +488,11 @@ const CasheForm = () => {
                         maxLength={10}
                         placeholder="mobile number"
                         pattern="^[0-9]{10}$"
-                        value={mainForm.mobileNo}
+                        value={mainForm.phone}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
-                            mobileNo: e.target.value,
+                            phone: e.target.value,
                           }))
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -503,11 +517,11 @@ const CasheForm = () => {
                         type="text"
                         required
                         placeholder="address line 1"
-                        value={mainForm.addressLine1}
+                        value={mainForm.addr}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
-                            addressLine1: e.target.value,
+                            addr: e.target.value,
                           }))
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -521,7 +535,7 @@ const CasheForm = () => {
                         </label>
                         <input
                           type="text"
-                          required
+                          required = {true}
                           placeholder="Locality"
                           value={mainForm.locality}
                           onChange={(e) =>
@@ -544,11 +558,11 @@ const CasheForm = () => {
                           placeholder="pin code"
                           maxLength={6}
                           pattern="^[0-9]{6}$"
-                          value={mainForm.pinCode}
+                          value={mainForm.pincode}
                           onChange={(e) =>
                             setMainForm((prev) => ({
                               ...prev,
-                              pinCode: e.target.value,
+                              pincode: e.target.value,
                             }))
                           }
                           className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -617,11 +631,13 @@ const CasheForm = () => {
                         type="text"
                         required
                         placeholder="company name"
-                        value={mainForm.companyName}
+                        value={mainForm.business_details.business_name}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
-                            companyName: e.target.value,
+                            business_details: {
+                              ...prev.business_details,business_name: e.target.value,
+                            },
                           }))
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -634,11 +650,11 @@ const CasheForm = () => {
                       </label>
                       <select
                         required
-                        value={mainForm.employmentType}
+                        value={mainForm.employment}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
-                            employmentType: e.target.value,
+                           employment: e.target.value,
                           }))
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -660,11 +676,11 @@ const CasheForm = () => {
                         type="number"
                         required
                         placeholder="monthly salary"
-                        value={mainForm.salary}
+                        value={mainForm.income}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
-                            salary: e.target.value,
+                            income: e.target.value,
                           }))
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
