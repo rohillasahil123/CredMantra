@@ -259,7 +259,7 @@ return(
                   type="tel"
                   required
                   maxLength={10}
-                  pattern="^[0-9]{10}$"
+                  pattern="\d*"
                   placeholder='mobile number'
                   value={mainForm.mobileNumber}
                   onChange={(e) => setMainForm(prev => ({
@@ -302,7 +302,7 @@ return(
                   type="text"
                   required
                   maxLength={6}
-                  pattern="^[0-9]{6}$"
+                  pattern="\d*"
                   placeholder='pincode'
                   value={mainForm.currentAddressPincode}
                   onChange={(e) => setMainForm(prev => ({

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+// import withRouter from "./Components/WithRouter/WithRouter";
+import { BrowserRouter, Route, Routes  } from "react-router-dom";
 import Header from "./Components/Pages/Header/Header";
 import Login from "./Components/AuthLogin/LoginFile/Login";
 import Ourteam from "./Components/Pages/OurTeam/Ourteam";
 import HomeAll from "./Components/HomeAll/HomeRoute/HomeAll";
-import Footer from "./Components/Pages/Footer/Footer";
 import PersonalLoan from "./Components/LoanForm/PersonalLoan";
 import BusinessEligibilityForm from "./Components/LoanForm/Business";
 import SignUp from "./Components/AuthLogin/Signup/Signup";
@@ -37,11 +37,14 @@ import MoneyTap from "./Components/PersonalLoanForm/MoneyTap";
 import LoanTap from "./Components/PersonalLoanForm/LoanTap";
 import Payme from "./Components/PersonalLoanForm/Payme";
 import Mpocket from "./Components/PersonalLoanForm/Mpocket";
+import AgeError from "./Components/Error/AgeError";
 
 
 const App = () => {
+  
   return (
     <div>
+      
       <BrowserRouter>
         <Header />
         <Routes>
@@ -86,8 +89,9 @@ const App = () => {
           <Route path="/loantap" element={ <Protect Component={LoanTap} />}></Route>
           <Route path="/payme" element={ <Protect Component={Payme} />}></Route>
           <Route path="/mpocket" element={ <Protect Component={Mpocket} />}></Route>
+          <Route path="/age-error" element={ <  Protect Component={AgeError}/>}></Route>
         </Routes>
-        <Footer1/>
+        {location.pathname !== "/lenderlist" && <Footer1 />}
         <Toaster />
       </BrowserRouter>
     </div>

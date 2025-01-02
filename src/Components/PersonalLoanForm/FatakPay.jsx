@@ -1,72 +1,100 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import FatakPayImage from "../../assets/fatakpay.svg"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import FatakPayImage from "../../assets/fatakpay.svg";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 const FatakPay = () => {
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    mobile: '',
-    first_name: '',
-    last_name: '',
-    gender: '',
-    email: '',
-    employment_type_id: '',
-    pan: '',
-    dob: '',
-    pincode: '',
+    mobile: "",
+    first_name: "",
+    last_name: "",
+    gender: "",
+    email: "",
+    employment_type_id: "",
+    pan: "",
+    dob: "",
+    pincode: "",
     consent: false,
   });
 
+  useEffect(  ()=>{
+   const getData = async ()=>{
+
+    const token = Cookies.get("userToken");
+    console.log(token)
+
+   }
+   getData()
+  },[])
+
+
+
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prevState => ({
+
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Add current timestamp for consent
+  
+    const birthDate = new Date(formData.dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      setError("You are not eligible because you are not 18 years old yet.");
+      return;
+    }
+  
     const submitData = {
       ...formData,
-      consent_timestamp: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      consent_timestamp: new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " "),
     };
-
+  
     try {
       const response = await axios.post(
-        'https://credmantra.com/api/v1/partner-api/fatakpay/eligibility',
+        "https://credmantra.com/api/v1/partner-api/fatakpay/eligibility",
         submitData,
         {
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
       console.log(response);
-     
     } catch (error) {
-      console.error('Error:', error);
-     
+      console.error("Error:", error);
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-      <h2 className="text-2xl font-bold mb-6">Connect with FatakPay</h2>
-      <img src={FatakPayImage} alt="FatakPay" className="h-5" />
-      </div>  
+        <h2 className="text-2xl font-bold mb-6">Connect with FatakPay</h2>
+        <img src={FatakPayImage} alt="FatakPay" className="h-5" />
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
-          
           <div>
             <label className="block mb-1">First Name</label>
             <input
               type="text"
               name="first_name"
-              placeholder='first name'
+              placeholder="first name"
               value={formData.first_name}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -79,7 +107,7 @@ const FatakPay = () => {
             <input
               type="text"
               name="last_name"
-              placeholder='last name'
+              placeholder="last name"
               value={formData.last_name}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -93,7 +121,9 @@ const FatakPay = () => {
             <input
               type="tel"
               name="mobile"
-              placeholder='mobile number'
+              maxLength={10}
+              pattern="\d*"
+              placeholder="mobile number"
               value={formData.mobile}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -106,7 +136,7 @@ const FatakPay = () => {
             <input
               type="email"
               name="email"
-              placeholder='email'
+              placeholder="email"
               value={formData.email}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -119,7 +149,7 @@ const FatakPay = () => {
             <label className="block mb-1">Gender</label>
             <select
               name="gender"
-              placeholder='gender'
+              placeholder="gender"
               value={formData.gender}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -136,7 +166,7 @@ const FatakPay = () => {
             <label className="block mb-1">Employment Type</label>
             <select
               name="employment_type_id"
-              placeholder='employment type'
+              placeholder="employment type"
               value={formData.employment_type_id}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -154,10 +184,10 @@ const FatakPay = () => {
             <input
               type="text"
               name="pan"
-              placeholder='pan number'
+              placeholder="pan number"
               value={formData.pan}
               onChange={handleChange}
-              className="w-full border rounded p-2"
+              className="w-full border rounded p-2 uppercase"
               required
             />
           </div>
@@ -167,7 +197,7 @@ const FatakPay = () => {
             <input
               type="date"
               name="dob"
-              placeholder='date of birth'
+              placeholder="date of birth"
               value={formData.dob}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -181,7 +211,7 @@ const FatakPay = () => {
             <input
               type="number"
               name="pincode"
-              placeholder='pincode'
+              placeholder="pincode"
               value={formData.pincode}
               onChange={handleChange}
               className="w-full border rounded p-2"
@@ -212,6 +242,11 @@ const FatakPay = () => {
           Check Eligibility
         </button>
       </form>
+      {error && (
+        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600">{error}</p>
+        </div>
+      )}
     </div>
   );
 };

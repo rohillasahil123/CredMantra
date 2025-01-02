@@ -19,6 +19,24 @@ const SmartCoinForm = () => {
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'dob') {
+      const birthDate = new Date(value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      if (age < 18) {
+        setError('You are not eligible because you are not 18 years old yet.');
+        return;
+      } else {
+        setError(null);
+      }
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -29,10 +47,10 @@ const SmartCoinForm = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
-     const result = await axios.post('http://credmantra.com/api/v1/partner-api/smartcoin/smartcoin/dedup', formData);
-        console.log(result)
+      const result = await axios.post('http://credmantra.com/api/v1/partner-api/smartcoin/smartcoin/dedup', formData);
+      console.log(result)
       setResponse(result);
     } catch (err) {
       setError('Something went wrong. Please try again.');
@@ -45,12 +63,12 @@ const SmartCoinForm = () => {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
-        Connect with SmartCoin 
-      </h2>
-      <img src={SmartCoinImage} alt="SmartCoin" className="h-12" />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
+          Connect with SmartCoin
+        </h2>
+        <img src={SmartCoinImage} alt="SmartCoin" className="h-12" />
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name Field */}
@@ -77,8 +95,9 @@ const SmartCoinForm = () => {
             <input
               type="tel"
               name="phone"
+              maxLength={10}
+              pattern="\d*"
               placeholder=' phone number'
-              pattern="[0-9]{10}"
               value={formData.phone}
               onChange={handleChange}
               required
@@ -111,7 +130,6 @@ const SmartCoinForm = () => {
               type="text"
               name="pan"
               placeholder=' PAN number'
-              pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
               value={formData.pan}
               onChange={handleChange}
               required
@@ -134,7 +152,6 @@ const SmartCoinForm = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
             />
           </div>
-
           {/* Income Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -163,7 +180,7 @@ const SmartCoinForm = () => {
               placeholder=' loan amount'
               value={formData.loanAmount}
               onChange={handleChange}
-            required
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 cursor-not-allowed"
             />
           </div>
@@ -179,7 +196,7 @@ const SmartCoinForm = () => {
               placeholder=' loan tenure'
               value={formData.loanTenure}
               onChange={handleChange}
-            required
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 cursor-not-allowed"
             />
           </div>
@@ -190,8 +207,8 @@ const SmartCoinForm = () => {
           type="submit"
           disabled={loading}
           className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors
-            ${loading 
-              ? 'bg-gray-400 cursor-not-allowed' 
+            ${loading
+              ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
             }`}
         >

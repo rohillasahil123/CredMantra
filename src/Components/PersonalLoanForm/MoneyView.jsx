@@ -32,6 +32,8 @@ const MoneyViewForm = () => {
     incomeMode: ''
   });
 
+  
+
   // Response Data State
   const [offers, setOffers] = useState(null);
   const [leadData, setLeadData] = useState('');
@@ -43,41 +45,53 @@ const MoneyViewForm = () => {
 
   const handleInputChange = (e, nestedField = null, index = 0) => {
     const { name, value } = e.target;
-    
-    setFormData(prev => {
-      if (nestedField) {
-        const updatedList = [...prev[nestedField]];
-        updatedList[index] = {
-          ...updatedList[index],
-          [name]: value
-        };
-        return {
-          ...prev,
-          [nestedField]: updatedList
-        };
-      }
-      return {
-        ...prev,
+  if (name === 'dateOfBirth') {
+    const birthDate = new Date(value);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    if (age < 18) {
+      toast.error('You are not eligible because you are not 18 years old yet.');
+      return; 
+    }
+  }
+
+  setFormData(prev => {
+    if (nestedField) {
+      const updatedList = [...prev[nestedField]];
+      updatedList[index] = {
+        ...updatedList[index],
         [name]: value
       };
-    });
-  };
-
+      return {
+        ...prev,
+        [nestedField]: updatedList
+      };
+    }
+    return {
+      ...prev,
+      [name]: value
+    };
+  });
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
+    setLoading(true); 
     try {
       // Create lead
       const createResponse = await axios.post(
         'https://credmantra.com/api/v1/partner-api/moneyview/create',
         formData
-      ); 
+      );
       const newLeadId = createResponse.data.leadId;
-      console.log(newLeadId,"tryry")
+      console.log(newLeadId, "tryry")
       setLeadData(newLeadId);
-      console.log(leadData , "ytu") 
-
+      console.log(leadData, "ytu")
+  
       // Get offers
       const offersResponse = await axios.post(
         'https://credmantra.com/api/v1/partner-api/moneyview/offers',
@@ -95,6 +109,8 @@ const MoneyViewForm = () => {
       setLoading(false);
     }
   };
+
+  
 
   const handleJourney = async () => {
     try {
@@ -134,7 +150,7 @@ const MoneyViewForm = () => {
   const renderForm = () => (
     <div className="max-w-4xl mx-auto px-4">
       <Steps />
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Step 1: Personal Details */}
         {activeStep === 0 && (
@@ -162,7 +178,6 @@ const MoneyViewForm = () => {
                 <input
                   type="date"
                   name="dateOfBirth"
-
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
                   required
@@ -177,11 +192,12 @@ const MoneyViewForm = () => {
                 <input
                   type="tel"
                   name="phone"
+                  maxLength={10}
+                  pattern="\d*"
                   value={formData.phone}
                   placeholder='mobile number'
                   onChange={handleInputChange}
-                  maxLength={10}
-                  pattern="^[0-9]{10}$"
+
                   required
                   className="mt-1 block w-[90%] h-8 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
@@ -268,7 +284,7 @@ const MoneyViewForm = () => {
                 <input
                   type="text"
                   name="pan"
-                placeholder='pan'
+                  placeholder='pan'
                   value={formData.pan}
                   onChange={handleInputChange}
                   maxLength={10}
@@ -357,7 +373,7 @@ const MoneyViewForm = () => {
           ) : (
             <button
               type="button"
-              onClick={() => setActiveStep(prev => prev + 1)}
+              onClick={handleSubmit}
               className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-blue-700"
             >
               Next
@@ -391,7 +407,7 @@ const MoneyViewForm = () => {
               </div>
             </div>
           ))}
-          
+
           <div className="flex justify-center">
             <button
               onClick={handleJourney}

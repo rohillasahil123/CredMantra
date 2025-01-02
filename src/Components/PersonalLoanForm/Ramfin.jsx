@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ramfinImg from '../../assets/ramfin.png'
+import toast from 'react-hot-toast';
 
 const RamfinForm = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +21,27 @@ const RamfinForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
+
+    if (name === 'dob') {
+      const birthDate = new Date(value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      if (age < 18) {
+       toast.error('You are not eligible because you are not 18 years old yet.');
+        return;
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -60,12 +76,11 @@ const RamfinForm = () => {
   return (<>
 
 
-    <div className='flex flex-row items-center justify-between'>
+    <div className='flex flex-row items-center justify-around'>
     <h1 className='text-center text-2xl font-bold'>Connect with Ramfin</h1>
-    <img src={ramfinImg} alt="" className='w-[14%] h-9' />
+    <img src={ramfinImg} alt="" className='sm:w-[14%] sm:h-9 h-10 w-[20%]' />
     </div>
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4">
-
       <div className="grid gap-2 ">
         <div>
           <label className="block mb-1">First Name</label>
@@ -98,6 +113,8 @@ const RamfinForm = () => {
           <input
             type="tel"
             name="phone"
+            maxLength={10}
+          pattern="\d*"
             placeholder='phone'
             value={formData.phone}
             onChange={handleChange}

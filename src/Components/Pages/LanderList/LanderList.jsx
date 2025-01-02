@@ -345,6 +345,8 @@ const LenderList = () => {
         setUser(userData);
         console.log("User ID from cookies:", userData);
 
+        setLoading(true); 
+
         try {
           const response = await axios.post(
             "https://credmantra.com/api/v1/auth/get-lenders",
@@ -367,6 +369,8 @@ const LenderList = () => {
           }
         } catch (error) {
           console.error("Error fetching lender data:", error);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -385,7 +389,7 @@ const LenderList = () => {
     setLoading(true);
     try {
       const response = await axios.post('https://credmantra.com/api/v1/leads2/inject_by_id',
-        { lenders: [lender], userId : userId },
+        { lenders: [lender], userId: userId },
         {
           headers: {
             'x-api-key': 'vs65Cu06INTER1GB2qSdJejP',
@@ -396,7 +400,6 @@ const LenderList = () => {
       console.log(response);
       const lenderResponse = response.data[respName];
       console.log(lenderResponse.redirectUrl);
-      // Handle success/failure logic here
       if (lenderResponse?.redirectUrl) {
         window.location.href = lenderResponse.redirectUrl;
       } else {
@@ -424,86 +427,103 @@ const LenderList = () => {
       <p className="text-2xl mt-[1.3%]">
         Here are the offers that will best suit your needs.
       </p>
-      {filteredLenders.map((lender, index) => (
-        <div
-          className="sm:w-[93%] h-[23vh] w-[90%] sm:h-[40vh] mt-[2%] border border-gray-800 rounded-2xl items-center text-center mb-[2%] "
-          style={{ justifySelf: "center" }}
-          key={index}
-        >
-          <div className=" flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-4 sm:space-x-0 ">
-            <img
-              src={lender.imageUrl}
-              alt="Safety List"
-              className="sm:h-[86%] sm:w-[16%] h-full w-full ml-1 sm:ml-0 mt-3 sm:mt-0 "
-            />
-            <div className="text-center">
-              <h2 className="text-[10px] sm:text-lg">Approval Rating</h2>
-              <div className="flex items-center justify-center">
-                <h2 className="text-[10px] sm:text-lg">
-                  {lender.approvalRating}
-                </h2>
-                <img
-                  src={meter}
-                  alt="Meter"
-                  className="sm:h-5 sm:w-7 sm:mt-1 h-3 w-5 "
-                />
-              </div>
-            </div>
+      {loading ? (
+        <div className="h-[100vh]">
+<div class="w-full gap-x-2 flex justify-center items-center mt-[10%]">
+  <div
+    class="w-5 bg-[#d991c2] animate-pulse h-5 rounded-full "
+  ></div>
+  <div
+    class="w-5 animate-pulse h-5 bg-[#9869b8] rounded-full "
+  ></div>
+  <div
+    class="w-5 h-5 animate-pulse bg-[#6756cc] rounded-full "
+  ></div>
+</div>
+</div>
 
-            <div className="text-center">
-              <h2 className="text-[10px] sm:text-lg">Loan Amount</h2>
-              <div className="flex items-center justify-center">
-                <h2 className="text-[10px] sm:text-lg">{lender.loanAmount}</h2>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h2 className="text-[10px] sm:text-lg">Interest Rate</h2>
-              <div className="flex items-center justify-center">
-                <h2 className="text-[10px] sm:text-lg">
-                  {lender.interestRate}
-                </h2>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h2 className="text-[10px] sm:text-lg">Tenure</h2>
-              <div className="flex items-center justify-center">
-                <h2 className="text-[10px] sm:text-lg">{lender.tenure}</h2>
-              </div>
-            </div>
-
-            <div className="text-center ">
-              <h2 className="text-[10px] sm:text-lg">Processing Fee</h2>
-              <div className="flex items-center justify-center">
-                <h2 className="text-[10px] sm:text-lg">
-                  {lender.processingFee}
-                </h2>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full h-0.5 bg-transparent border-t-2 border-dotted sm:mt-0 mt-[20%] border-gray-500"></div>
-
+      ) : (
+        filteredLenders.map((lender, index) => (
           <div
-            className="flex sm:justify-around mt-4"
-            style={{ justifyItems: "center" }}
+            className="sm:w-[93%] h-[23vh] w-[90%] sm:h-[40vh] mt-[2%] border border-gray-800 rounded-2xl items-center text-center mb-[2%] "
+            style={{ justifySelf: "center" }}
+            key={index}
           >
-            <div className="flex text-center sm:space-x-5">
-              {lender.features.map((feature, idx) => (
-                <div className="flex" key={idx}>
-                  <GrDocumentConfig className="mt-1" />
-                  <h2 className="text-[10px] sm:text-lg">{feature}</h2>
+            <div className=" flex sm:w-full h-[20%] w-[20%] sm:h-[25vh] mt-[3%] rounded-lg sm:justify-around text-gray-600 space-y-2 space-x-4 sm:space-x-0 ">
+              <img
+                src={lender.imageUrl}
+                alt="Safety List"
+                className="sm:h-[86%] sm:w-[16%] h-full w-full ml-1 sm:ml-0 mt-3 sm:mt-0 "
+              />
+              <div className="text-center">
+                <h2 className="text-[10px] sm:text-lg">Approval Rating</h2>
+                <div className="flex items-center justify-center">
+                  <h2 className="text-[10px] sm:text-lg">
+                    {lender.approvalRating}
+                  </h2>
+                  <img
+                    src={meter}
+                    alt="Meter"
+                    className="sm:h-5 sm:w-7 sm:mt-1 h-3 w-5 "
+                  />
                 </div>
-              ))}
+              </div>
+
+              <div className="text-center">
+                <h2 className="text-[10px] sm:text-lg">Loan Amount</h2>
+                <div className="flex items-center justify-center">
+                  <h2 className="text-[10px] sm:text-lg">{lender.loanAmount}</h2>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <h2 className="text-[10px] sm:text-lg">Interest Rate</h2>
+                <div className="flex items-center justify-center">
+                  <h2 className="text-[10px] sm:text-lg">
+                    {lender.interestRate}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <h2 className="text-[10px] sm:text-lg">Tenure</h2>
+                <div className="flex items-center justify-center">
+                  <h2 className="text-[10px] sm:text-lg">{lender.tenure}</h2>
+                </div>
+              </div>
+
+              <div className="text-center ">
+                <h2 className="text-[10px] sm:text-lg">Processing Fee</h2>
+                <div className="flex items-center justify-center">
+                  <h2 className="text-[10px] sm:text-lg">
+                    {lender.processingFee}
+                  </h2>
+                </div>
+              </div>
             </div>
-            <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center"
-              onClick={() => handleLenderApply(lender)}>
+
+            <div className="w-full h-0.5 bg-transparent border-t-2 border-dotted sm:mt-0 mt-[20%] border-gray-500"></div>
+
+            <div
+              className="flex sm:justify-around mt-4"
+              style={{ justifyItems: "center" }}
+            >
+              <div className="flex text-center sm:space-x-5">
+                {lender.features.map((feature, idx) => (
+                  <div className="flex" key={idx}>
+                    <GrDocumentConfig className="mt-1" />
+                    <h2 className="text-[10px] sm:text-lg">{feature}</h2>
+                  </div>
+                ))}
+              </div>
+              <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center"
+                onClick={() => handleLenderApply(lender)}>
                 <Link to={lender.formUrl}>Apply Now</Link>
-            </button>
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };

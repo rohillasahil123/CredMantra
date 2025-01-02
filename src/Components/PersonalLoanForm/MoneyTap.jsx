@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import MoneyTapImage from "../../assets/moneytap-logo.svg"
+import toast from 'react-hot-toast';
 
 const MoneyTap = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     dateOfBirth: '',
@@ -62,6 +64,19 @@ const MoneyTap = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+
+    const birthDate = new Date(formData.dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+          navigate('/age-error');
+      return;
+    }
     formData.consentDatetime = new Date().toISOString();
     try {
       const res = await axios.post('https://credmantra.com/api/v1/partner-api/moneytap/create', formData);
@@ -78,12 +93,13 @@ const MoneyTap = () => {
   return (
     <div className="flex flex-col items-center mt-5 min-h-screen w-full self-center">
       <div className="flex flex-col md:flex-row justify-between w-[90%] items-center mb-8">
-      <h1 className="text-2xl font-semibold mb-5">Connect with MoneyTap</h1>
-      <img src={MoneyTapImage} alt="MoneyTap" className="h-12" />
+        <h1 className="text-2xl font-semibold mb-5">Connect with MoneyTap</h1>
+        <img src={MoneyTapImage} alt="MoneyTap" className="h-12" />
       </div>
 
       {!formSubmitted ? (
-        <form onSubmit={handleSubmit} className="w-full max-w-md "style={{justifyItems:'center'}} >
+        <form onSubmit={handleSubmit} className="w-full max-w-md " style={{ justifyItems: 'center' }} >
+        
           {activeIndex === 0 && (
             <div className="flex flex-col mb-4 w-[90%]">
               <label htmlFor="name" className="mb-2">Name:</label>
@@ -113,28 +129,30 @@ const MoneyTap = () => {
                 id="phone"
                 name="phone"
                 type="text"
+                maxLength={10}
+                pattern="\d*"
                 placeholder='mobile number'
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="p-2 border border-gray-300 rounded"
                 required
-                pattern="^[0-9]{10}$"
+
               />
               <label htmlFor="gender" className="mb-2">Gender:</label>
-            <select
-              name="gender"
-              placeholder='gender'
-              value={formData.gender}
-              onChange={handleInputChange}
-              className="w-full border rounded p-2"
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
-              <option value="OTHER">Other</option>
-            </select>
-          
+              <select
+                name="gender"
+                placeholder='gender'
+                value={formData.gender}
+                onChange={handleInputChange}
+                className="w-full border rounded p-2"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+
               <label htmlFor="emailId" className="mb-2">Email ID:</label>
               <input
                 id="emailId"
@@ -178,6 +196,7 @@ const MoneyTap = () => {
                 id="pincode"
                 name="pincode"
                 type="text"
+                placeholder='pincode'
                 value={formData.homeAddress.pincode}
                 onChange={(e) => handleNestedInputChange(e, 'homeAddress', 'pincode')}
                 className="p-2 border border-gray-300 rounded"
@@ -270,9 +289,8 @@ const MoneyTap = () => {
                 placeholder='pan number'
                 value={formData.panNumber}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className="p-2 border border-gray-300 rounded uppercase"
                 required
-                pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                 maxLength="10"
               />
               <div className="flex items-center mt-2">
@@ -311,14 +329,20 @@ const MoneyTap = () => {
             ) : (
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-                disabled={!formData.consent || loading}
-              >
+                disabled={loading || !formData.consent || error}
+                className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${loading || error ? 'bg-gray-500 text-gray-300' : 'bg-blue-500 text-white'
+                  }`}
+                onClick={() => {
+                  if (loading) {
+                    setLoading(false);
+                  }
+                }}>
                 {loading ? 'Submitting...' : 'Submit'}
               </button>
             )}
           </div>
         </form>
+
       ) : (
         <div className="mt-5">
           {response && response.status === 'success' && (

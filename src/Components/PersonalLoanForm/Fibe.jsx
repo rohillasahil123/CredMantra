@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import fibeImage from "../../assets/FIBE.webp"
+import toast from 'react-hot-toast';
 const FibeForm = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,15 +31,29 @@ const FibeForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
+
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const birthDate = new Date(formData.dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      setError("You are not eligible because you are not 18 years old yet.");
+      return;
+    }
     try {
       const response = await axios.post('https://credmantra.com/api/v1/partner-api/fibe', {
         mobilenumber: formData.mobile,
@@ -69,10 +85,10 @@ const FibeForm = () => {
         consentDatetime: new Date().toISOString()
       });
       window.location.href = response.data.redirectionUrl
-      
+
       redirectionUrl
-      
-     
+
+
       console.log('Success in fibe:', response.data);
     } catch (error) {
       // Handle error
@@ -108,8 +124,9 @@ const FibeForm = () => {
           type="text"
           name="firstName"
           value={formData.firstName}
+          placeholder="first name"
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -118,9 +135,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="lastName"
+          placeholder="last name"
           value={formData.lastName}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -129,9 +147,10 @@ const FibeForm = () => {
         <input
           type="date"
           name="dob"
+          placeholder="date of birth"
           value={formData.dob}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -140,10 +159,12 @@ const FibeForm = () => {
         <input
           type="tel"
           name="mobile"
+          maxLength={10}
+          pattern="\d*"
+          placeholder="mobile number"
           value={formData.mobile}
           onChange={handleChange}
-          maxLength="10"
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -153,7 +174,7 @@ const FibeForm = () => {
           name="maritalStatus"
           value={formData.maritalStatus}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         >
           <option value="">Select Status</option>
@@ -167,12 +188,13 @@ const FibeForm = () => {
           name="gender"
           value={formData.gender}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         >
           <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
+          <option value="other">Other</option>
         </select>
       </div>
     </div>
@@ -186,8 +208,9 @@ const FibeForm = () => {
           type="text"
           name="address1"
           value={formData.address1}
+          placeholder="address line"
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -197,8 +220,9 @@ const FibeForm = () => {
           type="text"
           name="address2"
           value={formData.address2}
+          placeholder="address line 2"
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
         />
       </div>
       <div>
@@ -206,9 +230,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="landmark"
+          placeholder="landmark"
           value={formData.landmark}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -217,9 +242,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="city"
+          placeholder="city"
           value={formData.city}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -229,13 +255,20 @@ const FibeForm = () => {
           name="state"
           value={formData.state}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         >
           <option value="">Select State</option>
           <option value="Delhi">Delhi</option>
           <option value="Maharashtra">Maharashtra</option>
-          {/* Add other states */}
+          <option value="Karnataka">Karnataka</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div>
@@ -246,7 +279,8 @@ const FibeForm = () => {
           value={formData.pincode}
           onChange={handleChange}
           maxLength="6"
-          className="w-full p-2 border rounded"
+          placeholder="pincode"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -261,7 +295,7 @@ const FibeForm = () => {
           name="profession"
           value={formData.profession}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         >
           <option value="">Select Profession</option>
@@ -274,9 +308,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="employerName"
+          placeholder="employer name"
           value={formData.employerName}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -285,9 +320,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="officeAddress"
+          placeholder="office address"
           value={formData.officeAddress}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -296,9 +332,10 @@ const FibeForm = () => {
         <input
           type="text"
           name="officeCity"
+          placeholder="office city"
           value={formData.officeCity}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -307,10 +344,11 @@ const FibeForm = () => {
         <input
           type="text"
           name="officePincode"
+          placeholder="office pincode"
           value={formData.officePincode}
           onChange={handleChange}
           maxLength="6"
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -321,7 +359,7 @@ const FibeForm = () => {
           name="salary"
           value={formData.salary}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-[90%] p-2 border rounded"
           required
         />
       </div>
@@ -337,7 +375,7 @@ const FibeForm = () => {
           name="pan"
           value={formData.pan}
           onChange={handleChange}
-          className="w-full md:w-1/2 p-2 border rounded"
+          className="w-[90%] md:w-1/2 p-2 border rounded uppercase"
           maxLength="10"
           required
         />
@@ -386,7 +424,7 @@ const FibeForm = () => {
               >
                 Previous
               </button>
-              
+
               {step < 4 ? (
                 <button
                   type="button"
@@ -398,14 +436,23 @@ const FibeForm = () => {
               ) : (
                 <button
                   type="submit"
-                  disabled={loading || !formData.consent}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-                >
+                  disabled={loading || !formData.consent || error}
+                  className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${loading || error ? 'bg-gray-500 text-gray-300' : 'bg-blue-500 text-white'
+                    }`}
+                  onClick={() => {
+                    if (loading) {
+                      setLoading(false);
+                    }}}>
                   {loading ? 'Submitting...' : 'Submit'}
                 </button>
               )}
             </div>
           </form>
+          {error && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-600">{error}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
