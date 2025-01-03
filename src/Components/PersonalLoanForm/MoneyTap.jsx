@@ -20,7 +20,6 @@ const MoneyTap = () => {
     pincode: "",
     addressLine1: "",
     addressLine2: "",
-    pincode: "",
     income: "",
     pan: "",
     consent: false,

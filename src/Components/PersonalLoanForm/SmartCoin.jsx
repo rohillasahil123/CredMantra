@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import SmartCoinImage from "../../assets/smartcoin.jpg"
 
 const SmartCoinForm = () => {
@@ -42,6 +43,24 @@ const SmartCoinForm = () => {
       [e.target.name]: e.target.value
     });
   };
+
+
+  useEffect(()=>{
+    const filldata =async ()=>{
+      const token = Cookies.get("userToken")
+      const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',{
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+   const data = response.data.data.user
+   setFormData(data)
+    }
+    filldata()
+  },[])
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

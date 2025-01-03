@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import PrefrImage from "../../assets/prefr copy.png"
 
 const PrefrLoanForm = () => {
@@ -10,20 +11,20 @@ const PrefrLoanForm = () => {
 
   // Form States
   const [deDupeForm, setDeDupeForm] = useState({
-    mobileNumber: '',
-    personalEmailId: '',
-    panNumber: ''
+    phone: '',
+    email: '',
+    pan: ''
   });
 
   const [mainForm, setMainForm] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     dob: '',
-    personalEmailId: '',
+    email: '',
     gender: '',
     maritalStatus: '',
-    currentAddress: '',
-    currentAddressPincode: '',
+    addr: '',
+    pincode: '',
     city: '',
     state: '',
     employmentType: '',
@@ -31,11 +32,34 @@ const PrefrLoanForm = () => {
     officeAddress: '',
     officeCity: '',
     officePincode: '',
-    netMonthlyIncome: '',
-    panNumber: '',
+    income: '',
+    pan: '',
     desiredLoanAmount: '',
     consent: false
   });
+
+ 
+
+useEffect(()=>{
+  const fillData = async()=>{
+    const token = Cookies.get("userToken")
+    console.log(token)
+    const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      }
+   
+    )
+    console.log(response.data.data.user)
+    const data = response.data.data.user
+    setMainForm(data)
+  }
+  fillData()
+},[])
+
 
   // Options for dropdowns
   const genderOptions = ['Male', 'Female'];
@@ -64,6 +88,19 @@ const PrefrLoanForm = () => {
     setActiveStep(prevStep => prevStep - 1);
   };
 
+
+
+
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setMainForm((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  
 
 
 
@@ -126,6 +163,10 @@ const PrefrLoanForm = () => {
       setLoading(false);
     }
   };
+
+
+
+
 return(
     <div className="max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
@@ -144,13 +185,11 @@ return(
                 </label>
                 <input
                   type="text"
+                  name='name'
                   required
                   placeholder='Enter first name'
-                  value={mainForm.firstName}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    firstName: e.target.value
-                  }))}
+                  value={mainForm.name}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -164,10 +203,7 @@ return(
                   required
                   placeholder='Enter last name'
                   value={mainForm.lastName}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    lastName: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -178,13 +214,11 @@ return(
                 </label>
                 <input
                   type="date"
+                  name='dob'
                   required
                   placeholder=' date of birth'
                   value={mainForm.dob}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    dob: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -195,11 +229,9 @@ return(
                 </label>
                 <select
                   required
+                  name='gender'
                   value={mainForm.gender}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    gender: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select Gender</option>
@@ -217,11 +249,9 @@ return(
                 </label>
                 <select
                   required
+                  name='maritalStatus'
                   value={mainForm.maritalStatus}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    maritalStatus: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select Marital Status</option>
@@ -240,13 +270,11 @@ return(
                 <input
                   type="email"
                   required
+                  name='email'
                   placeholder='Enter email id'
                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                  value={mainForm.personalEmailId}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    personalEmailId: e.target.value
-                  }))}
+                  value={mainForm.email}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -259,13 +287,11 @@ return(
                   type="tel"
                   required
                   maxLength={10}
+                  name='phone'
                   pattern="\d*"
                   placeholder='mobile number'
-                  value={mainForm.mobileNumber}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    mobileNumber: e.target.value
-                  }))}
+                  value={mainForm.phone}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -282,12 +308,10 @@ return(
               </label>
               <textarea
                 required
+                name='addr'
                 placeholder='current address'
-                value={mainForm.currentAddress}
-                onChange={(e) => setMainForm(prev => ({
-                  ...prev,
-                  currentAddress: e.target.value
-                }))}
+                value={mainForm.addr}
+                onChange={handleInputChange}
                 rows={3}
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
@@ -302,13 +326,11 @@ return(
                   type="text"
                   required
                   maxLength={6}
+                  name='pincode'
                   pattern="\d*"
                   placeholder='pincode'
-                  value={mainForm.currentAddressPincode}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    currentAddressPincode: e.target.value
-                  }))}
+                  value={mainForm.pincode}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -320,12 +342,10 @@ return(
                 <input
                   type="text"
                   required
+                  name='city'
                   placeholder='city'
                   value={mainForm.city}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    city: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -337,10 +357,7 @@ return(
                 <select
                   required
                   value={mainForm.state}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    state: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select State</option>
@@ -366,10 +383,7 @@ return(
                 <select
                   required
                   value={mainForm.employmentType}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    employmentType: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select Employment Type</option>
@@ -387,13 +401,11 @@ return(
                 </label>
                 <input
                   type="text"
+                  name='business_name'
                   required
                   placeholder='company name'
-                  value={mainForm.companyName}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    companyName: e.target.value
-                  }))}
+                  value={mainForm.business_details.business_name}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -406,10 +418,7 @@ return(
                   required
                   value={mainForm.officeAddress}
                   placeholder='office address'
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    officeAddress: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   rows={3}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
@@ -424,10 +433,7 @@ return(
                   required
                   placeholder='office city'
                   value={mainForm.officeCity}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    officeCity: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -443,10 +449,7 @@ return(
                   pattern="^[0-9]{6}$"
                   placeholder='office pincode'
                   value={mainForm.officePincode}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    officePincode: e.target.value
-                  }))}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -458,12 +461,10 @@ return(
                 <input
                   type="number"
                   required
+                  name='income'
                   placeholder='monthly income'
-                  value={mainForm.netMonthlyIncome}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    netMonthlyIncome: e.target.value
-                  }))}
+                  value={mainForm.income}
+                  onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
@@ -481,14 +482,12 @@ return(
               <input
                 type="text"
                 required
+                name='pan'
                 placeholder='pan number'
                 maxLength={10}
                 pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
-                value={mainForm.panNumber}
-                onChange={(e) => setMainForm(prev => ({
-                  ...prev,
-                  panNumber: e.target.value.toUpperCase()
-                }))}
+                value={mainForm.pan}
+                onChange={handleInputChange}
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
@@ -500,12 +499,10 @@ return(
               <input
                 type="number"
                 required
+                name='amount'
                 placeholder='loan amount'
-                value={mainForm.desiredLoanAmount}
-                onChange={(e) => setMainForm(prev => ({
-                  ...prev,
-                  desiredLoanAmount: e.target.value
-                }))}
+                value={mainForm.amount}
+                onChange={handleInputChange}
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>

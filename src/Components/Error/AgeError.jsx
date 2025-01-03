@@ -15,7 +15,7 @@ const AgeError = () => {
             <img src={error} alt="" className='h-[50%] w-[50%]' />
         </div>
       <h1 className="text-3xl font-bold text-red-600 mb-4">Not Eligible</h1>
-      <p className="text-lg text-green-500 mb-8">
+      <p className="text-lg text-green-500 mb-8 w-[90%] ml-4 text-center" >
         You are not eligible because you are under 18 years old.
       </p>
       <button

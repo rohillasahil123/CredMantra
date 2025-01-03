@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import ramfinImg from '../../assets/ramfin.png'
 import toast from 'react-hot-toast';
 
 const RamfinForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     phone: '',
-    loanAmount: '',
+    amount: '',
     email: '',
     employeeType: '',
     dob: ''
@@ -18,6 +19,28 @@ const RamfinForm = () => {
     status: null,
     message: ''
   });
+
+  useEffect(()=>{
+    const filldata = async () => {
+    const token = Cookies.get('userToken')
+      const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          "Content-Type":"application/json"
+        }
+      })
+      console.log(response.data.data.user)
+      const data = response.data.data.user
+      setFormData(data)
+    }
+    filldata()
+  },[])
+
+
+
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,10 +78,10 @@ const RamfinForm = () => {
       });
     
       setFormData({
-        firstName: '',
+        name: '',
         lastName: '',
         phone: '',
-        loanAmount: '',
+        amount: '',
         email: '',
         employeeType: '',
         dob: ''
@@ -73,9 +96,8 @@ const RamfinForm = () => {
       setIsLoading(false);
     }
   };
-  return (<>
-
-
+  return (
+  <>
     <div className='flex flex-row items-center justify-around'>
     <h1 className='text-center text-2xl font-bold'>Connect with Ramfin</h1>
     <img src={ramfinImg} alt="" className='sm:w-[14%] sm:h-9 h-10 w-[20%]' />
@@ -86,11 +108,11 @@ const RamfinForm = () => {
           <label className="block mb-1">First Name</label>
           <input
             type="text"
-            name="firstName"
+            name="name"
             placeholder='first name'
-            value={formData.firstName}
+            value={formData.name}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
@@ -103,7 +125,7 @@ const RamfinForm = () => {
             placeholder='last name'
             value={formData.lastName}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
@@ -118,7 +140,7 @@ const RamfinForm = () => {
             placeholder='phone'
             value={formData.phone}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
@@ -131,7 +153,7 @@ const RamfinForm = () => {
             placeholder='loan amount'
             value={formData.loanAmount}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
@@ -144,7 +166,7 @@ const RamfinForm = () => {
             placeholder='email'
             value={formData.email}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
@@ -155,7 +177,7 @@ const RamfinForm = () => {
             name="employeeType"
             value={formData.employeeType}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           >
             <option value="Salered">Salaried</option>
@@ -171,14 +193,14 @@ const RamfinForm = () => {
             placeholder='dd/mm/yyyy'
             value={formData.dob}
             onChange={handleChange}
-            className="w-[80%] p-2 border rounded"
+            className="w-[97%] p-2 border rounded"
             required
           />
         </div>
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-[80%] bg-blue-500 text-white py-2 px-4 rounded 
+          className={`w-[97%] bg-blue-500 text-white py-2 px-4 rounded mt-5
             ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
         >
           {isLoading ? 'Submitting...' : 'Submit'}
