@@ -48,7 +48,7 @@ const Profile = () => {
         userDetails.phone,
         userDetails.pan,
         userDetails.education,
-        userDetails.company_name,
+        userDetails.business_name,
         userDetails.residential_type,
         userDetails.residential_pincode,
         userDetails.residential_address,
