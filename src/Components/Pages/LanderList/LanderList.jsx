@@ -352,6 +352,7 @@ const LenderList = () => {
             "https://credmantra.com/api/v1/auth/get-lenders",
             { userId: userData }
           );
+          console.log(response.data , "tytu");
 
           if (response.data && Array.isArray(response.data.data)) {
             const apiNames = response.data.data.map((name) =>
@@ -516,7 +517,7 @@ const LenderList = () => {
                   </div>
                 ))}
               </div>
-              <button className="h-[35px] border w-[40%] text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center"
+              <button className="h-[35px] border w-[25%] mr-3 sm:mr-0 text-[13px] sm:text-[17px] sm:w-[20%] bg-sky-400 text-white font-bold rounded-lg hover:bg-sky-800 flex items-center justify-center "
                 onClick={() => handleLenderApply(lender)}>
                 <Link to={lender.formUrl}>Apply Now</Link>
               </button>

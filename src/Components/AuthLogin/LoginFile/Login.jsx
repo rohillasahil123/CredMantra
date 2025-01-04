@@ -4,7 +4,6 @@ import loginImage from "../../../assets/LoginGirl4.jpg";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-// import EligibleLendersService from "../../EligibleLendersService/EligibleLendersService";
 
 const Login = () => {
   const [isOnScreen, setIsOnScreen] = useState(false);
@@ -15,7 +14,7 @@ const Login = () => {
   const [countdown, setCountdown] = useState(60);
   const [retryCount, setRetryCount] = useState(0);
   const [isLoader, setIsLoader] = useState(false);
-
+  
   const navigate = useNavigate();
 
   const handelChange = (e, index) => {
@@ -56,7 +55,6 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-
       if (response.data.type === "success") {
         const { token, userId } = response.data.data;
         Cookies.set("userToken", token, {
@@ -89,7 +87,7 @@ const Login = () => {
         phone: phone,
       });
       if (name) {
-        Cookies.set("userName", name, { expires: 7 }); 
+        Cookies.set("userName", name, { expires: 7 });
       }
       console.log(response.data);
       setIsOnScreen(true);
@@ -116,7 +114,7 @@ const Login = () => {
     return () => clearInterval(timer);
   }, [retryCount]);
 
-  const handleResendOtp =async() => {
+  const handleResendOtp = async () => {
     if (retryCount < 5) {
       try {
         const response = await axios.post(
@@ -143,7 +141,6 @@ const Login = () => {
   return (
     <>
       <div className="relative w-full h-[100vh]  overflow-hidden">
-        {/* Background Image */}
         <div className="absolute top-0 left-0 w-full h-full">
           <img
             src={loginImage}
@@ -151,19 +148,12 @@ const Login = () => {
             className="w-full h-full object-cover "
           />
         </div>
-
-        {/* Overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
-
-        {/* Content Section */}
         <div className="relative flex right-0 sm:right-[24%]  justify-center items-center h-full overflow-y-auto  ">
           <div
-            className="max-h-full w-[90%] sm:w-[70%] md:w-[50%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] rounded-xl p-6 space-y-4 overflow-y-auto shadow-[0_0_30px_15px_rgba(255,192,203,0.5)]
-"
-          >
+            className="max-h-full w-[90%] sm:w-[70%] md:w-[50%] lg:w-[35%] xl:w-[30%] 2xl:w-[25%] rounded-xl p-6 space-y-4 overflow-y-auto shadow-[0_0_30px_15px_rgba(255,192,203,0.5)]">
             {isOnScreen ? (
               <>
-                {/* OTP Screen */}
                 <div className="bg-violet-600 text-white text-center py-3 rounded-t-xl">
                   <h1 className="font-bold text-lg md:text-2xl">OTP</h1>
                 </div>
@@ -220,7 +210,6 @@ const Login = () => {
               </>
             ) : (
               <>
-                {/* Login Screen */}
                 <div className="bg-violet-600 text-white text-center py-3 rounded-t-xl">
                   <h1 className="font-bold text-lg md:text-2xl">LOGIN</h1>
                 </div>
