@@ -29,7 +29,7 @@ const LoanBox = () => {
       {/* Personal Loan Box */}
       <div
         data-aos={window.innerWidth >= 768 ? "fade-right" : "fade-up"} 
-        data-aos-delay="100" // Delay for animation (optional)
+        data-aos-delay="100"
         className="w-full md:w-1/2 bg-blue-400 text-white rounded-lg p-6 flex flex-col items-center text-center shadow-lg"
       >
         <div className="text-3xl mb-2">₹</div>
@@ -45,7 +45,7 @@ const LoanBox = () => {
       {/* Business Loan Box */}
       <div
       
-        data-aos={window.innerWidth >= 768 ? "fade-left" : "fade-up"} 
+        data-aos={window.innerWidth >= 768 ? "fade-right" : "fade-up"} 
         data-aos-delay="200" // Delay for animation (optional)
         className="w-full md:w-1/2 bg-blue-600 text-white rounded-lg p-6 flex flex-col items-center text-center shadow-lg"
       >

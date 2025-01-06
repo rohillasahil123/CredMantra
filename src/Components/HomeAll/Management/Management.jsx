@@ -19,19 +19,22 @@ const Management = () => {
           <h1 className="text-gray-700 font-bold text-center">Happy Customers</h1>
         </div>
               
-        <div className="flex flex-col rounded text-black justify-center items-center p-4">
+        <div className="flex flex-col rounded text-black justify-center items-center p-4"
+          data-aos="fade-up-left">
           <BsBank2 size={50} />
           <h1 className="text-xl font-bold">21+</h1>
           <h1 className="text-gray-700 font-bold text-center">Banks & NBFCs</h1>
         </div>
 
-        <div className="flex flex-col rounded text-black justify-center items-center p-4">
+        <div className="flex flex-col rounded text-black justify-center items-center p-4"
+          data-aos="fade-down-right">
           <RiPlantLine size={50} />
           <h1 className="text-xl font-bold">₹30,00,00,000+</h1>
           <h1 className="text-gray-700 font-bold text-center">Business Conducted</h1>
         </div>
 
-        <div className="flex flex-col rounded text-black justify-center items-center p-4">
+        <div className="flex flex-col rounded text-black justify-center items-center p-4"
+          data-aos="fade-up-left">
           <FaRegAddressBook size={50} />
           <h1 className="text-xl font-bold">2,000+</h1>
           <h1 className="text-gray-700 font-bold text-center">Relationship Managers</h1>
