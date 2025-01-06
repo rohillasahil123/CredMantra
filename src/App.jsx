@@ -1,6 +1,5 @@
-import React from "react";
-// import withRouter from "./Components/WithRouter/WithRouter";
-import { BrowserRouter, Route, Routes  } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Components/Pages/Header/Header";
 import Login from "./Components/AuthLogin/LoginFile/Login";
 import Ourteam from "./Components/Pages/OurTeam/Ourteam";
@@ -41,55 +40,46 @@ import AgeError from "./Components/Error/AgeError";
 
 
 const App = () => {
-  
+
+
   return (
     <div>
-      
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/" element={<HomeAll />} />
           <Route path="/ourteam" element={<Ourteam />} />
-          <Route
-            path="/personalloan"
-            element={<Protect Component={PersonalLoan} />}
-          />
-          <Route
-            path="/businessloan"
-            element={ <Protect Component={BusinessEligibilityForm}/> }
-          />
-           <Route
-            path="/homeloan"
-            element={ < Protect Component={HomeLoan} /> }
-          />
+          <Route path="/personalloan" element={<Protect Component={PersonalLoan} />}/>
+          <Route path="/businessloan" element={<Protect Component={BusinessEligibilityForm} />}/>
+          <Route path="/homeloan" element={<Protect Component={HomeLoan} />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/lenderlist" element={< Protect Component={LanderList} />} />
-          <Route path="/business-list" element={< Protect Component={ BussinesLanderList} />} />
-          <Route path="/contect" element={ <Protect Component={Contect} />} />
+          <Route path="/lenderlist" element={<Protect Component={LanderList} />}/>
+          <Route path="/business-list" element={<Protect Component={BussinesLanderList} />}/>
+          <Route path="/contect" element={<Protect Component={Contect} />} />
           <Route path="/emicalculator" element={<EmiCalculator />} />
           <Route path="/partner" element={<Partner />} />
           <Route path="/blog" element={<Blog />}></Route>
-          <Route path="/abhiLoans" element={  < Protect Component={LoanSecurity} />}></Route>
-          <Route path="/micro_loan" element={ <Protect Component={Microloans}/>}></Route>
-          <Route path="/hiring" element={ <Hiring/>}></Route>
-          <Route path="/profile" element={ <Protect Component={Profile } />}></Route>
-          <Route path="/editprofile" element={ <Protect Component={Editprofile} />}></Route>
-          <Route path="/vitto" element={ <Protect Component={VittoLoanForm} />}></Route>
-          <Route path="/faircent" element={ <Protect Component={Faircent} />}></Route>
-          <Route path="/landingkart" element={ <Protect Component={LendingKart} />}></Route>
-          <Route path="/fibe" element={ <Protect Component={FibeForm} />}></Route>
-          <Route path="/cashe" element={ <Protect Component={CasheForm} />}></Route>
-          <Route path="/moneyview" element={ <Protect Component={MoneyView} />}></Route>
-          <Route path="/ramfin" element={ <Protect Component={Ramfin} />}></Route>
-          <Route path="/smartcoin" element={ <Protect Component={SmartCoin} />}></Route>
-          <Route path="/perfer" element={ <Protect Component={Perfer} />}></Route>
-          <Route path="/fatakpay" element={ <Protect Component={FatakPay} />}></Route>
-          <Route path="/moneytap" element={ <Protect Component={MoneyTap} />}></Route>
-          <Route path="/loantap" element={ <Protect Component={LoanTap} />}></Route>
-          <Route path="/payme" element={ <Protect Component={Payme} />}></Route>
-          <Route path="/mpocket" element={ <Protect Component={Mpocket} />}></Route>
-          <Route path="/age-error" element={ <  Protect Component={AgeError}/>}></Route>
+          <Route path="/abhiLoans"element={<Protect Component={LoanSecurity} />}></Route>
+          <Route path="/micro_loan" element={<Protect Component={Microloans} />}></Route>
+          <Route path="/hiring" element={<Hiring />}></Route>
+          <Route path="/profile" element={<Protect Component={Profile} />} ></Route>
+          <Route path="/editprofile" element={<Protect Component={Editprofile} />}></Route>
+          <Route path="/vitto"element={<Protect Component={VittoLoanForm} />}></Route>
+          <Route path="/faircent"element={<Protect Component={Faircent} />}></Route>
+          <Route path="/landingkart" element={<Protect Component={LendingKart} />} ></Route>
+          <Route path="/fibe"element={<Protect Component={FibeForm} />}></Route>
+          <Route path="/cashe" element={<Protect Component={CasheForm} />}></Route>
+          <Route path="/moneyview" element={<Protect Component={MoneyView} />}></Route>
+          <Route path="/ramfin"element={<Protect Component={Ramfin} />}></Route>
+          <Route path="/smartcoin"element={<Protect Component={SmartCoin} />}></Route>
+          <Route path="/perfer" element={<Protect Component={Perfer} />}></Route>
+          <Route path="/fatakpay" element={<Protect Component={FatakPay} />}></Route>
+          <Route path="/moneytap" element={<Protect Component={MoneyTap} />}></Route>
+          <Route path="/loantap" element={<Protect Component={LoanTap} />} ></Route>
+          <Route path="/payme" element={<Protect Component={Payme} />}></Route>
+          <Route path="/mpocket" element={<Protect Component={Mpocket} />}></Route>
+          <Route path="/age-error" element={<Protect Component={AgeError} />} ></Route>
         </Routes>
         {location.pathname !== "/lenderlist" && <Footer1 />}
         <Toaster />

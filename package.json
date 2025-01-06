@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "browser-router": "^0.2.0",
     "js-cookie": "^3.0.5",
