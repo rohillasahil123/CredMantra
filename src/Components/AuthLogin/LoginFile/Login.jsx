@@ -74,6 +74,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
+      setIsLoader(false)
       toast.error("Failed to verify OTP. Please try again.");
     } finally {
       setIsLoader(false);
