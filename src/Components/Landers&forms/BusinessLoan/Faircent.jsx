@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import faircentImg from "../../assets/faircent.webp"
+import faircentImg from "../../../assets/faircent.webp"
 
 const FaircentComponent = () => {
   // State Management

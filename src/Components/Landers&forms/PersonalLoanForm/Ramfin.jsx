@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import ramfinImg from '../../assets/ramfin.png'
+import ramfinImg from '../../../assets/ramfin.png'
 import toast from 'react-hot-toast';
 
 const RamfinForm = () => {

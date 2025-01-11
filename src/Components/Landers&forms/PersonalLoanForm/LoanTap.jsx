@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import LoanTapImage from "../../assets/LoanTap.svg"
+import LoanTapImage from "../../../assets/LoanTap.svg"
 
 const LoanTap = () => {
   const [formData, setFormData] = useState({

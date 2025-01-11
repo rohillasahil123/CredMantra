@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import moneyview from "../../assets/mv_new_pwa_logo.svg";
+import moneyview from "../../../assets/mv_new_pwa_logo.svg";
 
 const MoneyViewForm = () => {
   const [stage, setStage] = useState(1);

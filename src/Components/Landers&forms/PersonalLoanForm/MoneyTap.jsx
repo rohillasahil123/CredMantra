@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import MoneyTapImage from "../../assets/moneytap-logo.svg";
+import MoneyTapImage from "../../../assets/moneytap-logo.svg";
 import toast from "react-hot-toast";
 
 const MoneyTap = () => {

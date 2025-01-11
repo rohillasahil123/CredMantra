@@ -1,7 +1,7 @@
 import React, { useState, useRef , useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import CasheImage from "../../assets/cashe.jpg";
+import CasheImage from "../../../assets/cashe.jpg";
 
 const CasheForm = () => {
   const [stage, setStage] = useState(1);

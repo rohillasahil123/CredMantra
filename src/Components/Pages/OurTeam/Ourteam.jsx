@@ -87,7 +87,7 @@ const Ourteam = () => {
         </div>
         <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
           <img src={wildproject} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
-          <h1 className='font-bold text-2xl '>Wild project rate</h1>
+          <h1 className='font-bold text-2xl '>Wide project rate</h1>
         </div>
         <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
           <img src={secure} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>

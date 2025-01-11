@@ -526,6 +526,7 @@ const LenderList = () => {
                 {lender.features.map((feature, idx) => (
                   <div className="flex" key={idx}>
                     <GrDocumentConfig className="mt-1" />
+                    
                     <h2 className="text-[10px] sm:text-lg">{feature}</h2>
                   </div>
                 ))}

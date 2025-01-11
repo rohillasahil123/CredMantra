@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import businesLoan from "../../assets/businessLoan.jpg";
-import determinehelp from "../../assets/Determine.png";
-import Gdocument from "../../assets/Gdocument.png";
-import ApplyLoan from "../../assets/Applyloan.png";
-import InBusinessLoan from "../../assets/inbusinessLoan.png";
-import helpBusiness from "../../assets/HelpBusiness.jpg";
+import businesLoan from "../../../assets/businessLoan.jpg";
+import determinehelp from "../../../assets/Determine.png";
+import Gdocument from "../../../assets/Gdocument.png";
+import ApplyLoan from "../../../assets/Applyloan.png";
+import InBusinessLoan from "../../../assets/inbusinessLoan.png";
+import helpBusiness from "../../../assets/HelpBusiness.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 
 
 

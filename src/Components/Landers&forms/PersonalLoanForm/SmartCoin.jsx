@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import SmartCoinImage from "../../assets/smartcoin.jpg"
+import SmartCoinImage from "../../../assets/smartcoin.jpg"
 
 const SmartCoinForm = () => {
   const [formData, setFormData] = useState({

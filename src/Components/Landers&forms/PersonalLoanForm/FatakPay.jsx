@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import FatakPayImage from "../../assets/fatakpay.svg";
+import FatakPayImage from "../../../assets/fatakpay.svg";
 import Cookies from "js-cookie";
 
 const FatakPay = () => {

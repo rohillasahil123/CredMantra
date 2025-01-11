@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import PaymeImage from "../../assets/payme copy.svg";
+import PaymeImage from "../../../assets/payme copy.svg";
 
 const Payme = () => {
   const [formData, setFormData] = useState({

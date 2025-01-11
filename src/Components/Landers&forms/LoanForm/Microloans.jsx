@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PersonalElegible from "../../assets/Micro_loan.png";
+import PersonalElegible from "../../../assets/Micro_loan.png";
 import { useNavigate } from "react-router-dom";
 
 const Microloans = () => {

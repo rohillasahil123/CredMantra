@@ -1,10 +1,10 @@
 import React, { useState , useEffect } from "react";
-import applyOnline from "../../assets/Applyloan.png";
-import ApproveLoan from "../../assets/Approval.png";
-import Recivingloan from "../../assets/recivingloan.png";
-import helpPersonal from "../../assets/HelpPersonal.jpg";
-import personalLoan from "../../assets/personalloan.jpg";
-import PersonalElegible from "../../assets/ElegibillityPersonal.png";
+import applyOnline from "../../../assets/Applyloan.png";
+import ApproveLoan from "../../../assets/Approval.png";
+import Recivingloan from "../../../assets/recivingloan.png";
+import helpPersonal from "../../../assets/HelpPersonal.jpg";
+import personalLoan from "../../../assets/personalloan.jpg";
+import PersonalElegible from "../../../assets/ElegibillityPersonal.png";
 import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast"

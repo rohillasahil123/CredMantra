@@ -81,7 +81,7 @@ const Partner = () => {
             />
           </div>
         </div>
-        <h1 className="text-2xl font-semibold mt-3  ">
+        <h1 className="text-2xl font-semibold  ">
           Supporting Partners <span className="text-sky-500 ">—</span>
         </h1>
         <div
@@ -91,7 +91,7 @@ const Partner = () => {
           {PartnerIamge.map((loan, index) => (
             <div
               key={index}
-              className="w-[60%] h-auto mt-[10%] flex  sm:w-[70%] sm:h-[80%] shadow-xl rounded-xl sm:flex flex-row sm:flex-col items-center justify-center     p-4  hover:shadow-[0_0_30px_15px_rgba(0,255,255,0.5)] hover:cursor-pointer transition-transform hover:scale-105  "
+              className="w-[60%] h-auto mt-[10%] flex  sm:w-[70%] sm:h-[80%] shadow-xl rounded-xl sm:flex flex-row sm:flex-col items-center justify-center     p-4  hover:shadow-[0_0_30px_15px_rgba(30,23,25)] hover:cursor-pointer transition-transform hover:scale-105  "
             >
               <div className=" sm:ml-auto  sm:w-full">
                 <img

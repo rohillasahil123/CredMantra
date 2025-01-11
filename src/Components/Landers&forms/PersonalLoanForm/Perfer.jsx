@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import PrefrImage from "../../assets/prefr copy.png"
+import PrefrImage from "../../../assets/prefr copy.png"
 
 const PrefrLoanForm = () => {
   const [stage, setStage] = useState(0);

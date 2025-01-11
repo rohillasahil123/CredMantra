@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import HomeImage from "../../assets/inHomeLoan.jpg";
-import HomeLoangif from "../../assets/homeloan.gif";
+import HomeImage from "../../../assets/inHomeLoan.jpg";
+import HomeLoangif from "../../../assets/homeloan.gif";
 
 const HomeLoan = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import MpocketImage from "../../assets/mpkt.svg"
+import MpocketImage from "../../../assets/mpkt.svg"
 import toast from 'react-hot-toast';
 const Mpocket = () => {
     const [formData, setFormData] = useState({

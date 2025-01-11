@@ -1,10 +1,10 @@
 // VittoLoanForm.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import panImage from "../../assets/pan-card.png";
-import vittoImage from "../../assets/vitto.png";
-import plusImage from "../../assets/plus.svg";
-import checkImage from "../../assets/fibe_check.svg";
+import panImage from "../../../assets/pan-card.png";
+import vittoImage from "../../../assets/vitto.png";
+import plusImage from "../../../assets/plus.svg";
+import checkImage from "../../../assets/fibe_check.svg";
 import Cookies from "js-cookie";
 
 const VittoLoanForm = () => {

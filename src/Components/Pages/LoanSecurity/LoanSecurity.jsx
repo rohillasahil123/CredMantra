@@ -168,7 +168,7 @@ const AbhiloansForm = () => {
         {stage === 1 && (
           <div className="max-w-md mx-auto items-center">
             <form onSubmit={otpShow ? submitOTP2 : submitOTP1} className="space-y-6 shadow-lg">
-              <div className=''>
+              <div className='' >
                 <label className="block text-sm font-medium text-gray-700">
                   Mobile Number
                 </label>

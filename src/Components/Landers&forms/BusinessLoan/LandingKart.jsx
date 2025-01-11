@@ -5,7 +5,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
-import FaircentImg from "../../assets/Lendingkart_Group_Latest_Logo 1 (1).svg"
+import FaircentImg from "../../../assets/Lendingkart_Group_Latest_Logo 1 (1).svg"
 
 const LendingKart = () => {
   const [stage, setStage] = useState(1);

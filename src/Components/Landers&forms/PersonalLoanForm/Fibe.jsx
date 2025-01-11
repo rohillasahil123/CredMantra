@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import fibeImage from "../../assets/FIBE.webp";
+import fibeImage from "../../../assets/FIBE.webp";
 import toast from "react-hot-toast";
 const FibeForm = () => {
   const [step, setStep] = useState(1);
