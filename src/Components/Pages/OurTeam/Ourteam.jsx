@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import oneImg from "../../../assets/on.png"
 import twoImg from "../../../assets/te.png"
 import fastApproval from '../../../assets/loanfast.webp'
@@ -7,9 +7,31 @@ import documents from '../../../assets/document.png'
 import process from '../../../assets/pocess.png'
 import speed from '../../../assets/speed.png'
 import secure from '../../../assets/safty.png'
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 
 
 const Ourteam = () => {
+
+   useEffect(() => {
+          AOS.init({
+              duration: 1000, 
+              easing: 'ease-out', 
+              once: true,
+              mirror: true
+          });
+          window.addEventListener('scroll', () => {
+              AOS.refresh();
+          });
+          return () => {
+              window.removeEventListener('scroll', () => {
+                  AOS.refresh();
+              });
+          };
+      }, []);
+  
+
+
   return (
     <>
     <div className=' text-center '>
@@ -66,30 +88,30 @@ const Ourteam = () => {
           <h1 className='text-xl font-bold'>
           "At Credmantra, we believe financial empowerment is the cornerstone of progress. We’re here to help you build, manage, and grow your wealth with confidence."</h1>
       </div>
-      <div className='flex h-[100vh] sm:h-[50vh] w-full justify-center sm:justify-around flex-col sm:flex-row mt-[2%] items-center space-y-6 sm:space-y-0'>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+      <div className='flex h-[100vh] sm:h-[50vh] w-full justify-center sm:justify-around flex-col sm:flex-row mt-[2%] items-center space-y-6 sm:space-y-0' >
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105  ' data-aos='fade-up' data-aos-delay="300">
           <img src={fastApproval} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Fast approval rate</h1>
         </div>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%] mt-[20%] sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%] mt-[20%] sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105' data-aos='fade-up' data-aos-delay="300">
           <img src={process} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>100% paperless process</h1>
         </div>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105' data-aos='fade-up' data-aos-delay="300">
           <img src={documents} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Hassle free documentation</h1>
         </div>
       </div>
-      <div className='flex h-[120vh] sm:h-[50vh] w-full sm:mt-0 justify-center sm:justify-around flex-col sm:flex-row  items-center space-y-3 sm:space-y-0'>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+      <div className='flex h-[120vh] sm:h-[50vh] w-full sm:mt-0 justify-center sm:justify-around flex-col sm:flex-row  items-center space-y-3 sm:space-y-0'  >
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 ' data-aos='fade-up' data-aos-delay="300" >
           <img src={speed} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Fast disbursal</h1>
         </div>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105' data-aos='fade-up' data-aos-delay="300">
           <img src={wildproject} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Wide project rate</h1>
         </div>
-        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105 '>
+        <div className='shadow-2xl  h-[80%] sm:h-[80%] w-[90%]  sm:w-[26%] items-center text-center content-center rounded-lg hover:cursor-pointer transition-transform hover:scale-105' data-aos='fade-up' data-aos-delay="300">
           <img src={secure} alt="" srcset=""  className='h-[70%] sm:h-[50%] w-[60%] ml-[20%]'/>
           <h1 className='font-bold text-2xl '>Safe data ecosystem</h1>
         </div>
