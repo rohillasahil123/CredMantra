@@ -98,9 +98,9 @@ const RamfinForm = () => {
   };
   return (
   <>
-    <div className='flex flex-row items-center justify-around'>
+    <div className='flex flex-col sm:flex-row items-center justify-around'>
     <h1 className='text-center text-2xl font-bold'>Connect with Ramfin</h1>
-    <img src={ramfinImg} alt="" className='sm:w-[14%] sm:h-9 h-10 w-[20%]' />
+    <img src={ramfinImg} alt="" className='sm:w-[14%] sm:h-9 h-10 mt-4 sm:mt-0 :w-[30%]' />
     </div>
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4">
       <div className="grid gap-2 ">

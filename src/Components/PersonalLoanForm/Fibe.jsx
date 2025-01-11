@@ -1,60 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import axios from 'axios';
-import fibeImage from "../../assets/FIBE.webp"
-import toast from 'react-hot-toast';
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import fibeImage from "../../assets/FIBE.webp";
+import toast from "react-hot-toast";
 const FibeForm = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    lastName: '',
-    dob: '',
-    phone: '',
-    maritalStatus: '',
-    gender: '',
-    addr: '',
-    addr2: '',
-    landmark: '',
-    city: '',
-    state: '',
-    pincode: '',
-    profession: '',
-    employerName: '',
-    officeAddress: '',
-    officeCity: '',
-    officePincode: '',
-    income: '',
-    pan: '',
-    consent: false
+    name: "",
+    lastName: "",
+    dob: "",
+    phone: "",
+    maritalStatus: "",
+    gender: "",
+    addr: "",
+    addr2: "",
+    landmark: "",
+    city: "",
+    state: "",
+    pincode: "",
+    profession: "",
+    employerName: "",
+    officeAddress: "",
+    officeCity: "",
+    officePincode: "",
+    income: "",
+    pan: "",
+    consent: false,
   });
-
 
   useEffect(() => {
     const autofilldetails = async () => {
       const token = Cookies.get("userToken");
-      const response = await axios.get("https://credmantra.com/api/v1/auth/verify-user",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+      const response = await axios.get(
+        "https://credmantra.com/api/v1/auth/verify-user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      }
-    )
-    const data = response.data.data.user;
-    setFormData(data)
-    console.log(data, "response");
-    }
+      );
+      const data = response.data.data.user;
+      setFormData(data);
+      console.log(data, "response");
+    };
     autofilldetails();
-
   }, []);
-
-
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
 
     setFormData((prevState) => ({
       ...prevState,
@@ -70,7 +66,10 @@ const FibeForm = () => {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
     if (age < 18) {
@@ -78,61 +77,71 @@ const FibeForm = () => {
       return;
     }
     try {
-      const response = await axios.post('https://credmantra.com/api/v1/partner-api/fibe', {
-        mobilenumber: formData.mobile,
-        profile: {
-          name: formData.name,
-          lastname: formData.lastName,
-          dob: formData.dob,
-          maritalstatus: formData.maritalStatus,
-          gender: formData.gender,
-          address1: formData.addr,
-          address2: formData.addr2,
-          landmark: formData.landmark,
-          city: formData.city,
-          state: formData.state,
-          pincode: formData.pincode,
-          employment: formData.employment
-        },
-        employeedetails: {
-          employername: formData.employerName,
-          officeaddress: formData.officeAddress,
-          officeCity: formData.officeCity,
-          officepincode: formData.officePincode,
-          income: formData.income
-        },
-        finance: {
-          pan: formData.pan
-        },
-        consent: formData.consent,
-        consentDatetime: new Date().toISOString()
-      });
-      window.location.href = response.data.redirectionUrl
+      const response = await axios.post(
+        "https://credmantra.com/api/v1/partner-api/fibe",
+        {
+          mobilenumber: formData.mobile,
+          profile: {
+            name: formData.name,
+            lastname: formData.lastName,
+            dob: formData.dob,
+            maritalstatus: formData.maritalStatus,
+            gender: formData.gender,
+            address1: formData.addr,
+            address2: formData.addr2,
+            landmark: formData.landmark,
+            city: formData.city,
+            state: formData.state,
+            pincode: formData.pincode,
+            employment: formData.employment,
+          },
+          employeedetails: {
+            employername: formData.employerName,
+            officeaddress: formData.officeAddress,
+            officeCity: formData.officeCity,
+            officepincode: formData.officePincode,
+            income: formData.income,
+          },
+          finance: {
+            pan: formData.pan,
+          },
+          consent: formData.consent,
+          consentDatetime: new Date().toISOString(),
+        }
+      );
+      window.location.href = response.data.redirectionUrl;
 
-      redirectionUrl
+      redirectionUrl;
 
-
-      console.log('Success in fibe:', response.data);
+      console.log("Success in fibe:", response.data);
     } catch (error) {
       // Handle error
-      console.error('Error:', error);
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const renderStepIndicator = () => (
-    <div className="flex justify-center mb-8">
+    <div className="hidden md:flex justify-center mb-8">
       {[1, 2, 3, 4].map((num) => (
         <div key={num} className="flex items-center">
-          <div className={`
-            w-8 h-8 rounded-full flex items-center justify-center
-            ${step >= num ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'}
-          `}>
+          <div
+            className={`
+          w-8 h-8 rounded-full flex items-center justify-center
+          ${
+            step >= num ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"
+          }
+        `}
+          >
             {num}
           </div>
           {num < 4 && (
-            <div className={`w-16 h-1 ${step > num ? 'bg-blue-500' : 'bg-gray-200'}`} />
+            <div
+              className={`w-16 h-1 ${
+                step > num ? "bg-blue-500" : "bg-gray-200"
+              }`}
+            />
           )}
         </div>
       ))}
@@ -413,9 +422,7 @@ const FibeForm = () => {
           className="h-4 w-4"
           required
         />
-        <label>
-          I agree to the Terms and Conditions
-        </label>
+        <label>I agree to the Terms and Conditions</label>
       </div>
     </div>
   );
@@ -442,7 +449,7 @@ const FibeForm = () => {
             <div className="flex justify-between">
               <button
                 type="button"
-                onClick={() => setStep(s => s - 1)}
+                onClick={() => setStep((s) => s - 1)}
                 disabled={step === 1}
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
               >
@@ -452,7 +459,7 @@ const FibeForm = () => {
               {step < 4 ? (
                 <button
                   type="button"
-                  onClick={() => setStep(s => s + 1)}
+                  onClick={() => setStep((s) => s + 1)}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 >
                   Next
@@ -461,13 +468,18 @@ const FibeForm = () => {
                 <button
                   type="submit"
                   disabled={loading || !formData.consent || error}
-                  className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${loading || error ? 'bg-gray-500 text-gray-300' : 'bg-blue-500 text-white'
-                    }`}
+                  className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${
+                    loading || error
+                      ? "bg-gray-500 text-gray-300"
+                      : "bg-blue-500 text-white"
+                  }`}
                   onClick={() => {
                     if (loading) {
                       setLoading(false);
-                    }}}>
-                  {loading ? 'Submitting...' : 'Submit'}
+                    }
+                  }}
+                >
+                  {loading ? "Submitting..." : "Submit"}
                 </button>
               )}
             </div>

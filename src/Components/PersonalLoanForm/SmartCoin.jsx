@@ -85,7 +85,7 @@ const SmartCoinForm = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
           Connect with SmartCoin
         </h2>
-        <img src={SmartCoinImage} alt="SmartCoin" className="h-12" />
+        <img src={SmartCoinImage} alt="SmartCoin" className="h-12 w-[20%] sm:w-[13%]" />
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">

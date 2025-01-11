@@ -36,12 +36,9 @@ import MoneyTap from "./Components/PersonalLoanForm/MoneyTap";
 import LoanTap from "./Components/PersonalLoanForm/LoanTap";
 import Payme from "./Components/PersonalLoanForm/Payme";
 import Mpocket from "./Components/PersonalLoanForm/Mpocket";
-import AgeError from "./Components/Error/AgeError";
-
+import AgeError from "./Components/Error/AgeError"
 
 const App = () => {
-
-
   return (
     <div>
       <BrowserRouter>

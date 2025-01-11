@@ -142,7 +142,7 @@ const MoneyViewForm = () => {
 
   // Steps Component
   const Steps = () => (
-    <div className="flex justify-between mb-8">
+    <div className="flex justify-between  mb-8 ">
       {["Personal Details", "Employment Details"].map((step, index) => (
         <div key={step} className="flex items-center">
           <div
@@ -157,21 +157,21 @@ const MoneyViewForm = () => {
           >
             {index + 1}
           </div>
-          <span className="ml-2 text-sm font-medium">{step}</span>
-          {index === 0 && <div className="flex-1 h-0.5 mx-4 bg-gray-200" />}
+          <span className="ml-2 text-[12px] font-medium">{step}</span>
+          {index === 0 && <div className="flex-1 h-0.5  bg-gray-200" />}
         </div>
       ))}
     </div>
   );
 
   const renderForm = () => (
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="max-w-5xl mx-auto ">
       <Steps />
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6  ">
         {/* Step 1: Personal Details */}
         {activeStep === 0 && (
-          <div className="bg-white p-6 rounded-lg shadow ">
+          <div className="bg-white  rounded-lg shadow w-[90%]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -453,11 +453,11 @@ const MoneyViewForm = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-semibold font-sans">
+        <div className="flex justify-between sm:flex-row flex-col items-center mb-8">
+          <h1 className="text-lg sm:text-3xl font-semibold font-sans">
             Connect with MoneyView
           </h1>
-          <img src={moneyview} alt="MoneyView" className="h-12" />
+          <img src={moneyview} alt="MoneyView" className="sm:h-12 h-9" />
         </div>
 
         {stage === 1 && renderForm()}

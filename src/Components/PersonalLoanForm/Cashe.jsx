@@ -631,7 +631,7 @@ const CasheForm = () => {
                         type="text"
                         required
                         placeholder="company name"
-                        value={mainForm.business_details.business_name}
+                        value={mainForm.business_details}
                         onChange={(e) =>
                           setMainForm((prev) => ({
                             ...prev,
