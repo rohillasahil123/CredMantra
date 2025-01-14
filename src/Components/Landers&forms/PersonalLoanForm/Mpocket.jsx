@@ -4,10 +4,11 @@ import Cookies from 'js-cookie';
 import MpocketImage from "../../../assets/mpkt.svg"
 import toast from 'react-hot-toast';
 const Mpocket = () => {
+    const[errors , setErrors] = useState({});
     const [formData, setFormData] = useState({
         email: '',
         phone: '',
-        firstName: '',
+        name: '',
         lastName: '',
         dob: '',
         gender: '',
@@ -57,6 +58,15 @@ const Mpocket = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+      const  newErrors = {}
+        if(!formData.email)newErrors.name= "Email is required"
+        if (!formData.phone) newErrors.phone = "Phone number is required.";
+        if (!/^\d{10}$/.test(formData.phone))
+        newErrors.phone = "Enter a valid 10-digit phone number.";
+        if (!formData.name) newErrors.name = "Full name is required.";
+        if (!formData.dob) newErrors.dob = "Date of Birth is required.";
+        if (!formData.lastName) newErrors.lastName = "lastName of Birth is required.";
+        setErrors(newErrors);
         console.log(formData)
         // const dedupeReq = { mobileNumber: formData.phone, email: formData.email };
         // const leadReq = {
@@ -85,38 +95,48 @@ const Mpocket = () => {
             <form className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md" onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <input
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                         className={`w-full px-3 py-2 border ${errors.email ? "border-red-500" : "border-gray-300"} border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         placeholder="Email"
                         required
                     />
+                    {
+                        errors.email && <p className="text-red-500 text-sm">{errors.email}</p>
+                    }
                 </div>
                 <div className="mb-4">
                     <input
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         type="tel"
                         name="phone"
                         maxLength={10}
                         pattern="\d*"
                         value={formData.phone}
                         onChange={handleChange}
+                        className={`w-full px-3 py-2 border ${errors.phone ? "border-red-500" : "border-gray-300"} border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         placeholder="Phone"
                         required
                     />
+                    {
+                        errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>
+                    }
                 </div>
+
                 <div className="mb-4">
                     <input
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        className={`w-full px-3 py-2 border ${errors.name ? "border-red-red" : "border-gray-300"} border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         placeholder="First Name"
                         required
                     />
+                    {
+                    errors.name && <p className="text-red-500 text-sm">{errors.name}</p>
+                    }
                 </div>
                 <div className="mb-4">
                     <input
@@ -131,13 +151,16 @@ const Mpocket = () => {
                 </div>
                 <div className="mb-4">
                     <input
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         type="date"
                         name="dob"
                         value={formData.dob}
                         onChange={handleChange}
                         required
+                        className={`w-full px-3 py-2 border ${errors.dob ? "border-red-500" : "border-gray-300"} border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     />
+                    {
+                        errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>
+                    }
                 </div>
                 <div className="mb-4">
                     <select

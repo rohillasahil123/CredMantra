@@ -9,13 +9,13 @@ import BusinessEligibilityForm from "./Components/Landers&forms/LoanForm/Busines
 import SignUp from "./Components/AuthLogin/Signup/Signup";
 import LanderList from "./Components/Landers&forms/LanderList/LanderList";
 import { Toaster } from "react-hot-toast";
-import Contect from "./Components/Pages/Contect/Contect";
+import Contect from "./Components/Pages/Contect/Contect"
 import EmiCalculator from "./Components/HomeAll/Calculater/EmiCalculator";
 import Partner from "./Components/Pages/Partners/Partner";
 import Blog from "./Components/Pages/Blog/Blog";
 import Protect from "./Components/AuthLogin/Protectedroute/Protect";
 import HomeLoan from "./Components/Landers&forms/LoanForm/HomeLoan";
-import LoanSecurity from "./Components/Pages/LoanSecurity/LoanSecurity";
+import LoanSecurity from "./Components/Landers&forms/LoanForm/LoanSecurity/LoanSecurity";
 import Microloans from "./Components/Landers&forms/LoanForm/Microloans";
 import BussinesLanderList from "./Components/Landers&forms/LanderList/BussinesLanderList";
 import Hiring from "./Components/Pages/Hiring/Hiring";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import abhi from "../../../assets/abhi.webp";
+import abhi from "../../../../assets/abhi.webp";
 import { useNavigate } from 'react-router-dom';
 
 const AbhiloansForm = () => {
@@ -167,7 +167,7 @@ const AbhiloansForm = () => {
 
         {stage === 1 && (
           <div className="max-w-md mx-auto items-center">
-            <form onSubmit={otpShow ? submitOTP2 : submitOTP1} className="space-y-6 shadow-lg">
+            <form onSubmit={otpShow ? submitOTP2 : submitOTP1} className="space-y-6 ">
               <div className='' >
                 <label className="block text-sm font-medium text-gray-700">
                   Mobile Number
@@ -181,7 +181,7 @@ const AbhiloansForm = () => {
                   disabled={otpShow}
                   maxLength={10}
                   pattern="^[0-9]{10}$"
-                  className="mt-1 block w-[90%] uppercase rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 h-8 disabled:bg-gray-100"
+                  className="mt-1 block w-[90%] uppercase rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 h-8 disabled:bg-gray-100" 
                   required
                 />
               </div>
@@ -229,9 +229,9 @@ const AbhiloansForm = () => {
               <button
                 type="submit"
                 disabled={otpLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+                className="w-[90%] flex justify-center py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
               >
-                {otpLoading ? 'Processing...' : otpShow ? 'Verify OTP' : 'Get OTP'}
+                {otpLoading ? 'Processing...' : otpShow ? 'Verify OTP' : 'GET OTP'}
               </button>
             </form>
           </div>
