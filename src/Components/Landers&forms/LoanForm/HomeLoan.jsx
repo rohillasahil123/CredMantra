@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeImage from "../../../assets/inHomeLoan.jpg";
 import HomeLoangif from "../../../assets/homeloan.gif";
 
 const HomeLoan = () => {
   const [isFormVisible, SetIsFormVisible] = useState(false);
+  const [error, setError] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -22,13 +23,33 @@ const HomeLoan = () => {
       ...formData,
       [name]: value,
     });
+    setError({...error , [name] : "" })
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormData("");
+    const newErrors = {};
+    if (!formData.name)newErrors.name = " Name is required";
+    if (!formData.lastName)newErrors.lastName = "LastName is required";
+    if (!formData.phone)newErrors.phone = "Phone number is required.";
+    if (!/^\d{10}$/.test(formData.phone))
+      newErrors.phone = "Enter a valid 10-digit phone number.";
+    if (!formData.email) newErrors.email = "email is required";
+    if (!formData.pincode) newErrors.pincode = "Pincode is required";
+    setError(newErrors)
+    console.log(newErrors)
+    if (Object.keys(newErrors).length === 0) {
+      setFormData("");
     console.log("Form data submitted:", formData);
+    }
   };
+
+
+  useEffect(()=>{
+    console.log(error , "yu")
+  })
+
 
   return (
     <div className="sm:min-h-[105vh] h-[80vh]">
@@ -40,60 +61,105 @@ const HomeLoan = () => {
               Home Loan Form
             </h1>
             <div
-              className="items-center flex-col  sm:flex-row  sm:flex text-center  w-[80%] border h-[80%] mt-[5%] shadow-2xl rounded-lg  "
+              className="items-center flex-col  sm:flex-row  sm:flex text-center  w-[80%] border h-[85%] sm:h-[89%] mt-[5%] shadow-2xl rounded-lg  "
               style={{ justifySelf: "center" }}
             >
-              <div className="sm:h-[90%] sm:w-[50%] ml-[5%] w-[100%] h-[40%] items-center ">
-                <img src={HomeLoangif} alt="" className="h-full w-[90%]" />
+              <div className="sm:h-[90%] sm:w-[50%] ml-[5%] w-[100%] h-[22%] justify-center ">
+                <img
+                  src={HomeLoangif}
+                  alt=""
+                  className="h-[99%] w-[48%] sm:w-[80%]"
+                  style={{ justifySelf: "center" }}
+                />
               </div>
 
-              <div className="space-y-3 mt-4">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="h-9 w-[60%] border rounded-md shadow-lg p-[2%]"
-                />
+              <div className="space-y-2 w-full sm:w-[70%] " style={{textAlign:"-webkit-center"}}>
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`h-9 block w-[60%] border shadow-lg  ${
+                      error.name ? "border-red-500" : "border-gray-300"
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
+                    placeholder="Enter full name"
+                  />
+                  {error.name && (
+                    <p className="text-red-500 text-[12px] ">{error.name}</p>
+                  )}
+                </div>
+                <div>
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="h-9 w-[60%] border rounded-md shadow-lg p-[2%]"
+                  className={`h-9 block w-[60%] border shadow-lg  ${
+                    error.lastName ? "border-red-500" : "border-gray-300"
+                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
                 />
+                {error.lastName && (
+                  <p className="text-red-500 text-[12px] ">{error.lastName}</p>
+                )}
+                </div>
+                <div>
                 <input
                   type="text"
                   name="phone"
                   placeholder="Phone"
+                  maxLength={10}
+                  pattern="/^\d{10}$/"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="h-9 w-[60%] border rounded-md shadow-lg p-[2%]"
+                  className={`h-9 block w-[60%] border shadow-lg  ${
+                    error.phone ? "border-red-500" : "border-gray-300"
+                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
                 />
+                {error.phone && (
+                    <p className="text-red-500 text-[12px] ">{error.phone}</p>
+                  )}
+                </div>
+                <div>
                 <input
                   type="text"
                   name="email"
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="h-9 w-[60%] border rounded-md shadow-lg p-[2%]"
+                  className={`h-9 block w-[60%] border shadow-lg  ${
+                    error.name ? "border-red-500" : "border-gray-300"
+                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
                 />
+                {error.email && (
+                  <p className="text-red-500 text-[12px] ">{error.email}</p>
+                )}
+                </div>
+                <div>
                 <input
                   type="text"
                   name="pincode"
                   placeholder="Pincode"
                   value={formData.pincode}
                   onChange={handleChange}
-                  className="h-9 w-[60%] border rounded-md shadow-lg p-[2%]"
+                  className={`h-9 block w-[60%] border shadow-lg  ${
+                    error.name ? "border-red-500" : "border-gray-300"
+                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
                 />
+                {
+                  error.pincode && (
+                    <p className="text-red-500 text-[12px]">{error.pincode}</p>
+                  )
+                }
+                </div>
                 <br />
                 <button
-                type="submit"
-                  className="bg-orange-500 text-sm sm:text-sm sm:ml-[9%] ml-[9%] sm:mt-[15%] text-white h-8 w-[40%] sm:w-[30%] rounded-md uppercase"
+                  type="submit"
+                  className="bg-orange-500 text-sm sm:text-sm sm:ml-[9%]   sm:mt-[15%] text-white h-8 w-[60%] sm:w-[30%] rounded-md uppercase"
                   onClick={handleSubmit}
-                >       
+                >
                   Submit
                 </button>
               </div>
@@ -103,15 +169,12 @@ const HomeLoan = () => {
       ) : (
         <>
           <div className="h-[90vh]">
-            <div
-              className="sm:w-[100%] sm:h-[80%] relaltive "
-            >
+            <div className="sm:w-[100%] sm:h-[80%] relaltive ">
               <img
                 src={HomeImage}
                 alt=""
                 srcset=""
                 className="w-[98%]  h-[100%] rounded-lg mt-2"
-              
               />
             </div>
             <div className="absolute   top-[7%] sm:top-[18%] left-[2%] sm:left-[7%] space-y-0.5 sm:space-y-1 text-white sm:text-teal-900 ">
@@ -133,7 +196,6 @@ const HomeLoan = () => {
 
               <button
                 className="bg-orange-500 text-sm sm:text-sm  sm:ml-[9%] sm:mt-[10%] text-white h-9 w-[50%] sm:w-[30%] rounded-md uppercase"
-
                 onClick={DisplayForm}
               >
                 Get Started

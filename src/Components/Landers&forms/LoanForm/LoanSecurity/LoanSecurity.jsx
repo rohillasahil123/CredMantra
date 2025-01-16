@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Cookies from "js-cookie"
 import abhi from "../../../../assets/abhi.webp";
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const AbhiloansForm = () => {
 
   // Get user data on component mount
   useEffect(() => {
-    const token = localStorage.getItem('jwt_token');
+    const token = Cookies.get("userToken")
     if (token) {
       getUserData(token);
     } else {
@@ -178,6 +178,7 @@ const AbhiloansForm = () => {
                   value={otpForm.mobileNumber}
                   onChange={handleOtpChange}
                   placeholder=' mobile number'
+
                   disabled={otpShow}
                   maxLength={10}
                   pattern="^[0-9]{10}$"

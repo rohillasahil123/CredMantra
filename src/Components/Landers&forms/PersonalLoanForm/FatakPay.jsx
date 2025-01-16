@@ -18,28 +18,24 @@ const FatakPay = () => {
     consent: false,
   });
 
-  useEffect(  ()=>{
-   const getData = async ()=>{
-    const token = Cookies.get("userToken");
-    const response = await axios.get(
-      "https://credmantra.com/api/v1/auth/verify-user",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+  useEffect(() => {
+    const getData = async () => {
+      const token = Cookies.get("userToken");
+      const response = await axios.get(
+        "https://credmantra.com/api/v1/auth/verify-user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      }
-    )
-      const data = response.data.data.user
-      setFormData(data)
-      console.log(data)
-
-   }
-   getData()
-  },[])
-
-
-
+      );
+      const data = response.data.data.user;
+      setFormData(data);
+      console.log(data);
+    };
+    getData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,23 +44,27 @@ const FatakPay = () => {
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
     }));
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     const birthDate = new Date(formData.dob);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
     if (age < 18) {
       setError("You are not eligible because you are not 18 years old yet.");
       return;
+
     }
-  
+
     const submitData = {
       ...formData,
       consent_timestamp: new Date()
@@ -72,7 +72,7 @@ const FatakPay = () => {
         .slice(0, 19)
         .replace("T", " "),
     };
-  
+
     try {
       const response = await axios.post(
         "https://credmantra.com/api/v1/partner-api/fatakpay/eligibility",
@@ -196,6 +196,7 @@ const FatakPay = () => {
               placeholder="pan number"
               value={formData.pan}
               onChange={handleChange}
+              maxLength={10}
               className="w-full border rounded p-2 uppercase"
               required
             />
@@ -212,6 +213,7 @@ const FatakPay = () => {
               className="w-full border rounded p-2"
               required
             />
+            {error && <p className="text-red-600">{error}</p>}
           </div>
 
           {/* Row 5 */}
@@ -251,11 +253,6 @@ const FatakPay = () => {
           Check Eligibility
         </button>
       </form>
-      {error && (
-        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-600">{error}</p>
-        </div>
-      )}
     </div>
   );
 };

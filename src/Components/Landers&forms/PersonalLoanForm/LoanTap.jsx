@@ -87,7 +87,7 @@ const LoanTap = () => {
           <label htmlFor="loanAmount" className="mb-2">Loan Amount:</label>
           <input
             id="loanAmount"
-            name="loanAmount"
+            name="loan_required"
             type="number"
             placeholder="Loan Amount"
             value={formData.loan_required}

@@ -56,7 +56,8 @@ const FibeForm = () => {
         }
       );
       const data = response.data.data.user;
-      setFormData(data);
+      setFormData(data);  
+      console.log(formData)   
     };
     autofilldetails();
   }, []);
@@ -70,7 +71,6 @@ const FibeForm = () => {
     setIsButtonDisabled(!isFormValid);
   }, [formData, step]);
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -79,6 +79,7 @@ const FibeForm = () => {
   // Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
+      console.log(formData)
     setLoading(true);
     try {
       const response = await axios.post(
@@ -128,16 +129,16 @@ const FibeForm = () => {
 
   // handle next
   const handleNext = () => {
-    const currentStepFields = activeStap[step];  // Fields for current step
+    const currentStepFields = activeStap[step]; // Fields for current step
     const newErrors = {};
-  
+
     // Validate required fields for current step
     currentStepFields.forEach((field) => {
       if (!formData[field] || formData[field].trim() === "") {
         newErrors[field] = `${field} is required.`;
       }
     });
-  
+
     // Validate DOB (if applicable)
     if (currentStepFields.includes("dob")) {
       const birthDate = new Date(formData.dob);
@@ -150,19 +151,21 @@ const FibeForm = () => {
       ) {
         age--;
       }
-  
+
       if (age < 18) {
         newErrors.dob = "You must be at least 18 years old.";
       }
     }
-  
+
     // Update error state
     setError(newErrors);
     console.log("Errors:", newErrors); // Debugging errors
-  
+
     // Check if all fields are filled for the current step
-    const isStepComplete = currentStepFields.every((field) => formData[field]?.trim());
-  
+    const isStepComplete = currentStepFields.every((field) =>
+      formData[field]?.trim()
+    );
+
     // Only increment step if no errors and all fields are filled
     if (Object.keys(newErrors).length === 0 && isStepComplete) {
       setStep((prevStep) => {
@@ -172,14 +175,17 @@ const FibeForm = () => {
       });
     }
   };
-  useEffect(()=>{
-    console.log("isButto" , isButtonDisabled)
-  })
+  useEffect(() => {
+    console.log("isButto", isButtonDisabled);
+  });
 
-  useEffect(()=>{
-    console.log("error" , error)
-  })
+  useEffect(() => {
+    console.log("error", error);
+  });
 
+    useEffect(() => {
+    console.log("loading", loading);
+  });
 
 
   const renderStepIndicator = () => (
@@ -228,6 +234,7 @@ const FibeForm = () => {
           type="text"
           name="lastName"
           value={formData.lastName}
+          placeholder="last Name"
           onChange={handleChange}
           className={`w-[90%] p-2 border rounded ${
             error.lastName ? "border-red-500" : ""
@@ -242,7 +249,7 @@ const FibeForm = () => {
           name="dob"
           value={formData.dob}
           onChange={handleChange}
-          className={`mt-1 block w-full border ${
+          className={`mt-1 block w-[90%] border ${
             error.dob ? "border-red-500" : "border-gray-300"
           } border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500`}
         />
@@ -493,7 +500,6 @@ const FibeForm = () => {
       </div>
     </div>
   );
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -523,7 +529,7 @@ const FibeForm = () => {
                 Previous
               </button>
 
-              {step < 4 ? (
+              {step < 3 ? (
                 <button
                   type="button"
                   disabled={isButtonDisabled}
@@ -540,14 +546,15 @@ const FibeForm = () => {
                 <button
                   type="submit"
                   disabled={loading || !formData.consent || error}
-                  className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${
-                    loading || error
+                  className={`px-4 py-2 rounded hover:bg-blue-600  ${
+                   error || loading
                       ? "bg-gray-500 text-gray-300"
-                      : "bg-blue-500 text-white"
+                      : "bg-blue-800 text-white"
                   }`}
                   onClick={() => {
                     if (loading) {
                       setLoading(false);
+                      console.log("rtr")
                     }
                   }}
                 >
