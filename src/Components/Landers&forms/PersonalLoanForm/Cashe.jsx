@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import CasheImage from "../../../assets/cashe.jpg";
@@ -10,28 +10,26 @@ const CasheForm = () => {
   // const [deDupeLoading, setDeDupeLoading] = useState(false);
   const [uploadButton, setUploadButton] = useState("Submit");
   const [consent, setConsent] = useState(false);
-  const [error, setError] = useState(null); 
-
-
-
+  const [error, setError] = useState(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
-      const autofilldetails = async () => {
-        const token = Cookies.get("userToken");
-        const response = await axios.get(
-          "https://credmantra.com/api/v1/auth/verify-user",
+    const autofilldetails = async () => {
+      const token = Cookies.get("userToken");
+      const response = await axios.get(
+        "https://credmantra.com/api/v1/auth/verify-user",
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
-      )
-      const data = response.data.data.user
+      );
+      const data = response.data.data.user;
       console.log(data, "response");
-      setMainForm(data);  
-      }
-      autofilldetails();
+      setMainForm(data);
+    };
+    autofilldetails();
   }, []);
 
   // File refs
@@ -53,11 +51,17 @@ const CasheForm = () => {
     email: "",
     companyName: "",
     employmentType: "",
-    salary: "",
+    income: "",
     salaryReceivedType: "",
     loanAmount: "",
     partner_name: "CredMantra_Partner1",
   });
+  const stepFields = [
+    ["name", "dob", "gender", "phone"], // Step 0 fields
+    ["addr", "locality", "pincode", "city", "state"], // Step 1 fields
+    ["companyName", "employmentType", "income", "salaryReceivedType"],
+    ["loanAmount"],
+  ];
 
   const [files, setFiles] = useState({
     aadhar: null,
@@ -156,44 +160,30 @@ const CasheForm = () => {
   const handleDeDupeSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    try {
-      const response = await axios.post(
-        "https://credmantra.com/api/v1/partner-api/cashe/checkDuplicateLead",
-        mainForm
-      );
-      console.log(response.data, "response");
-      if (response.data.status === "VALIDATION_ERROR") {
-        setStage(2);
-      } else {
-        setStage(3);
-      }
-    } catch (error) {
-      console.error("API Error:", error);
-    } finally {
-      setLoading(false);
-    }
+    setStage(2);
+    // try {
+    //   const response = await axios.post(
+    //     "https://credmantra.com/api/v1/partner-api/cashe/checkDuplicateLead",
+    //     mainForm
+    //   );
+    //   console.log(response.data, "response");
+    //   if (response.data.status === "VALIDATION_ERROR") {
+    //     setStage(2);
+    //   } else {
+    //     setStage(3);
+    //   }
+    // } catch (error) {
+    //   console.error("API Error:", error);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   // Handle Main Form Submit
   const handleMainFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const birthDate = new Date(mainForm.dob);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (
-      monthDifference < 0 ||
-      (monthDifference === 0 && today.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
 
-    if (age < 18) {
-      setError("You are not eligible because you are not 18 years old yet.");
-      return;
-    }
     try {
       const response = await axios.post(
         "https://credmantra.com/api/v1/partner-api/cashe/preApproval",
@@ -359,6 +349,7 @@ const CasheForm = () => {
             ref={aadharFileRef}
             onChange={handleFileChange("aadhar")}
             className="hidden"
+            required
             accept="image/*,.pdf"
           />
           <img
@@ -384,6 +375,46 @@ const CasheForm = () => {
       </button>
     </div>
   );
+
+  useEffect(() => {
+    const currentStepFields = stepFields[activeStep];
+
+    const isFormValid = currentStepFields.every(
+      (field) => mainForm[field] && mainForm[field].trim() !== ""
+    );
+
+    setIsButtonDisabled(!isFormValid);
+  }, [mainForm, activeStep]);
+
+  // Generic handler for all input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setMainForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleNext = () => {
+    const birthDate = new Date(mainForm.dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    if (age < 18) {
+      setError("You are not eligible because you are not 18 years old yet.");
+      return;
+    }
+
+    if (!isButtonDisabled) {
+      setActiveStep((prev) => prev + 1);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -452,6 +483,7 @@ const CasheForm = () => {
                         }
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       />
+                      {error && <p className="text-red-600">{error}</p>}
                     </div>
 
                     <div>
@@ -535,7 +567,7 @@ const CasheForm = () => {
                         </label>
                         <input
                           type="text"
-                          required = {true}
+                          required={true}
                           placeholder="Locality"
                           value={mainForm.locality}
                           onChange={(e) =>
@@ -618,7 +650,7 @@ const CasheForm = () => {
 
               {/* Employment Details Step */}
               {activeStep === 2 && (
-                <div className="bg-white p-6 rounded-lg shadow">
+                <div className="bg-white p-6 rounded-md shadow">
                   <h2 className="text-xl font-semibold mb-6">
                     Employment Details
                   </h2>
@@ -629,18 +661,12 @@ const CasheForm = () => {
                       </label>
                       <input
                         type="text"
+                        name="companyName" // Use the name attribute for identifying fields
                         required
-                        placeholder="company name"
-                        value={mainForm.business_details}
-                        onChange={(e) =>
-                          setMainForm((prev) => ({
-                            ...prev,
-                            business_details: {
-                              ...prev.business_details,business_name: e.target.value,
-                            },
-                          }))
-                        }
-                        className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        value={mainForm.companyName}
+                        onChange={handleInputChange} // Use the generic handler
+                        placeholder="Enter company name"
+                        className="mt-1 block w-full h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
 
@@ -649,41 +675,31 @@ const CasheForm = () => {
                         Employment Type
                       </label>
                       <select
+                        name="employmentType" // Name attribute for the select field
                         required
-                        value={mainForm.employment}
-                        onChange={(e) =>
-                          setMainForm((prev) => ({
-                            ...prev,
-                           employment: e.target.value,
-                          }))
-                        }
-                        className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        value={mainForm.employmentType}
+                        onChange={handleInputChange} // Use the generic handler
+                        className="mt-1 block w-full h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       >
                         <option value="">Select Employment Type</option>
-                        {employmentOptions.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.name}
-                          </option>
-                        ))}
+                        <option value="fulltime">Full-Time</option>
+                        <option value="parttime">Part-Time</option>
+                        {/* Add more options here */}
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        Monthly Salary
+                        Monthly Income
                       </label>
                       <input
                         type="number"
+                        name="income" // Name attribute for the number input
                         required
-                        placeholder="monthly salary"
                         value={mainForm.income}
-                        onChange={(e) =>
-                          setMainForm((prev) => ({
-                            ...prev,
-                            income: e.target.value,
-                          }))
-                        }
-                        className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        onChange={handleInputChange} // Use the generic handler
+                        placeholder="Enter monthly income"
+                        className="mt-1 block w-full h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
 
@@ -692,22 +708,16 @@ const CasheForm = () => {
                         Salary Received Type
                       </label>
                       <select
+                        name="salaryReceivedType" // Name attribute for the select field
                         required
                         value={mainForm.salaryReceivedType}
-                        onChange={(e) =>
-                          setMainForm((prev) => ({
-                            ...prev,
-                            salaryReceivedType: e.target.value,
-                          }))
-                        }
-                        className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        onChange={handleInputChange} // Use the generic handler
+                        className="mt-1 block w-full h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       >
                         <option value="">Select Salary Type</option>
-                        {salaryOptions.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.name}
-                          </option>
-                        ))}
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        {/* Add more options here */}
                       </select>
                     </div>
                   </div>
@@ -728,12 +738,7 @@ const CasheForm = () => {
                         required
                         placeholder="loan amount required"
                         value={mainForm.loanAmount}
-                        onChange={(e) =>
-                          setMainForm((prev) => ({
-                            ...prev,
-                            loanAmount: e.target.value,
-                          }))
-                        }
+                        onChange={handleInputChange}
                         className="mt-1 block w-[90%] h-9 border rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
@@ -772,27 +777,26 @@ const CasheForm = () => {
                 {activeStep === 3 ? (
                   <button
                     type="submit"
-                    disabled={loading || !consent}
+                    disabled={loading}
                     className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
                   >
-                    {loading ? "Processing..." : "Submit"}
+                    {loading ? "Submiting..." : "Submit"}
                   </button>
                 ) : (
                   <button
-                    type="button"
-                    onClick={() => setActiveStep((prev) => prev + 1)}
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                    onClick={handleNext}
+                    disabled={isButtonDisabled}
+                    className={`p-2 w-[10%] rounded-md text-white font-bold ${
+                      isButtonDisabled
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-green-500 hover:bg-green-600"
+                    }`}
                   >
                     Next
                   </button>
                 )}
               </div>
             </form>
-            {error && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600">{error}</p>
-              </div>
-            )}
           </div>
         )}
         {stage === 3 && (

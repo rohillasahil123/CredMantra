@@ -49,7 +49,6 @@ const Mpocket = () => {
             return; 
           }
         }
-      
         setFormData((prevState) => ({
           ...prevState,
           [name]: value,
@@ -58,32 +57,34 @@ const Mpocket = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-      const  newErrors = {}
-        if(!formData.email)newErrors.name= "Email is required"
-        if (!formData.phone) newErrors.phone = "Phone number is required.";
-        if (!/^\d{10}$/.test(formData.phone))
-        newErrors.phone = "Enter a valid 10-digit phone number.";
-        if (!formData.name) newErrors.name = "Full name is required.";
-        if (!formData.dob) newErrors.dob = "Date of Birth is required.";
-        if (!formData.lastName) newErrors.lastName = "lastName of Birth is required.";
-        setErrors(newErrors);
-        console.log(formData)
-        // const dedupeReq = { mobileNumber: formData.phone, email: formData.email };
-        // const leadReq = {
-        //     email_id: formData.email,
-        //     mobile_no: formData.phone,
-        //     full_name: formData.firstName + " " + formData.lastName,
-        //     date_of_birth: formData.dob,
-        //     gender: formData.gender.toLowerCase(),
-        // //     profession: "salaried",
-        // };
+        const birthdaydate = new Date(formData.dob)
+        const today = new Date()
+        let age = today.getFullYear() - birthdaydate.getFullYear()
+        const monthDifference = today.getMonth() - birthdaydate.getMonth()
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate()
+            < birthdaydate.getDate())) {
+        age--
+        }
+        if (age < 18) {
+            toast.error("You are not eligible because you are not 18 years old yet.");
+            return;
+            }
+        const dedupeReq = { mobileNumber: formData.phone, email: formData.email };
+        const leadReq = {
+            email_id: formData.email,
+            mobile_no: formData.phone,
+            full_name: formData.firstName + " " + formData.lastName,
+            date_of_birth: formData.dob,
+            gender: formData.gender.toLowerCase(),
+            profession: "salaried",
+        };
 
-        // try {
-        //     const response = await axios.post('/api/submit', { dedupeReq, leadReq });
-        //     console.log('API Response:', response.data);
-        // } catch (error) {
-        //     console.error('API Error:', error);
-        // }
+        try {
+            const response = await axios.post('/api/submit', { dedupeReq, leadReq });
+            console.log('API Response:', response.data);
+        } catch (error) {
+            console.error('API Error:', error);
+        }
     };
 
     return (
@@ -113,6 +114,7 @@ const Mpocket = () => {
                         name="phone"
                         maxLength={10}
                         pattern="\d*"
+                         inputMode="numeric"
                         value={formData.phone}
                         onChange={handleChange}
                         className={`w-full px-3 py-2 border ${errors.phone ? "border-red-500" : "border-gray-300"} border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}

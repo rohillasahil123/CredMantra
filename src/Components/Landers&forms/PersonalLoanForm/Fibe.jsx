@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import fibeImage from "../../../assets/FIBE.webp";
-import toast from "react-hot-toast";
 const FibeForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -21,7 +21,6 @@ const FibeForm = () => {
     state: "",
     pincode: "",
     profession: "",
-    employerName: "",
     officeAddress: "",
     officeCity: "",
     officePincode: "",
@@ -29,6 +28,20 @@ const FibeForm = () => {
     pan: "",
     consent: false,
   });
+
+  const activeStap = [
+    ["name", "dob", "lastName", "phone", "gender", "maritalStatus"],
+    ["addr", "addr2", "landmark", "city", "state", "pincode"],
+    [
+      "profession",
+      "name",
+      "officeAddress",
+      "officeCity",
+      "officePincode",
+      "income",
+    ],
+    ["pan"],
+  ];
 
   useEffect(() => {
     const autofilldetails = async () => {
@@ -44,38 +57,29 @@ const FibeForm = () => {
       );
       const data = response.data.data.user;
       setFormData(data);
-      console.log(data, "response");
     };
     autofilldetails();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  //  steps change
+  useEffect(() => {
+    const currentStepFields = activeStap[step];
+    const isFormValid = currentStepFields.every(
+      (field) => formData[field] && formData[field].trim() !== ""
+    );
+    setIsButtonDisabled(!isFormValid);
+  }, [formData, step]);
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const birthDate = new Date(formData.dob);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (
-      monthDifference < 0 ||
-      (monthDifference === 0 && today.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-    if (age < 18) {
-      setError("You are not eligible because you are not 18 years old yet.");
-      return;
-    }
     try {
       const response = await axios.post(
         "https://credmantra.com/api/v1/partner-api/fibe",
@@ -122,6 +126,62 @@ const FibeForm = () => {
     }
   };
 
+  // handle next
+  const handleNext = () => {
+    const currentStepFields = activeStap[step];  // Fields for current step
+    const newErrors = {};
+  
+    // Validate required fields for current step
+    currentStepFields.forEach((field) => {
+      if (!formData[field] || formData[field].trim() === "") {
+        newErrors[field] = `${field} is required.`;
+      }
+    });
+  
+    // Validate DOB (if applicable)
+    if (currentStepFields.includes("dob")) {
+      const birthDate = new Date(formData.dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+  
+      if (age < 18) {
+        newErrors.dob = "You must be at least 18 years old.";
+      }
+    }
+  
+    // Update error state
+    setError(newErrors);
+    console.log("Errors:", newErrors); // Debugging errors
+  
+    // Check if all fields are filled for the current step
+    const isStepComplete = currentStepFields.every((field) => formData[field]?.trim());
+  
+    // Only increment step if no errors and all fields are filled
+    if (Object.keys(newErrors).length === 0 && isStepComplete) {
+      setStep((prevStep) => {
+        const newStep = prevStep + 1;
+        console.log("Moving to Step:", newStep); // Debugging step increment
+        return newStep;
+      });
+    }
+  };
+  useEffect(()=>{
+    console.log("isButto" , isButtonDisabled)
+  })
+
+  useEffect(()=>{
+    console.log("error" , error)
+  })
+
+
+
   const renderStepIndicator = () => (
     <div className="hidden md:flex justify-center mb-8">
       {[1, 2, 3, 4].map((num) => (
@@ -167,24 +227,26 @@ const FibeForm = () => {
         <input
           type="text"
           name="lastName"
-          placeholder="last name"
           value={formData.lastName}
           onChange={handleChange}
-          className="w-[90%] p-2 border rounded"
-          required
+          className={`w-[90%] p-2 border rounded ${
+            error.lastName ? "border-red-500" : ""
+          }`}
         />
+        {error.lastName && <p className="text-red-500">{error.lastName}</p>}
       </div>
       <div>
-        <label className="block mb-2">Date of Birth</label>
+        <label className="block text-sm font-medium text-gray-700">DOB:</label>
         <input
           type="date"
           name="dob"
-          placeholder="date of birth"
           value={formData.dob}
           onChange={handleChange}
-          className="w-[90%] p-2 border rounded"
-          required
+          className={`mt-1 block w-full border ${
+            error.dob ? "border-red-500" : "border-gray-300"
+          } border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500`}
         />
+        {error.dob && <p className="text-red-500 text-sm mt-1">{error.dob} </p>}
       </div>
       <div>
         <label className="block mb-2">Mobile Number</label>
@@ -206,14 +268,19 @@ const FibeForm = () => {
           name="maritalStatus"
           value={formData.maritalStatus}
           onChange={handleChange}
-          className="w-[90%] p-2 border rounded"
-          required
+          className={`w-[90%] p-2 border rounded ${
+            error.maritalStatus ? "border-red-500" : ""
+          }`}
         >
           <option value="">Select Status</option>
           <option value="Single">Single</option>
           <option value="Married">Married</option>
         </select>
+        {error.maritalStatus && (
+          <p className="text-red-500">{error.maritalStatus}</p>
+        )}
       </div>
+
       <div>
         <label className="block mb-2">Gender</label>
         <select
@@ -374,7 +441,7 @@ const FibeForm = () => {
       <div>
         <label className="block mb-2">Office Pincode</label>
         <input
-          type="text"
+          type="number"
           name="officePincode"
           placeholder="office pincode"
           value={formData.officePincode}
@@ -440,10 +507,10 @@ const FibeForm = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-8">
-              {step === 1 && renderPersonalDetails()}
-              {step === 2 && renderAddressDetails()}
-              {step === 3 && renderEmploymentDetails()}
-              {step === 4 && renderLoanDetails()}
+              {step === 0 && renderPersonalDetails()}
+              {step === 1 && renderAddressDetails()}
+              {step === 2 && renderEmploymentDetails()}
+              {step === 3 && renderLoanDetails()}
             </div>
 
             <div className="flex justify-between">
@@ -459,8 +526,13 @@ const FibeForm = () => {
               {step < 4 ? (
                 <button
                   type="button"
-                  onClick={() => setStep((s) => s + 1)}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  disabled={isButtonDisabled}
+                  onClick={handleNext}
+                  className={`p-2 w-[18%] rounded-md text-white font-bold ${
+                    isButtonDisabled
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-green-500 hover:bg-green-600"
+                  }`}
                 >
                   Next
                 </button>
@@ -484,11 +556,6 @@ const FibeForm = () => {
               )}
             </div>
           </form>
-          {error && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-red-600">{error}</p>
-            </div>
-          )}
         </div>
       </div>
     </div>
