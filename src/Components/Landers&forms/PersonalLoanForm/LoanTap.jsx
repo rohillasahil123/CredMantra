@@ -124,7 +124,7 @@ const LoanTap = () => {
         </div>
       )}
     </div>
-  );
+  )
 };
 
 export default LoanTap;

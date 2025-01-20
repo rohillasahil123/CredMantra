@@ -37,11 +37,6 @@ const RamfinForm = () => {
   },[])
 
 
-
-
-
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -180,6 +175,7 @@ const RamfinForm = () => {
             className="w-[97%] p-2 border rounded"
             required
           >
+            <option value="Salered">Select Employment Type</option>
             <option value="Salered">Salaried</option>
             <option value="SelfEmployed">Self Employed</option>
           </select>

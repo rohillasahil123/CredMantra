@@ -6,6 +6,8 @@ const EmiCalculator = () => {
   const [interestRate, setInterestRate] = useState(0);
   const [loanTenure, setLoanTenure] = useState(0);
   const [emi, setEmi] = useState(null);
+  const [totalPay , setTotalPay] = useState(null)
+  const [totalIntrestPay , setTotalIntrestPay] = useState(null)
 
   const calculateEMI = () => {
     const monthlyRate = interestRate / 12 / 100;
@@ -14,7 +16,10 @@ const EmiCalculator = () => {
       (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
       (Math.pow(1 + monthlyRate, months) - 1);
     setEmi(emiValue.toFixed(2));
+    setTotalPay(parseInt(emiValue*months))
+    setTotalIntrestPay(parseInt(emiValue*months - loanAmount))
   };
+
 
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
@@ -61,10 +66,30 @@ const EmiCalculator = () => {
           </button>
 
           {emi && (
-            <div className="mt-4 text-center text-lg font-semibold">
+            <div className="mt-4 text-center text-orange-700 text-lg font-semibold">
               Your EMI: ₹{emi}
-            </div>
+            </div> 
           )}
+          <div className='flex justify-around'>
+          {
+            totalPay &&(
+              <div>
+                  <div className="mt-4 text-center text-green-600 text-lg font-semibold">
+              Total Pay Amount: ₹{totalPay}
+            </div> 
+              </div>
+            )
+          }
+          {
+           totalIntrestPay &&(
+              <div>
+                  <div className="mt-4 text-center text-red-500 text-lg font-semibold">
+              Total Intrest Amount: ₹{totalIntrestPay}
+            </div> 
+              </div>
+            )
+          }
+          </div>
         </div>
 
         <div className="w-full lg:w-1/2 p-4 flex justify-center">

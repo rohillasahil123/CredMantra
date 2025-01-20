@@ -2,18 +2,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import MoneyTapImage from "../../../assets/moneytap-logo.svg";
-import toast from "react-hot-toast";
+import MoneyTapImage from "../../../assets/moneytap-logo.svg";;
 
 const MoneyTap = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     dob: "",
     phone: "",
-    email: "",
+    gmail: "",
     gender: "",
     addr: "",
     addr2: "",
@@ -22,8 +21,26 @@ const MoneyTap = () => {
     addressLine2: "",
     income: "",
     pan: "",
+    jobType: "",
+    EmployName: "",
+    OfficeAddress1: "",
+    OfficeAddress2: "",
+    OfficePincode: "",
     consent: false,
   });
+  const activeStep = [
+    ["name", "dob", "phone", "email", "gender"],
+    ["addressLine1", "addressLine2", "pincode"],
+    [
+      "jobType",
+      "EmployName",
+      "OfficeAddress1",
+      "OfficeAddress2",
+      "income",
+    ],
+    ["pan"],
+  ];
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [response, setResponse] = useState(null);
 
@@ -67,6 +84,7 @@ const MoneyTap = () => {
       ...prevData,
       [name]: value,
     }));
+    setError({ ...error, [name]: "" });
   };
 
   const handleNestedInputChange = (e, category, field) => {
@@ -83,7 +101,6 @@ const MoneyTap = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     const birthDate = new Date(formData.dateOfBirth);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -114,6 +131,49 @@ const MoneyTap = () => {
     }
   };
 
+  const handleNext = () => {
+    const newErrors = {};
+    if (activeIndex === 0) {
+      if (!formData.name) newErrors.name = "Name is required";
+      if (!formData.gmail) newErrors.gmail = "Email is required";
+      if (!formData.dob) newErrors.dob = "Date of birth is required";
+      if (!formData.phone) newErrors.phone = "Phone number is required";
+      if (!/^\d{10}$/.test(formData.phone))
+        newErrors.phone = "Enter a valid 10-digit phone number."; 
+      if (!formData.gender) newErrors.gender = "Gender is required";
+    } else if (activeIndex === 1) {
+      if (!formData.addr) newErrors.addr = "Address1 is required";
+      if (!formData.addr2) newErrors.addr2 = "Address2 is required";
+      if (!formData.pincode) newErrors.pincode = "Pincode is required";
+    } else if (activeIndex === 2) {
+      if (!formData.jobType) newErrors.jobType= "Job type is required";
+      if (!formData.EmployName) newErrors.EmployName = "EmployName is required";
+      if (!formData.OfficeAddress1) newErrors.OfficeAddress1 = "Office address is required";
+      if (!formData.OfficeAddress2) newErrors.OfficeAddress2 = "Office address2 is required";
+      if (!formData.OfficePincode) newErrors.OfficePincode = "Office pincode is required";
+      if (!formData.income) newErrors.income = "Income is required";
+    }else if(activeIndex === 3){
+      if (!formData.pan) newErrors.pan = "pan is required";
+    }
+    setError(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      console.log(formData);
+      setActiveIndex((prev) => prev + 1);
+    }
+  };
+  
+  useEffect(() => {
+    console.log(error , "error" ) ;
+    console.log(loading , "Loading  ho rhi hai ")
+  
+  });
+
+
+  useEffect(()=>{
+    console.log(  loading || error)
+    console.log("loading")  
+  })
+
   return (
     <div className="flex flex-col items-center mt-5 min-h-screen w-full self-center">
       <div className="flex flex-col md:flex-row justify-between w-[90%] items-center mb-8">
@@ -139,37 +199,46 @@ const MoneyTap = () => {
                 placeholder="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.name ? "border-red-500" : ""
+                }`}
                 required
               />
+              {error.name && <p className="text-red-500">{error.name}</p>}
               <label htmlFor="dateOfBirth" className="mb-2">
                 Date of Birth:
               </label>
               <input
                 id="dateOfBirth"
-                name="dateOfBirth"
+                name="dob"
                 type="date"
                 placeholder="date of birth"
-                value={formData.dateOfBirth}
+                value={formData.dob}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.dob ? "border-red-500" : ""
+                }`}
                 required
               />
+              {error.dob && <p className="text-red-500">{error.dob}</p>}
               <label htmlFor="phone" className="mb-2">
                 Mobile Number:
               </label>
               <input
                 id="phone"
                 name="phone"
-                type="text"
+                type="tel"
                 maxLength={10}
                 pattern="\d*"
                 placeholder="mobile number"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.phone ? "border-red-500" : ""
+                }`}
                 required
               />
+              {error.phone && <p className="text-red-500">{error.phone}</p>}
               <label htmlFor="gender" className="mb-2">
                 Gender:
               </label>
@@ -178,7 +247,9 @@ const MoneyTap = () => {
                 placeholder="gender"
                 value={formData.gender}
                 onChange={handleInputChange}
-                className="w-full border rounded p-2"
+                className={`w-[90%] p-2 border rounded ${
+                  error.gender ? "border-red-500" : "bg-gray-300"
+                }`}
                 required
               >
                 <option value="">Select Gender</option>
@@ -186,21 +257,25 @@ const MoneyTap = () => {
                 <option value="FEMALE">Female</option>
                 <option value="OTHER">Other</option>
               </select>
+              {error.gender && <p className="text-red-500">{error.gender}</p>}
 
               <label htmlFor="emailId" className="mb-2">
                 Email ID:
               </label>
               <input
                 id="emailId"
-                name="emailId"
-                type="email"
-                placeholder="email"
-                value={formData.email}
+                name="gmail"
+                type="gmail"
+                placeholder="Gmail"
+                value={formData.gmail}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.gmail ? "border-red-500" : "bg-gray-300"
+                }`}
                 required
                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               />
+              {error.gmail && <p className="text-red-500">{error.gmail}</p>}
             </div>
           )}
           {activeIndex === 1 && (
@@ -215,9 +290,12 @@ const MoneyTap = () => {
                 placeholder="address"
                 value={formData.addr}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.addr ? "border-red-500" : "bg-gray-300"
+                }`}
                 required
               />
+              {error.addr && <p className="text-red-500">{error.addr}</p>}
               <label htmlFor="addressLine2" className="mb-2">
                 Address Line 2:
               </label>
@@ -228,23 +306,30 @@ const MoneyTap = () => {
                 placeholder="address 2"
                 value={formData.addr2}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.addr2 ? "border-red-500" : "border-gray-300"
+                }`}
                 required
               />
+              {error.addr2 && <p className="text-red-500">{error.addr2}</p>}
               <label htmlFor="pincode" className="mb-2">
                 Pincode:
               </label>
               <input
                 id="pincode"
                 name="pincode"
-                type="text"
+                type="number"
+                maxLength={6}
                 placeholder="pincode"
                 value={formData.pincode}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.lastName ? "border-red-500" : "border-gray-300"
+                }`}
                 required
                 pattern="^[0-9]{6}$"
               />
+              {error.pincode && <p className="text-red-500">{error.pincode}</p>}
             </div>
           )}
           {activeIndex === 2 && (
@@ -258,70 +343,95 @@ const MoneyTap = () => {
                 placeholder="job type"
                 value={formData.jobType}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.jobType ? "border-red-500" : ""
+                }`}
                 required
               >
+                {error.jobType && (
+                  <p className="text-red-500">{error.jobType}</p>
+                )}
                 {jobTypeOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>
                 ))}
               </select>
+
               <label htmlFor="companyName" className="mb-2">
                 Employer Name:
               </label>
               <input
                 id="companyName"
-                name="name"
+                name="EmployName"
                 type="text"
                 placeholder="employer name"
-                value={formData.name}
+                value={formData.EmployName}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.EmployName ? "border-red-500" : ""
+                }`}
                 required
               />
+              {error.EmployName && <p className="text-red-500">{error.EmployName}</p>}
               <label htmlFor="officeAddressLine1" className="mb-2">
                 Office Address Line 1:
               </label>
               <input
                 id="officeAddressLine1"
-                name="addressLine1"
+                name="OfficeAddress1"
                 type="text"
                 placeholder="office address line 1"
-                value={formData.addressLine1}
+                value={formData.OfficeAddress1}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.OfficeAddress1 ? "border-red-500" : ""
+                }`}
                 required
               />
+              {error.OfficeAddress1 && (
+                <p className="text-red-500">{error.OfficeAddress1}</p>
+              )}
               <label htmlFor="officeAddressLine2" className="mb-2">
                 Office Address Line 2:
               </label>
               <input
                 id="officeAddressLine2"
-                name="addressLine2"
+                name="OfficeAddress2"
                 type="text"
                 placeholder="office address line 2"
-                value={formData.addressLine2}
+                value={formData.OfficeAddress2}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.OfficeAddress2 ? "border-red-500" : ""
+                }`}
                 required
               />
+          {
+            error.OfficeAddress2 &&( <p className="text-sm text-red-500">{error.OfficeAddress2}</p>)
+          }
+
+
               <label htmlFor="officePincode" className="mb-2">
                 Office Pincode:
               </label>
               <input
                 id="officePincode"
-                name="officePincode"
-                type="text"
+                name="OfficePincode"
+                type="number"
                 placeholder="office pincode"
-                value={formData.pincode}
-                onChange={(e) =>
-                  handleNestedInputChange(e, "officeAddress", "pincode")
-                }
-                className="p-2 border border-gray-300 rounded"
+                maxLength={6}q
+                value={formData.OfficePincode}
+                onChange={handleInputChange}
+                className={`w-[90%] p-2 border rounded ${
+                  error.OfficePincode ? "border-red-500" : ""
+                }`}
                 required
                 pattern="^[0-9]{6}$"
               />
+              {
+                error.OfficePincode &&( <p className="text-red-500">{error.OfficePincode}</p>)
+              }
               <label htmlFor="declaredIncome" className="mb-2">
                 Declared Income:
               </label>
@@ -332,9 +442,14 @@ const MoneyTap = () => {
                 placeholder="declar income"
                 value={formData.income}
                 onChange={handleInputChange}
-                className="p-2 border border-gray-300 rounded"
+                className={`w-[90%] p-2 border rounded ${
+                  error.OfficeAddress2 ? "border-red-500" : ""
+                }`}
                 required
               />
+              {
+                error.income &&( <p className="text-red-500">{error.income}</p>)
+              }
             </div>
           )}
           {activeIndex === 3 && (
@@ -387,32 +502,28 @@ const MoneyTap = () => {
             >
               Previous
             </button>
-            {activeIndex < steps.length - 1 ? (
-              <button
-                type="button"
-                onClick={() => setActiveIndex((prev) => prev + 1)}
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                type="submit"
-                disabled={loading || !formData.consent || error}
-                className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${
-                  loading || error
-                    ? "bg-gray-500 text-gray-300"
-                    : "bg-blue-500 text-white"
-                }`}
-                onClick={() => {
-                  if (loading) {
-                    setLoading(false);
-                  }
-                }}
-              >
-                {loading ? "Submitting..." : "Submit"}
-              </button>
-            )}
+            <div>
+    {activeIndex < steps.length - 1 ? (
+      <button
+        type="button"
+        onClick={handleNext}
+        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      >
+        Next
+      </button>
+    ) : (
+      <button
+        type="submit"
+        disabled={!formData.consent || !error}
+        className={`px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 ${
+          error ? "bg-blue-500 text-gray-300" : "bg-blue-500 text-white"
+        }`}
+        onClick={handleSubmit}
+      >
+        {loading ? "Submitting..." : "Submit"}
+      </button>
+    )}
+  </div>
           </div>
         </form>
       ) : (
@@ -427,5 +538,9 @@ const MoneyTap = () => {
     </div>
   );
 };
+
+
+
+ 
 
 export default MoneyTap;

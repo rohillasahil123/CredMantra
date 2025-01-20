@@ -1,138 +1,196 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import PrefrImage from "../../../assets/prefr copy.png"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import PrefrImage from "../../../assets/prefr copy.png";
 
 const PrefrLoanForm = () => {
   const [stage, setStage] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({});
   const [deDupeLoading, setDeDupeLoading] = useState(false);
 
   // Form States
   const [deDupeForm, setDeDupeForm] = useState({
-    phone: '',
-    email: '',
-    pan: ''
+    phone: "",
+    email: "",
+    pan: "",
   });
 
   const [mainForm, setMainForm] = useState({
-    name: '',
-    lastName: '',
-    dob: '',
-    email: '',
-    gender: '',
-    maritalStatus: '',
-    addr: '',
-    pincode: '',
-    city: '',
-    state: '',
-    employmentType: '',
-    companyName: '',
-    officeAddress: '',
-    officeCity: '',
-    officePincode: '',
-    income: '',
-    pan: '',
-    desiredLoanAmount: '',
-    consent: false
+    name: "",
+    lastName: "",
+    dob: "",
+    email: "",
+    gender: "",
+    maritalStatus: "",
+    addr: "",
+    phone: "",
+    pincode: "",
+    city: "",
+    state: "",
+    employmentType: "",
+    business_name: "",
+    officeAddress: "",
+    officeCity: "",
+    officePincode: "",
+    income: "",
+    pan: "",
+    LoanAmount: "",
+    consent: false,
   });
 
- 
+  // const ActiveState = [
+  //   ["name" , "lastName"  , "dob" , "email" , "maritalStatus", "phone"  ],
 
-useEffect(()=>{
-  const fillData = async()=>{
-    const token = Cookies.get("userToken")
-    console.log(token)
-    const response = await axios.get('https://credmantra.com/api/v1/auth/verify-user',
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }
-      }
-   
-    )
-    console.log(response.data.data.user)
-    const data = response.data.data.user
-    setMainForm(data)
-  }
-  fillData()
-},[])
+  // ]
 
+  const validationNext = () => {
+    const newErrors = {};
 
-  // Options for dropdowns
-  const genderOptions = ['Male', 'Female'];
-  const maritalOptions = ['married', 'single'];
-  const professionOptions = ['salaried', 'selfEmployed'];
-  const stateOptions = [
-    'ANDHRA PRADESH', 'DELHI', 'GUJARAT', 'KARNATAKA',
-    'KERALA', 'MAHARASHTRA', 'TAMIL NADU', 'TELANGANA'
-  ];
+    if (activeStep === 0) {
+      if (!mainForm.name) newErrors.name = "Name is required";
+      if (!mainForm.lastName) newErrors.lastName = "Last Name is required";
+      if (!mainForm.dob) newErrors.dob = "Date of Birth is required";
+      if (!mainForm.email) newErrors.email = "Email is required";
+      if (!mainForm.gender) newErrors.gender = "Gender is required";
+      if (!mainForm.maritalStatus)
+        newErrors.maritalStatus = "Marital Status is required";
+      if (!mainForm.phone) newErrors.phone = "Phone Number is required";
+    } else if (activeStep === 1) {
+      if (!mainForm.addr) newErrors.addr = "Address is required";
+      if (!mainForm.pincode) newErrors.pincode = "Pincode is required";
+      if (!mainForm.city) newErrors.city = "City is required";
+      if (!mainForm.state) newErrors.state = "State is required";
+    } else if (activeStep === 2) {
+      if (!mainForm.employmentType)
+        newErrors.employmentType = "Employment Type is required";
+      if (!mainForm.business_name)
+        newErrors.business_name= "Company Name is required";
+      if (!mainForm.officeAddress)
+        newErrors.officeAddress = "Office Address is required";
+      if (!mainForm.officeCity)
+        newErrors.officeCity = "Office City is required";
+      if (!mainForm.officePincode)
+        newErrors.officePincode = "Office Pincode is required";
+      if (!mainForm.income) newErrors.income = "Income is required";
+    }
 
-  const steps = [
-    'Personal Details',
-    'Address',
-    'Employment Details',
-    'Loan Details'
-  ];
+    return newErrors;
+  };
 
   const handleNext = () => {
-    if (activeStep < steps.length - 1) {
-      setActiveStep(prevStep => prevStep + 1);
+    const errors = validationNext();
+    if (Object.keys(errors).length === 0) {
+      if (activeStep < steps.length - 1) {
+        setActiveStep((prevStep) => prevStep + 1);
+      }
+    } else {
+      setError(errors); // Set the error state when there are validation errors
     }
   };
 
-
-  const handlePrev = () => {
-    setActiveStep(prevStep => prevStep - 1);
+  const validationSubmit = () => {
+    const newErrors = {};
+    if (!mainForm.pan) newErrors.pan = "Pan Number is required";
+    if (!mainForm.LoanAmount) newErrors.LoanAmount = "Loan Amount is required";
+    setError(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
+  useEffect(() => {
+    const fillData = async () => {
+      const token = Cookies.get("userToken");
+      console.log(token);
+      const response = await axios.get(
+        "https://credmantra.com/api/v1/auth/verify-user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data.data.user);
+      const data = response.data.data.user;
+      setMainForm(data);
+    };
+    fillData();
+  }, []);
 
+  // Options for dropdowns
+  const genderOptions = ["Male", "Female"];
+  const maritalOptions = ["married", "single"];
+  const professionOptions = ["salaried", "selfEmployed"];
+  const stateOptions = [
+    "ANDHRA PRADESH",
+    "DELHI",
+    "GUJARAT",
+    "KARNATAKA",
+    "KERALA",
+    "MAHARASHTRA",
+    "TAMIL NADU",
+    "TELANGANA",
+  ];
 
+  const steps = [
+    "Personal Details",
+    "Address",
+    "Employment Details",
+    "Loan Details",
+  ];
 
+  useEffect(() => {
+    console.log(error, "ercx");
+    console.log(activeStep, "activeState");
+  });
 
+  const handlePrev = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setMainForm((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+
+    setError((prevError) => ({
+      ...prevError,
+      [name]: "",
+    }));
   };
-  
 
+  // const handleDeDupeSubmit = async (ea) => {
+  //   e.preventDefault();
+  //   setDeDupeLoading(true);
 
+  //   try {
+  //     const response = await axios.post(
+  //       'https://credmantra.com/api/v1/partner-api/prefr/dedupe',
+  //       deDupeForm
+  //     );
+  //     console.log(response.data.duplicateFound)
+  //     if (!response.data.duplicateFound) {
+  //       const startResponse = await axios.post(
+  //         'https://credmantra.com/api/v1/partner-api/prefr/start',
+  //         { mobileNo: deDupeForm.mobileNumber }
+  //       );
 
-
-  const handleDeDupeSubmit = async (e) => {
-    e.preventDefault();
-    setDeDupeLoading(true);
-
-    try {
-      const response = await axios.post(
-        'https://credmantra.com/api/v1/partner-api/prefr/dedupe',
-        deDupeForm
-      );
-      console.log(response.data.duplicateFound)
-      if (!response.data.duplicateFound) {
-        const startResponse = await axios.post(
-          'https://credmantra.com/api/v1/partner-api/prefr/start',
-          { mobileNo: deDupeForm.mobileNumber }
-        );
-        
-        if (startResponse.data.status === 200) {
-          setStage(2);
-        }
-      } else {
-        setStage(4);
-      }
-    } catch (error) {
-      console.error('API Error:', error);
-    } finally {
-      setDeDupeLoading(false);
-    }
-  };
+  //       if (startResponse.data.status === 200) {
+  //         setStage(2);
+  //       }
+  //     } else {
+  //       setStage(4);
+  //     }
+  //   } catch (error) {
+  //     console.error('API Error:', error);
+  //   } finally {
+  //     setDeDupeLoading(false);
+  //   }
+  // };
 
   const handleMainFormSubmit = async (e) => {
     e.preventDefault();
@@ -140,42 +198,41 @@ useEffect(()=>{
 
     try {
       const response = await axios.post(
-        'https://credmantra.com/api/v1/partner-api/prefr/details',
+        "https://credmantra.com/api/v1/partner-api/prefr/details",
         mainForm
       );
 
-      if (response.data.status === 'success') {
+      if (response.data.status === "success") {
         const webviewResponse = await axios.post(
-          'https://credmantra.com/api/v1/partner-api/prefr/webview',
+          "https://credmantra.com/api/v1/partner-api/prefr/webview",
           { loanId: response.data.loanId }
         );
 
-        if (webviewResponse.data.status === 'success') {
+        if (webviewResponse.data.status === "success") {
           window.location.href = webviewResponse.data.data.webviewUrl;
         } else {
           setStage(4);
         }
       }
     } catch (error) {
-      console.error('API Error:', error);
+      console.error("API Error:", error);
       setStage(4);
     } finally {
       setLoading(false);
     }
   };
 
-
-
-
-return(
+  return (
     <div className="max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Connect with Prefr</h1>
         <img src={PrefrImage} alt="Prefr" className="h-12" />
       </div>
-  
-      <form onSubmit={handleMainFormSubmit} className="bg-white p-6 rounded-lg shadow">
-  
+
+      <form
+        onSubmit={handleMainFormSubmit}
+        className="bg-white p-6 rounded-lg shadow"
+      >
         {activeStep === 0 && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -185,15 +242,20 @@ return(
                 </label>
                 <input
                   type="text"
-                  name='name'
+                  name="name"
                   required
-                  placeholder='Enter first name'
+                  placeholder="Enter first name"
                   value={mainForm.name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className={`mt-1 block w-full h-9 rounded-md ${
+                    error.name ? "border-red-500" : "border-gray-300"
+                  } shadow-sm focus:border-blue-500 focus:ring-blue-500`}
                 />
+                {error.name && (
+                  <p className="text-red-500 text-sm">{error.name}</p>
+                )}
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Last Name
@@ -201,68 +263,85 @@ return(
                 <input
                   type="text"
                   required
-                  placeholder='Enter last name'
+                  placeholder="Enter last name"
+                  name="lastName"
                   value={mainForm.lastName}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className={`mt-1 block w-full h-9 rounded-md ${
+                    error.lastName ? "border-red-500" : "border-gray-300"
+                  } shadow-sm focus:border-blue-500 focus:ring-blue-500`}
                 />
+                {error.lastName && (
+                  <p className="text-red-500 text-sm">{error.lastName}</p>
+                )}
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Date of Birth
                 </label>
                 <input
                   type="date"
-                  name='dob'
+                  name="dob"
                   required
-                  placeholder=' date of birth'
+                  placeholder=" date of birth"
                   value={mainForm.dob}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.dob && ( <p className="text-red-500 text-sm" >{error.dob}</p> )
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Gender
                 </label>
                 <select
                   required
-                  name='gender'
+                  name="gender"
                   value={mainForm.gender}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
+                
                   <option value="">Select Gender</option>
-                  {genderOptions.map(option => (
+                  {genderOptions.map((option) => (
                     <option key={option} value={option}>
                       {option}
                     </option>
                   ))}
                 </select>
+
+                {
+                    error.gender && (<p className="text-red-500 text-sm ">{error.gender}</p> )
+                  }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Marital Status
                 </label>
                 <select
                   required
-                  name='maritalStatus'
+                  name="maritalStatus"
                   value={mainForm.maritalStatus}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select Marital Status</option>
-                  {maritalOptions.map(option => (
+                  {maritalOptions.map((option) => (
                     <option key={option} value={option}>
                       {option.charAt(0).toUpperCase() + option.slice(1)}
                     </option>
                   ))}
                 </select>
+                {
+                  error.maritalStatus && (<p className="text-red-500 text-sm ">{error.maritalStatus}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Email ID
@@ -270,15 +349,18 @@ return(
                 <input
                   type="email"
                   required
-                  name='email'
-                  placeholder='Enter email id'
+                  name="email"
+                  placeholder="Enter email id"
                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                   value={mainForm.email}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.email && (<p className="text-red-500 text-sm" >{error.email}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Mobile Number
@@ -287,19 +369,21 @@ return(
                   type="tel"
                   required
                   maxLength={10}
-                  name='phone'
+                  name="phone"
                   pattern="\d*"
-                  placeholder='mobile number'
+                  placeholder="mobile number"
                   value={mainForm.phone}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.phone && (<p className="text-red-500 text-sm" >{error.phone}</p>)
+                }
               </div>
             </div>
           </div>
         )}
-  
-       
+
         {activeStep === 1 && (
           <div className="space-y-6">
             <div>
@@ -308,15 +392,18 @@ return(
               </label>
               <textarea
                 required
-                name='addr'
-                placeholder='current address'
+                name="addr"
+                placeholder="current address"
                 value={mainForm.addr}
                 onChange={handleInputChange}
                 rows={3}
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
+              {
+                error.addr && (<p className="text-red-500 text-sm ">{error.addr}</p>)
+              }
             </div>
-  
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -326,15 +413,18 @@ return(
                   type="text"
                   required
                   maxLength={6}
-                  name='pincode'
+                  name="pincode"
                   pattern="\d*"
-                  placeholder='pincode'
+                  placeholder="pincode"
                   value={mainForm.pincode}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.pincode && (<p className="text-red-500 text-sm" >{error.pincode}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   City
@@ -342,37 +432,43 @@ return(
                 <input
                   type="text"
                   required
-                  name='city'
-                  placeholder='city'
+                  name="city"
+                  placeholder="city"
                   value={mainForm.city}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.city && (<p className="text-red-500 text-sm" >{error.city}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   State
                 </label>
                 <select
                   required
+                  name="state"
                   value={mainForm.state}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select State</option>
-                  {stateOptions.map(state => (
+                  {stateOptions.map((state) => (
                     <option key={state} value={state}>
                       {state}
                     </option>
                   ))}
                 </select>
+                {
+                  error.state && (<p className="text-red-500 text-sm" >{error.state}</p>)
+                }
               </div>
             </div>
           </div>
         )}
-  
-   
+
         {activeStep === 2 && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -382,48 +478,59 @@ return(
                 </label>
                 <select
                   required
+                  name="employmentType"
                   value={mainForm.employmentType}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select Employment Type</option>
-                  {professionOptions.map(option => (
+                  {professionOptions.map((option) => (
                     <option key={option} value={option}>
                       {option.charAt(0).toUpperCase() + option.slice(1)}
                     </option>
                   ))}
                 </select>
+                {
+                  error.employmentType && (<p className="text-red-500 text-sm" >{error.employmentType}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Company Name
                 </label>
                 <input
                   type="text"
-                  name='business_name'
+                  name="business_name"
                   required
-                  placeholder='company name'
-                  value={mainForm.business_details.business_name}
+                  placeholder="company name"
+                  value={mainForm.business_name}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.business_name && (<p className="text-red-500 text-sm" >{error.business_name}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Office Address
                 </label>
                 <textarea
                   required
+                  name="officeAddress"
                   value={mainForm.officeAddress}
-                  placeholder='office address'
+                  placeholder="office address"
                   onChange={handleInputChange}
                   rows={3}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.officeAddress && (<p className="text-red-500 text-sm" >{error.officeAddress}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Office City
@@ -431,13 +538,17 @@ return(
                 <input
                   type="text"
                   required
-                  placeholder='office city'
+                  name="officeCity"
+                  placeholder="office city"
                   value={mainForm.officeCity}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.officeCity && (<p className="text-red-500 text-sm" >{error.officeCity}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Office Pincode
@@ -446,14 +557,18 @@ return(
                   type="text"
                   required
                   maxLength={6}
+                  name="officePincode"
                   pattern="^[0-9]{6}$"
-                  placeholder='office pincode'
+                  placeholder="office pincode"
                   value={mainForm.officePincode}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.officePincode && (<p className="text-red-500 text-sm" >{error.officePincode}</p>)
+                }
               </div>
-  
+
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Net Monthly Income
@@ -461,17 +576,20 @@ return(
                 <input
                   type="number"
                   required
-                  name='income'
-                  placeholder='monthly income'
+                  name="income"
+                  placeholder="monthly income"
                   value={mainForm.income}
                   onChange={handleInputChange}
                   className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
+                {
+                  error.income && (<p className="text-red-500 text-sm" >{error.income}</p>)
+                }
               </div>
             </div>
           </div>
         )}
-  
+
         {/* Loan Details Step */}
         {activeStep === 3 && (
           <div className="space-y-6">
@@ -482,8 +600,8 @@ return(
               <input
                 type="text"
                 required
-                name='pan'
-                placeholder='pan number'
+                name="pan"
+                placeholder="pan number"
                 maxLength={10}
                 pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                 value={mainForm.pan}
@@ -491,7 +609,7 @@ return(
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
-  
+
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Desired Loan Amount
@@ -499,36 +617,38 @@ return(
               <input
                 type="number"
                 required
-                name='amount'
-                placeholder='loan amount'
+                name="amount"
+                placeholder="loan amount"
                 value={mainForm.amount}
                 onChange={handleInputChange}
                 className="mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
-  
+
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input
                   type="checkbox"
                   checked={mainForm.consent}
-                  onChange={(e) => setMainForm(prev => ({
-                    ...prev,
-                    consent: e.target.checked
-                  }))}
+                  onChange={(e) =>
+                    setMainForm((prev) => ({
+                      ...prev,
+                      consent: e.target.checked,
+                    }))
+                  }
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
               </div>
               <div className="ml-3 text-sm">
                 <label className="font-medium text-gray-700">
-                  I agree to the Terms and Conditions and authorize Credit Vidya Private Limited to access my credit information.
+                  I agree to the Terms and Conditions and authorize Credit Vidya
+                  Private Limited to access my credit information.
                 </label>
               </div>
             </div>
           </div>
         )}
-  
-       
+
         <div className="flex justify-between mt-8">
           <button
             type="button"
@@ -538,20 +658,20 @@ return(
           >
             Previous
           </button>
-  
+
           {activeStep === steps.length - 1 ? (
             <button
               type="submit"
               disabled={loading || !mainForm.consent}
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
             >
-              {loading ? 'Processing...' : 'Submit'}
+              {loading ? "Processing..." : "Submit"}
             </button>
           ) : (
             <button
               type="button"
-              onClick={handleNext}
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              onClick={handleNext}
             >
               Next
             </button>
@@ -560,6 +680,6 @@ return(
       </form>
     </div>
   );
-} 
+};
 
-export default PrefrLoanForm 
+export default PrefrLoanForm;

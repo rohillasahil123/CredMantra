@@ -56,8 +56,8 @@ const FibeForm = () => {
         }
       );
       const data = response.data.data.user;
-      setFormData(data);  
-      console.log(formData)   
+      setFormData(data);
+      console.log(formData);
     };
     autofilldetails();
   }, []);
@@ -79,7 +79,7 @@ const FibeForm = () => {
   // Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
-      console.log(formData)
+    console.log(formData);
     setLoading(true);
     try {
       const response = await axios.post(
@@ -183,10 +183,9 @@ const FibeForm = () => {
     console.log("error", error);
   });
 
-    useEffect(() => {
+  useEffect(() => {
     console.log("loading", loading);
   });
-
 
   const renderStepIndicator = () => (
     <div className="hidden md:flex justify-center mb-8">
@@ -452,8 +451,9 @@ const FibeForm = () => {
           name="officePincode"
           placeholder="office pincode"
           value={formData.officePincode}
+
           onChange={handleChange}
-          maxLength="6"
+          maxLength={6}
           className="w-[90%] p-2 border rounded"
           required
         />
@@ -523,44 +523,51 @@ const FibeForm = () => {
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                disabled={step === 1}
+                disabled={step === 0}
                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
               >
                 Previous
               </button>
 
-              {step < 3 ? (
-                <button
-                  type="button"
-                  disabled={isButtonDisabled}
-                  onClick={handleNext}
-                  className={`p-2 w-[18%] rounded-md text-white font-bold ${
-                    isButtonDisabled
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-green-500 hover:bg-green-600"
-                  }`}
-                >
-                  Next
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  disabled={loading || !formData.consent || error}
-                  className={`px-4 py-2 rounded hover:bg-blue-600  ${
-                   error || loading
-                      ? "bg-gray-500 text-gray-300"
-                      : "bg-blue-800 text-white"
-                  }`}
-                  onClick={() => {
-                    if (loading) {
-                      setLoading(false);
-                      console.log("rtr")
+              <div className="w-[14%]">
+                {step < 3 ? (
+                  <button
+                    type="button"
+                    disabled={isButtonDisabled}
+                    onClick={handleNext}
+                    className={`p-2 w-[18%] rounded-md text-white font-bold ${
+                      isButtonDisabled
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-green-500 hover:bg-green-600"
+                    }`}
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={
+                      loading ||
+                      !formData.consent ||
+                      Object.keys(error).length > 0
                     }
-                  }}
-                >
-                  {loading ? "Submitting..." : "Submit"}
-                </button>
-              )}
+                    className={`px-4 py-2 h-9 w-[40%]  rounded hover:bg-blue-600 ${
+                      loading ||
+                      !formData.consent ||
+                      Object.keys(error).length > 0
+                        ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                        : "bg-blue-800 text-white"
+                    }`}
+                    onClick={(e) => {
+                      if (!loading && !Object.keys(error).length) {
+                        handleSubmit(e);
+                      }
+                    }}
+                  >
+                    {loading ? "Submitting..." : "Submit"}
+                  </button>
+                )}
+              </div>
             </div>
           </form>
         </div>

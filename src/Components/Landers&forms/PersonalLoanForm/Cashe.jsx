@@ -160,6 +160,7 @@ const CasheForm = () => {
   const handleDeDupeSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setLoading(false)
     setStage(2);
     // try {
     //   const response = await axios.post(
@@ -375,6 +376,10 @@ const CasheForm = () => {
       </button>
     </div>
   );
+
+useEffect(()=>{
+  console.log(loading , "loading ho rhi hai ")
+})
 
   useEffect(() => {
     const currentStepFields = stepFields[activeStep];

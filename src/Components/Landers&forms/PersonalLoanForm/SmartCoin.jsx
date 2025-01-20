@@ -148,6 +148,7 @@ const SmartCoinForm = () => {
             <input
               type="text"
               name="pan"
+              maxLength={10}
               placeholder=' PAN number'
               value={formData.pan}
               onChange={handleChange}

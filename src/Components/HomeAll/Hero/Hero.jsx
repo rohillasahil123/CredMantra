@@ -54,16 +54,19 @@ const Hero = () => {
       <div className="lg:flex-grow sm:w-1/2  md:w-1/2 bg-sky-300  flex flex-col items-center md:items-start text-center md:text-left md:flex-row-reverse justify-center p-[2%]">
         <div className="container mt-5 sm:mt-10">
           <div className="flex flex-wrap gap-3  sm:ml-0   sm:text-center justify-center">
+            
             {loanOptions.map((loan, index) => (
               <div
                 key={index}
                 className="w-full sm:w-[46%]  h-[12vh] sm:h-[19vh] flex  items-center justify-center shadow-2xl rounded-xl bg-white  hover:cursor-pointer transition-transform hover:scale-105"
-              >
+              > 
                 <img
                   alt={loan.title}
+                    
                   className="w-[90%] sm:h-[46%] md:h-[62%] md:w-[72%]  h-[94%] mb-[-12px] mt-[-2%] ml-1"
                   src={loan.imgSrc}
                 />
+               
                 <div className="space-y-1 text-center h-[62%] w-full">
                   <h1 className="title-font  text-black text-[13px] sm:text-[10px] md:text-[14px] font-bold uppercase">
                     {loan.title}
