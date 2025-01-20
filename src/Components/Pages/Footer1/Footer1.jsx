@@ -29,7 +29,6 @@ const Footer1 = () => {
             <Link to="/partner">
               <div className=" mt-2">Our Partner</div>{" "}
             </Link>
-            <Link to="/contect "> </Link>
           </div>
 
         <div className=" lg:mb-0 font-serif items-center mt-0 sm:mt-[-5%]   ">
@@ -41,7 +40,7 @@ const Footer1 = () => {
             <Link to="/hiring">
               <div className=" hover:cursor-pointer mt-2">Hiring</div>
             </Link>
-            <div className=" mt-2"> Contect Us </div>{" "}
+            <div className=" mt-2">   <Link to="/contect"> Contect Us </Link>  </div>{" "}
           </div>
       </div>
       <div className="bg-black w-full h-auto mt-[28%] sm:mt-0 text-white text-center flex flex-col lg:flex-row justify-between items-center px-4 lg:px-24">

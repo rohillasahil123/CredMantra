@@ -23,33 +23,26 @@ const HomeLoan = () => {
       ...formData,
       [name]: value,
     });
-    setError({...error , [name] : "" })
+    setError({ ...error, [name]: "" });
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
-    if (!formData.name)newErrors.name = " Name is required";
-    if (!formData.lastName)newErrors.lastName = "LastName is required";
-    if (!formData.phone)newErrors.phone = "Phone number is required.";
+    if (!formData.name) newErrors.name = " Name is required";
+    if (!formData.lastName) newErrors.lastName = "LastName is required";
+    if (!formData.phone) newErrors.phone = "Phone number is required.";
     if (!/^\d{10}$/.test(formData.phone))
       newErrors.phone = "Enter a valid 10-digit phone number.";
     if (!formData.email) newErrors.email = "email is required";
     if (!formData.pincode) newErrors.pincode = "Pincode is required";
-    setError(newErrors)
-    console.log(newErrors)
+    setError(newErrors);
+    console.log(newErrors);
     if (Object.keys(newErrors).length === 0) {
       setFormData("");
-    console.log("Form data submitted:", formData);
+      console.log("Form data submitted:", formData);
     }
   };
-
-
-  useEffect(()=>{
-    console.log(error , "yu")
-  })
-
 
   return (
     <div className="sm:min-h-[105vh] h-[80vh]">
@@ -61,7 +54,7 @@ const HomeLoan = () => {
               Home Loan Form
             </h1>
             <div
-              className="items-center flex-col  sm:flex-row  sm:flex text-center  w-[80%] border h-[85%] sm:h-[89%] mt-[5%] shadow-2xl rounded-lg  "
+              className="items-center flex-col  sm:flex-row  sm:flex text-center  w-[80%] border h-[70%] sm:h-[89%] mt-[5%] shadow-2xl rounded-lg  "
               style={{ justifySelf: "center" }}
             >
               <div className="sm:h-[90%] sm:w-[50%] ml-[5%] w-[100%] h-[22%] justify-center ">
@@ -73,7 +66,10 @@ const HomeLoan = () => {
                 />
               </div>
 
-              <div className="space-y-2 w-full sm:w-[70%] " style={{textAlign:"-webkit-center"}}>
+              <div
+                className="space-y-2 w-full sm:w-[70%] "
+                style={{ textAlign: "-webkit-center" }}
+              >
                 <div>
                   <input
                     type="text"
@@ -83,76 +79,77 @@ const HomeLoan = () => {
                     onChange={handleChange}
                     className={`h-9 block w-[60%] border shadow-lg  ${
                       error.name ? "border-red-500" : "border-gray-300"
-                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500`}
                     placeholder="Enter full name"
                   />
                   {error.name && (
                     <p className="text-red-500 text-[12px] ">{error.name}</p>
                   )}
                 </div>
-                <div>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className={`h-9 block w-[60%] border shadow-lg  ${
-                    error.lastName ? "border-red-500" : "border-gray-300"
-                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
-                />
-                {error.lastName && (
-                  <p className="text-red-500 text-[12px] ">{error.lastName}</p>
-                )}
+               kuc <div>
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className={`h-9 block w-[60%] border shadow-lg  ${
+                      error.lastName ? "border-red-500" : "border-gray-300"
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {error.lastName && (
+                    <p className="text-red-500 text-[12px] ">
+                      {error.lastName}
+                    </p>
+                  )}
                 </div>
                 <div>
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone"
-                  maxLength={10}
-                  pattern="/^\d{10}$/"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`h-9 block w-[60%] border shadow-lg  ${
-                    error.phone ? "border-red-500" : "border-gray-300"
-                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
-                />
-                {error.phone && (
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    maxLength={10}
+                    pattern="/^\d{10}$/"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`h-9 block w-[60%] border shadow-lg  ${
+                      error.phone ? "border-red-500" : "border-gray-300"
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {error.phone && (
                     <p className="text-red-500 text-[12px] ">{error.phone}</p>
                   )}
                 </div>
                 <div>
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`h-9 block w-[60%] border shadow-lg  ${
-                    error.name ? "border-red-500" : "border-gray-300"
-                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
-                />
-                {error.email && (
-                  <p className="text-red-500 text-[12px] ">{error.email}</p>
-                )}
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`h-9 block w-[60%] border shadow-lg  ${
+                      error.name ? "border-red-500" : "border-gray-300"
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {error.email && (
+                    <p className="text-red-500 text-[12px] ">{error.email}</p>
+                  )}
                 </div>
                 <div>
-                <input
-                  type="text"
-                  name="pincode"
-                  placeholder="Pincode"
-                  value={formData.pincode}
-                  onChange={handleChange}
-                  className={`h-9 block w-[60%] border shadow-lg  ${
-                    error.name ? "border-red-500" : "border-gray-300"
-                  } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500` } 
-                />
-                {
-                  error.pincode && (
+                  <input
+                    type="tel"
+                    name="pincode"
+                    maxLength={6}
+                    placeholder="Pincode"
+                    value={formData.pincode}
+                    onChange={handleChange}
+                    className={`h-9 block w-[60%] border shadow-lg  ${
+                      error.name ? "border-red-500" : "border-gray-300"
+                    } rounded-md p-[2%] focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {error.pincode && (
                     <p className="text-red-500 text-[12px]">{error.pincode}</p>
-                  )
-                }
+                  )}
                 </div>
                 <br />
                 <button
@@ -217,8 +214,8 @@ const HomeLoan = () => {
                 experience.
               </p>
               <button
-                className="text-sm  border-black uppercase h-9 w-[50%]   sm:w-[20%] bg-gray-200 "
-                style={{ marginTop: "3%" }}
+                className="text-sm  border-black uppercase h-7 w-[50%]   sm:w-[20%] bg-gray-200 "
+                style={{ marginTop: "2%" }}
               >
                 Learn More
               </button>

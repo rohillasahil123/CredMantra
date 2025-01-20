@@ -74,7 +74,7 @@ const EmiCalculator = () => {
           {
             totalPay &&(
               <div>
-                  <div className="mt-4 text-center text-green-600 text-lg font-semibold">
+                  <div className="mt-4 text-center text-blue-600 text-lg font-semibold">
               Total Pay Amount: ₹{totalPay}
             </div> 
               </div>
@@ -83,7 +83,7 @@ const EmiCalculator = () => {
           {
            totalIntrestPay &&(
               <div>
-                  <div className="mt-4 text-center text-red-500 text-lg font-semibold">
+                  <div className="mt-4 text-center text-blue-500 text-lg font-semibold">
               Total Intrest Amount: ₹{totalIntrestPay}
             </div> 
               </div>
